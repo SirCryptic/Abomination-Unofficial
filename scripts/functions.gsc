@@ -1,0 +1,518 @@
+Godmode(player)
+{
+    player.godmode = isDefined(player.godmode) ? undefined : true;
+    
+    if(isDefined(player.godmode))
+    {
+        player endon("disconnect");
+
+        while(isDefined(player.godmode)) //Black Ops Always Seems To Have An Issue With Invulnerability Turning Off Randomly. Looping it will fix that.
+        {
+            player EnableInvulnerability();
+            wait 0.1;
+        }
+    }
+    else
+        player DisableInvulnerability();
+}
+
+Noclip1(player)
+{
+    player.Noclip = isDefined(player.Noclip) ? undefined : true;
+    
+    if(isDefined(player.Noclip))
+    {
+        player endon("disconnect");
+
+        if(player hasMenu() && player isInMenu())
+            player closeMenu1();
+        player DisableWeapons();
+        player DisableOffHandWeapons();
+        player.nocliplinker = SpawnScriptModel(player.origin, "tag_origin");
+        player PlayerLinkTo(player.nocliplinker, "tag_origin");
+        
+        while(isDefined(player.Noclip) && isAlive(player))
+        {
+            if(player AttackButtonPressed())
+                player.nocliplinker.origin = (player.nocliplinker.origin + (AnglesToForward(player GetPlayerAngles()) * 60));
+            else if(player AdsButtonPressed())
+                player.nocliplinker.origin = (player.nocliplinker.origin - (AnglesToForward(player GetPlayerAngles()) * 60));
+            if(player MeleeButtonPressed())
+                break;
+            
+            wait 0.01;
+        }
+
+        if(isDefined(player.Noclip))
+            player Noclip1(player);
+    }
+    else
+    {
+        player Unlink();
+        player.nocliplinker delete();
+        player EnableWeapons();
+        player EnableOffHandWeapons();
+    }
+}
+TeleportZombies() 
+{
+    foreach(zombie in GetAITeamArray(level.zombie_team)) 
+    {
+        if (isDefined(zombie)) zombie ForceTeleport(self.origin + (+40, 0, 0));
+    }
+    self iPrintLnBold("Zombies Teleported!");
+}
+
+PlasmaLoop(player)
+{
+    player.PlasmaLoop = isDefined(player.PlasmaLoop) ? undefined : true;
+
+    if(isDefined(player.PlasmaLoop))
+    {
+        player endon("disconnect");
+
+        while(isDefined(player.PlasmaLoop))
+        {
+            player function_e8f77739(#"zm_timeplayed", 1000000);
+            wait 0.1;
+        }
+    }
+}
+SaveLocation(Val)
+{
+    if(Val == 0)
+    {
+        self.SaveLocation      = self.origin;
+        self.SaveLocationAngle = self.angles;
+        if(!IsDefined(self.SaveLocTog))
+            self.SaveLocTog = true;
+            
+        self iPrintLn("Current Position: ^2Saved");
+    }
+    else if(Val == 1)
+    {
+        if(!IsDefined(self.SaveLocTog))
+            return self iPrintLnBold("^1Error: ^7No Location Saved");
+            
+        self SetPlayerAngles(self.SaveLocationAngle);
+        self SetOrigin(self.SaveLocation);
+        self iPrintLn("Saved Position: ^2Loaded");
+    }
+    else
+    {
+        self.SaveLocTog        = undefined;
+        self.SaveLocation      = undefined;
+        self.SaveLocationAngle = undefined;
+    }
+}
+
+thirdperson(player)
+{
+    player.thirdperson = isDefined(player.thirdperson) ? undefined : true;
+    if (isDefined(player.thirdperson))
+        self setclientthirdperson(1);
+    else
+        self setclientthirdperson(0);
+}
+Clone()
+{
+    self util::spawn_player_clone(self);
+}
+AddBotsToGame(player) 
+{
+    AddTestClient();
+}
+Multijump(currentNum = 0)
+{
+    self endon("disconnect");
+    self notify("SMulti");
+    self.Multijump = isDefined(self.Multijump) ? undefined : true;
+    self endon("SMulti");
+    
+    if(isDefined(self.Multijump))
+        self setPerk("specialty_fallheight");
+    else
+        self unSetPerk("specialty_fallheight");
+        
+    while(IsDefined(self.Multijump))
+    {
+        if(self JumpButtonPressed() && currentNum < 15)
+        {
+            self setVelocity(self getVelocity() + (0, 0, 250));
+            currentNum++;
+        }
+        if(currentNum == 15 && self isOnGround())
+            currentNum = 0;
+
+        wait .1;
+    }
+}
+
+SuperJump()
+{
+    level.SuperJump = isDefined(level.SuperJump) ? undefined : true;
+    if(isDefined(level.SuperJump))
+    {
+        foreach(player in level.players)
+            player thread AllSuperJump();
+    }
+}
+
+AllSuperJump()
+{
+    self endon("disconnect");
+    while(isDefined(level.SuperJump))
+    {
+        if(self JumpButtonPressed())
+        {
+            for(i=0;i<5;i++)
+                self SetVelocity(self GetVelocity() + (0, 0, 140));
+
+            while(!self IsOnGround())
+                wait .05;
+        }
+        wait .05; 
+    }
+}
+
+SuperSpeed()
+{
+    level.SuperSpeed = isDefined(level.SuperSpeed) ? undefined : true;
+
+    if(isDefined(level.SuperSpeed))
+        setDvar("g_speed", 500);
+    else
+        setDvar("g_speed", 200);
+}
+
+BO4NoFallDam()
+{
+    level.BO4NoFallD = isDefined(level.BO4NoFallD) ? undefined : true;
+    if(isDefined(self.BO4NoFallD))
+    {
+        SetDvar(#"bg_fallDamageMinHeight", 9999);
+        SetDvar(#"bg_fallDamageMaxHeight", 9999);
+    }
+    else
+    {
+        setdvar(#"bg_falldamageminheight", 256);
+		setdvar(#"bg_falldamagemaxheight", 512);
+    }
+}
+
+AntiJoin()
+{
+    level.AntiJoin = isDefined(level.AntiJoin) ? undefined : true;
+}
+
+AntiQuit(player) 
+{
+
+    self.AntiQuit = isDefined(self.AntiQuit) ? undefined : true;
+    if(isDefined(self.AntiQuit))
+    {
+        SetMatchFlag("disableIngameMenu", 1);
+        self iPrintLnBold("Anti Quit ^2Enabled");
+        foreach(player in level.players) 
+        {
+            player CloseInGameMenu();
+        }
+    } 
+    else 
+    {
+        SetMatchFlag("disableIngameMenu", 0);
+        self iPrintLnBold("Anti Quit ^1Disabled");
+    }
+}
+B4Gravity()
+{
+    level.B4Gravity = isDefined(level.B4Gravity) ? undefined : true;
+    if(isDefined(level.B4Gravity))
+        SetDvar("bg_gravity", 100);
+    else
+        SetDvar("bg_gravity", 350);
+}
+UnlimitedAmmo(player)
+{
+    player.UnlimitedAmmo = isDefined(player.UnlimitedAmmo) ? undefined : true;
+
+    if(isDefined(player.UnlimitedAmmo))
+    {
+        player endon("disconnect");
+
+        while(isDefined(player.UnlimitedAmmo))
+        {
+            player GiveMaxAmmo(player GetCurrentWeapon());
+            player SetWeaponAmmoClip(player GetCurrentWeapon(), player GetCurrentWeapon().clipsize);
+            wait .05;
+        }
+    }
+}
+
+EditPlayerScore(score, player)
+{
+    player.score = !score ? 0 : player.score + score;
+}
+selfInstaKill()
+{
+    self.personal_instakill = isDefined(self.personal_instakill) ? undefined : true;
+}
+
+RestartMap()
+{
+    map_restart(0);
+}
+KillAllZombies(player) 
+{
+    foreach(zombie in GetAITeamArray(level.zombie_team)) 
+    {
+        if (isDefined(zombie)) zombie dodamage(zombie.maxhealth + 999, zombie.origin, player);
+    }
+}
+StartTeleGun()
+{
+    self.TeleGun = isDefined(self.TeleGun) ? undefined : true;
+    if (isDefined(self.TeleGun))
+    {
+        self thread TeleportToCrosshair();
+    } 
+    else 
+    {
+        self notify("stop_telegun");
+    }
+}
+
+TeleportToCrosshair() 
+{
+    self endon("stop_telegun");
+    self endon("game_ended");
+    for (;;) 
+    {
+        self waittill("weapon_fired");
+        self SetOrigin(bullettrace(self GetTagOrigin("tag_weapon"), self GetTagOrigin("tag_weapon") + vector_scal(AnglesToForward(self GetPlayerAngles()), 10000), 1, self)["position"]);
+        wait .1;
+    }
+    wait .1;
+}
+
+vector_scal(vec, scale) 
+{
+    vec = (vec[0] * scale, vec[1] * scale, vec[2] * scale);
+    return vec;
+} 
+
+BO4FreezeBox()
+{
+    level.chests[level.chest_index].no_fly_away = (!isDefined(level.chests[level.chest_index].no_fly_away) ? true : undefined);
+}
+UnlimitedSprint(player) 
+{
+    player.UnlimitedSprint = isDefined(player.UnlimitedSprint) ? undefined : true;
+    if (isDefined(player.UnlimitedSprint))
+    {
+        player setperk("specialty_unlimitedsprint");
+        player iPrintLnBold("Unlimited Sprint ^2Enabled");
+    } 
+    else 
+    {
+        player unsetperk("specialty_unlimitedsprint");
+        player iPrintLnBold("Unlimited Sprint ^1Disabled");
+    }
+}    
+        
+DropWeapon()
+{
+    Current_Weapon = self GetCurrentWeapon();
+    self DropItem(Current_Weapon);
+    self iPrintLnBold("^2Current Weapon Dropped");
+}
+unfair_toggleaimbot()
+{
+    self.aimbot = isDefined(self.aimbot) ? undefined : true;
+    if (isDefined(self.aimbot))
+    {
+        self thread unfair_AimBot();
+        self iPrintLnBold("Aimbot ^2Enabled");
+    } 
+    else 
+    {
+        self notify("StopAimbotting");
+        self iPrintLnBold("Aimbot ^1Disabled");
+    }
+}
+
+unfair_AimBot()
+{
+    self endon("disconnect");
+    self endon("StopAimbotting");
+    while(isDefined(self.aimbot))
+    {
+        ClosestZombie = Array::get_all_closest(self.origin, GetAITeamArray(level.zombie_team));
+        
+        if(self isFiring() && ClosestZombie.size > 0 && isAlive(ClosestZombie[0]) && !self IsMeleeing())
+        {
+            Loc = ClosestZombie[0] gettagorigin("tag_origin");
+            
+            self setplayerangles(VectorToAngles((Loc) - (self gettagorigin("tag_origin"))));
+            wait .05;
+            ClosestZombie[0] kill();
+        }
+        wait .05;
+    }
+}
+
+MaxRank(player)
+{
+    player AddRankXPValue("kill", 1439600);
+    player rank::updaterank();
+    wait 0.1;
+    UploadStats(player);
+}
+
+Level1000(player)
+{
+    player AddRankXPValue("kill", 52486400);
+    player rank::updaterank();
+    wait 0.1;
+    UploadStats(player);
+}
+
+Achievements(player)
+{
+    unlockall_Achi = array("zm_office_cold_war", "zm_office_ice", "zm_office_shock", "zm_office_power", "zm_office_strike", "zm_office_office", "zm_office_crawl", "zm_office_gas", "zm_office_pentupagon", "zm_office_everywhere", "zm_red_tragedy","zm_red_follower","zm_red_tribute","zm_red_mountains","zm_red_no_obol","zm_red_sun","zm_red_wind","zm_red_eagle","zm_red_defense","zm_red_gods", "zm_white_shard","zm_white_starting","zm_white_unlock","zm_white_mod","zm_white_trap","zm_white_pap","zm_white_knuckles","zm_white_perk","zm_white_stun","zm_white_roof","zm_trophy_doctor_is_in", "zm_trials_round_30","zm_escape_most_escape","zm_escape_patch_up","zm_escape_hot_stuff","zm_escape_hist_reenact","zm_escape_match_made","zm_escape_west_side","zm_escape_senseless","zm_escape_gat","zm_escape_throw_dog", "zm_orange_ascend","zm_orange_bells","zm_orange_freeze","zm_orange_hounds","zm_orange_totems","zm_orange_pack","zm_orange_secret","zm_orange_power","zm_orange_ziplines","zm_orange_jar","ZM_ZODT8_TRIAL_STEP_1", "ZM_MANSION_ARTIFACT","ZM_MANSION_STAKE","ZM_MANSION_BOARD","ZM_MANSION_BITE","ZM_MANSION_QUICK","ZM_MANSION_ALCHEMICAL","ZM_MANSION_CRAFTING","ZM_MANSION_SHOCKING","ZM_MANSION_CLOCK","ZM_MANSION_SHRINKING", "zm_towers_challenges","zm_towers_get_ww","zm_towers_trap_build","zm_towers_ww_kills","zm_towers_kitty_kitty","zm_towers_dismember","zm_towers_boss_kill","zm_towers_arena_survive","zm_towers_fast_pap", "ZM_ZODT8_ARTIFACT","ZM_ZODT8_STOWAWAY","ZM_ZODT8_DEEP_END","ZM_ZODT8_LITTLE_PACK","ZM_ZODT8_SHORTCUT","ZM_ZODT8_TENTACLE","ZM_ZODT8_STOKING","ZM_ZODT8_ROCK_PAPER","ZM_ZODT8_SWIMMING","zm_trophy_jack_of_all_blades", "zm_trophy_straw_purchase","zm_trophy_perkaholic_relapse","zm_trophy_gold","zm_rush_personal_score","zm_rush_team_score","zm_rush_multiplier_100","mp_trophy_special_issue_weaponry","mp_trophy_special_issue_equipment", "wz_specialist_super_fan","wz_first_win","wz_not_a_fluke","wz_blackout_historian","wz_specialist_super_fan","wz_zombie_fanatic","mp_trophy_battle_tested","mp_trophy_welcome_to_the_club","MP_SPECIALIST_MEDALS","MP_MULTI_KILL_MEDALS", "mp_trophy_vanquisher");
+
+    foreach(Achev in unlockall_Achi) 
+    {
+        player GiveAchievement(Achev);
+        player iPrintLnBold("^2" + Achev);
+        wait .5;
+    }
+    wait .5;
+    player iPrintLnBold("^6All Achievements Unlocked");
+}
+MaxWeaponRanks(player)
+{
+    player endon("disconnect");
+
+    foreach(weap in level.zombie_weapons) //Sets weapon ranks which unlocks attachments
+    {
+        if(isDefined(weap.weapon))
+        {
+            player stats::set_stat(#"hash_60e21f66eb3a1f18", weap.weapon.name, #"xp", 665535);
+            player stats::set_stat(#"hash_60e21f66eb3a1f18", weap.weapon.name, #"plevel", 2);
+            
+            wait 0.01;
+        }
+    }
+
+    attachments = Array(#"reflex", #"acog", #"holo", #"dualoptic", #"mms", #"elo"); //Unlocks reticles
+    foreach(attachment in attachments)
+    {
+        player stats::set_stat(#"hash_2ea32bf38705dfdc", attachment, #"kills", #"StatValue", 3000);
+        player stats::set_stat(#"hash_2ea32bf38705dfdc", attachment, #"kills", #"ChallengeValue", 3000);
+
+        wait 0.01;
+    }
+
+    wait 0.1;
+    UploadStats(player);
+
+    player iPrintlnBold("Max Weapon Ranks ^2Set");
+    if(player != self)
+        self iPrintlnBold(player getName() + ": Max Weapon Ranks ^2Set");
+}
+
+UnlockAllChallenges(player)
+{
+    if(isDefined(player.UnlockAll))
+        return;
+    player.UnlockAll = true;
+
+    player endon("disconnect");
+
+    player iPrintlnBold("Unlock All ^2Started");
+    if(player != self)
+        self iPrintlnBold(player getName() + ": Unlock All ^2Started");
+
+    for(a=1;a<6;a++)
+    {
+        if(a == 4) //statsmilestones4.csv is an empty table. So we skip it
+            a++;
+        
+        switch(a)
+        {
+            case 1:
+                start = 1;
+                end = 292;
+                break;
+            case 2:
+                start = 292;
+                end = 548;
+                break;
+            case 3:
+                start = 548;
+                end = 589;
+                break;
+            case 5:
+                start = 1024;
+                end = 1412;
+                break;
+            default:
+                start = 0;
+                end = 0;
+                break;
+        }
+        
+        for(value=start;value<end;value++)
+        {
+            stat         = SpawnStruct();
+            stat.value   = Int(TableLookup("gamedata/stats/zm/statsmilestones" + a + ".csv", 0, value, 2));
+            stat.type    = TableLookup("gamedata/stats/zm/statsmilestones" + a + ".csv", 0, value, 3);
+            stat.name    = TableLookup("gamedata/stats/zm/statsmilestones" + a + ".csv", 0, value, 4);
+
+            switch(stat.type)
+            {
+                case "global":
+                    player stats::set_stat(#"PlayerStatsList", stat.name, #"StatValue", stat.value);
+                    player stats::set_stat(#"PlayerStatsList", stat.name, #"Challengevalue", stat.value);
+                    break;
+                case "attachment":
+                    break; //Without column 13 on the tables, it's pretty useless. So we skip the attachment challenges.
+                case "group":
+                    groups = Array(#"weapon_pistol", #"weapon_smg", #"weapon_assault", #"weapon_lmg", #"weapon_cqb", #"weapon_sniper", #"weapon_tactical", #"weapon_launcher", #"weapon_cqb", #"weapon_knife", #"weapon_special");
+                    foreach(group in groups)
+                    {
+                        player stats::set_stat(#"GroupStats", group, #"stats", stat.name, #"StatValue", stat.value);
+                        player stats::set_stat(#"GroupStats", group, #"stats", stat.name, #"Challengevalue", stat.value);
+
+                        wait 0.01;
+                    }
+                    break;
+                default:
+                    foreach(weap in level.zombie_weapons)
+                        if(isDefined(weap.weapon) && zm_utility::getweaponclasszm(weap.weapon) == stat.type)
+                        {
+                            player AddWeaponStat(weap.weapon, stat.name, stat.value);
+                            wait 0.01;
+                        }
+                    break;
+            }
+            wait 0.1;
+            UploadStats(player);
+        }
+    }
+
+    player iPrintlnBold("Unlock All Challenges ^2Done");
+    if(player != self)
+        self iPrintlnBold(player getName() + ": Unlock All Challenges ^2Done");
+}
+
+CompleteActiveContracts(player)
+{
+    foreach(index, contract in player.pers["contracts"])
+    {
+        targetVal = contract.target_value;
+        if(isDefined(targetVal) && targetVal)
+            contract.current_value = targetVal;
+    }
+}
