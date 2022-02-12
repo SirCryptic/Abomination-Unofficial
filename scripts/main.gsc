@@ -1,6 +1,6 @@
 /*
     Black Ops 4 Abomination
-    Developed By: CF4_99
+    Developed By: SirCryptic & CF4_99
     Discord.gg/MXT
 
     Credits:
