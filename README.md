@@ -26,8 +26,9 @@ you will need to use this gsc injector with visual studio code in order to use i
 ### **-Change Log**
 - 26/02/22~7:05
 
-- Added Misc Menu (Nothing Much)
+- Added Misc Menu (Nothing Much / Player Teleports basically)
 - Added Round Changer
+- Added Print Notifs for most functions
 
 
 ### **-Foot Notes:**
