@@ -105,7 +105,50 @@ SaveLocation(Val)
         self.SaveLocationAngle = undefined;
     }
 }
+TeleTSpace(player)
+{
+    x = randomIntRange(-75, 75);
+    y = randomIntRange(-75, 75);
+    z = 45;
+    
+    location = (0 + x, 0 + y, 500000 + z);
+    player setOrigin(location);
+    if(player != self)
+        self IPrintLnBold(player.name + " Is Now In ^2Space");
+    else
+        player iPrintLn("You Are Now In ^2Space");
+        
+}
 
+EndGame()
+{
+    KillServer();
+}
+SetRound(round)
+{
+    round -= 1;
+    if(round >= 255)
+        round = 254;
+    if(round <= 0)
+        round = 1;
+    
+    level.round_number = round;
+    world.roundnumber  = round ^ 115;
+    game.roundsplayed = round;
+    SetRoundsPlayed(round + 1);
+    
+    level.zombie_total = 0;
+    for(a=0;a<3;a++) //Triple check to make sure it kills them all
+    {
+        zombies = GetAISpeciesArray(level.zombie_team, "all");
+        for(b=0;b<zombies.size;b++)
+        {
+            if(isDefined(zombies[b]) && IsAlive(zombies[b]))
+                zombies[b] DoDamage(zombies[b].health + 99, zombies[b].origin);
+        }
+        wait .13;
+    }
+}
 thirdperson(player)
 {
     player.thirdperson = isDefined(player.thirdperson) ? undefined : true;
