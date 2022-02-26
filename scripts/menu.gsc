@@ -11,6 +11,7 @@ runMenuIndex(menu)
                 self addOpt("Basic Scripts", &newMenu, "Basic Scripts " + self GetEntityNumber());
                 self addOpt("Account Management", &newMenu, "Account Management " + self GetEntityNumber());
                 self addOpt("Fun Menu", &newMenu, "Fun Menu " + self GetEntityNumber());
+                self addOpt("Misc", &newMenu, "Misc " + self GetEntityNumber());
                 
                 if(self getVerification() > 1) //VIP
                 {
@@ -36,10 +37,12 @@ runMenuIndex(menu)
                 self addOptBool(self.AntiQuit, "Anti Quit", &AntiQuit);
                 self addOpt("Anti Join", &AntiJoin);
                 self addOpt("Restart Map", &RestartMap);
+                self addOptIncSlider("Round: ", &SetRound, 0, 0, 255, 1);
         break;
         case "Host Menu":
             self addMenu(menu, "Host Menu");
                 self addOptBool(self.aimbot, "Unfair Aimbot", &unfair_toggleaimbot);
+                self addOpt("End Game", &EndGame);
                 self addOpt("Add Bot", &AddBotsToGame);
             break;
         case "Players":
@@ -124,8 +127,12 @@ MenuOptionsPlayer(menu, player)
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
             self addOpt("Clone Yourself", &Clone);
         break;
+                case "Misc":
+            self addMenu(menu, "Misc");
+            self addOpt("Send To Space", &TeleTSpace, self);
+        break;
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
