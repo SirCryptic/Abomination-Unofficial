@@ -32,7 +32,6 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 
 ### **-Foot Notes:**
-this was not developed with infinte loader as i dont have access to it
 im just merely adding upon the menu that worked for me from those that didnt,  enjoy :)
 
 ### **-Credits**
