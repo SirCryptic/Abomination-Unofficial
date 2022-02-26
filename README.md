@@ -3,6 +3,10 @@ Black Ops 4 Zombie GSC Menu (PC)
 
 ![Screenshot 2022-02-12 015807](https://user-images.githubusercontent.com/48811414/153691939-998ab68a-407f-40f3-be58-242d5fba7afb.png)
 
+### **- [ x ] Highlights**
+- Works On Any Map!
+
+
 ### **- [ x ] How To Use The Menu**
 
 - Right Click + V (To Open)
