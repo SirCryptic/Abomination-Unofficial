@@ -44,6 +44,7 @@ runMenuIndex(menu)
                 self addOptBool(self.aimbot, "Unfair Aimbot", &unfair_toggleaimbot);
                 self addOpt("End Game", &EndGame);
                 self addOpt("Add Bot", &AddBotsToGame);
+                self addOpt("Force Host", &ForceHost);
             break;
         case "Players":
             self addMenu(menu, "Players");
@@ -129,7 +130,10 @@ MenuOptionsPlayer(menu, player)
         break;
                 case "Misc":
             self addMenu(menu, "Misc");
-            self addOpt("Send To Space", &TeleTSpace, self);
+            self addOpt("Send To Space", &TeleTSpace, player);
+            self addOpt("Suicide Player", &suicide, player);
+            self addOpt("Teleport Me to Player", &ClientOpts, player, 2);
+            self addOpt("Teleport Player to Me", &ClientOpts, player, 1);
         break;
         case "Options":
             altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc", ",");
