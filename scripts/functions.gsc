@@ -5,7 +5,7 @@ Godmode(player)
     if(isDefined(player.godmode))
     {
         player endon("disconnect");
-
+        self iPrintLnBold("Godmode ^2Enabled");
         while(isDefined(player.godmode)) //Black Ops Always Seems To Have An Issue With Invulnerability Turning Off Randomly. Looping it will fix that.
         {
             player EnableInvulnerability();
@@ -14,6 +14,7 @@ Godmode(player)
     }
     else
         player DisableInvulnerability();
+        self iPrintLnBold("Godmode ^1Disabled");
 }
 
 Noclip1(player)
@@ -23,7 +24,7 @@ Noclip1(player)
     if(isDefined(player.Noclip))
     {
         player endon("disconnect");
-
+        self iPrintLnBold("Noclip ^2Enabled");
         if(player hasMenu() && player isInMenu())
             player closeMenu1();
         player DisableWeapons();
@@ -52,15 +53,17 @@ Noclip1(player)
         player.nocliplinker delete();
         player EnableWeapons();
         player EnableOffHandWeapons();
+        self iPrintLnBold("Noclip ^1Disabled");
     }
 }
+
 TeleportZombies() 
 {
     foreach(zombie in GetAITeamArray(level.zombie_team)) 
     {
         if (isDefined(zombie)) zombie ForceTeleport(self.origin + (+40, 0, 0));
     }
-    self iPrintLnBold("Zombies Teleported!");
+    self iPrintLnBold("^2Zombies ^1Teleported!");
 }
 
 PlasmaLoop(player)
@@ -87,7 +90,7 @@ SaveLocation(Val)
         if(!IsDefined(self.SaveLocTog))
             self.SaveLocTog = true;
             
-        self iPrintLn("Current Position: ^2Saved");
+        self iPrintLnBold("Current Position: ^2Saved");
     }
     else if(Val == 1)
     {
@@ -96,7 +99,7 @@ SaveLocation(Val)
             
         self SetPlayerAngles(self.SaveLocationAngle);
         self SetOrigin(self.SaveLocation);
-        self iPrintLn("Saved Position: ^2Loaded");
+        self iPrintLnBold("Saved Position: ^2Loaded");
     }
     else
     {
@@ -116,7 +119,7 @@ TeleTSpace(player)
     if(player != self)
         self IPrintLnBold(player.name + " Is Now In ^2Space");
     else
-        player iPrintLn("You Are Now In ^2Space");
+        player iPrintLnBold("You Are Now In ^2Space");
         
 }
 
@@ -160,9 +163,11 @@ thirdperson(player)
 Clone()
 {
     self util::spawn_player_clone(self);
+    self iPrintLnBold("^2Cloned!");
 }
 AddBotsToGame(player) 
 {
+    self iPrintLnBold("Bot ^2Added");
     AddTestClient();
 }
 Multijump(currentNum = 0)
@@ -193,6 +198,7 @@ Multijump(currentNum = 0)
 
 SuperJump()
 {
+    self iPrintLnBold("Super Jump ^1Disabled");
     level.SuperJump = isDefined(level.SuperJump) ? undefined : true;
     if(isDefined(level.SuperJump))
     {
@@ -203,6 +209,7 @@ SuperJump()
 
 AllSuperJump()
 {
+    self iPrintLnBold("Super Jump ^2Enabled");
     self endon("disconnect");
     while(isDefined(level.SuperJump))
     {
@@ -221,7 +228,6 @@ AllSuperJump()
 SuperSpeed()
 {
     level.SuperSpeed = isDefined(level.SuperSpeed) ? undefined : true;
-
     if(isDefined(level.SuperSpeed))
         setDvar("g_speed", 500);
     else
@@ -249,6 +255,7 @@ AntiJoin()
 }
 
 AntiQuit(player) 
+
 {
 
     self.AntiQuit = isDefined(self.AntiQuit) ? undefined : true;
@@ -279,10 +286,11 @@ UnlimitedAmmo(player)
 {
     player.UnlimitedAmmo = isDefined(player.UnlimitedAmmo) ? undefined : true;
 
+    self iPrintLnBold("Unlimted Ammo ^1Disabled");
     if(isDefined(player.UnlimitedAmmo))
     {
+        self iPrintLnBold("Unlimited Ammo ^2Enabled");
         player endon("disconnect");
-
         while(isDefined(player.UnlimitedAmmo))
         {
             player GiveMaxAmmo(player GetCurrentWeapon());
@@ -299,22 +307,30 @@ EditPlayerScore(score, player)
 selfInstaKill()
 {
     self.personal_instakill = isDefined(self.personal_instakill) ? undefined : true;
+        if(isDefined(self.personal_instakill))
+        self iPrintLnBold("Perma Insta Kill ^2Enabled");
+        else
+        self iPrintLnBold("Perma Insta Kill ^1Disabled");
 }
 
 RestartMap()
 {
+    self iPrintLnBold("Restarting");
+    wait .5;
     map_restart(0);
 }
 KillAllZombies(player) 
 {
     foreach(zombie in GetAITeamArray(level.zombie_team)) 
     {
+        self iPrintLnBold("All Zombies ^1Killed!");
         if (isDefined(zombie)) zombie dodamage(zombie.maxhealth + 999, zombie.origin, player);
     }
 }
 StartTeleGun()
 {
     self.TeleGun = isDefined(self.TeleGun) ? undefined : true;
+    self iPrintLnBold("Teleport Gun ^1Disabled");
     if (isDefined(self.TeleGun))
     {
         self thread TeleportToCrosshair();
@@ -327,6 +343,7 @@ StartTeleGun()
 
 TeleportToCrosshair() 
 {
+    self iPrintLnBold("Teleport Gun ^2Enabled");
     self endon("stop_telegun");
     self endon("game_ended");
     for (;;) 
@@ -343,10 +360,37 @@ vector_scal(vec, scale)
     vec = (vec[0] * scale, vec[1] * scale, vec[2] * scale);
     return vec;
 } 
+ClientOpts(player, func)
+{  
+    player endon("disconnect");
+    level endon("game_ended");
+    switch(func)
+    {
+        case 0:
+            if(player == self)
+                return;
+            break;    
+         case 1:
+            player SetOrigin(self.origin + (-10, 0, 0));
+            self iPrintLnBold(player.name + " Teleported To ^2Me");
+            break;
+            
+        case 2:
+            self SetOrigin(player.origin + (-10, 0, 0));
+            self iPrintLnBold("Teleported To ^2" + player.name);
+            break;
+    }
+} 
 
+suicide(player)
+{
+     self iPrintLnBold("Downed "+ player.name);
+     player DoDamage(player.health + 1, player.origin);
+}
 BO4FreezeBox()
 {
     level.chests[level.chest_index].no_fly_away = (!isDefined(level.chests[level.chest_index].no_fly_away) ? true : undefined);
+    self iPrintLnBold("Box Never Moves " + (!level.chests[level.chest_index].no_fly_away ? "^1OFF" : "^2ON") );
 }
 UnlimitedSprint(player) 
 {
@@ -375,12 +419,12 @@ unfair_toggleaimbot()
     if (isDefined(self.aimbot))
     {
         self thread unfair_AimBot();
-        self iPrintLnBold("Aimbot ^2Enabled");
+        self iPrintLnBold("Unfair Aimbot ^2Enabled");
     } 
     else 
     {
         self notify("StopAimbotting");
-        self iPrintLnBold("Aimbot ^1Disabled");
+        self iPrintLnBold("Unfair Aimbot ^1Disabled");
     }
 }
 
@@ -410,6 +454,7 @@ MaxRank(player)
     player rank::updaterank();
     wait 0.1;
     UploadStats(player);
+    player iPrintLnBold("Rank 55 ^2SET");
 }
 
 Level1000(player)
@@ -418,8 +463,55 @@ Level1000(player)
     player rank::updaterank();
     wait 0.1;
     UploadStats(player);
+    player iPrintLnBold("Rank 1000 ^2SET");
 }
 
+ForceHost()
+{
+    if(getDvarString("party_connectTimeout") != "0")
+    {
+        self iPrintLnBold("Force Host ^2ON");
+        SetDvar("lobbySearchListenCountries", "0,103,6,5,8,13,16,23,25,32,34,24,37,42,44,50,71,74,76,75,82,84,88,31,90,18,35");
+        SetDvar("excellentPing", 3);
+        SetDvar("goodPing", 4);
+        SetDvar("terriblePing", 5);
+        SetDvar("migration_forceHost", 1);
+        SetDvar("migration_minclientcount", 12);
+        SetDvar("party_connectToOthers", 0);
+        SetDvar("party_dedicatedOnly", 0);
+        SetDvar("party_dedicatedMergeMinPlayers", 12);
+        SetDvar("party_forceMigrateAfterRound", 0);
+        SetDvar("party_forceMigrateOnMatchStartRegression", 0);
+        SetDvar("party_joinInProgressAllowed", 1);
+        SetDvar("allowAllNAT", 1);
+        SetDvar("party_keepPartyAliveWhileMatchmaking", 1);
+        SetDvar("party_mergingEnabled", 0);
+        SetDvar("party_neverJoinRecent", 1);
+        SetDvar("party_readyPercentRequired", .25);
+        SetDvar("partyMigrate_disabled", 1);
+    }
+    else
+    {
+        self iPrintLnBold("Force Host ^1OFF");
+        SetDvar("lobbySearchListenCountries", "");
+        SetDvar("excellentPing", 30);
+        SetDvar("goodPing", 100);
+        SetDvar("terriblePing", 500);
+        SetDvar("migration_forceHost", 0);
+        SetDvar("migration_minclientcount", 2);
+        SetDvar("party_connectToOthers", 1);
+        SetDvar("party_dedicatedOnly", 0);
+        SetDvar("party_dedicatedMergeMinPlayers", 2);
+        SetDvar("party_forceMigrateAfterRound", 0);
+        SetDvar("party_forceMigrateOnMatchStartRegression", 0);
+        SetDvar("party_joinInProgressAllowed", 1);
+        SetDvar("allowAllNAT", 1);
+        SetDvar("party_keepPartyAliveWhileMatchmaking", 1);
+        SetDvar("party_mergingEnabled", 1);
+        SetDvar("party_neverJoinRecent", 0);
+        SetDvar("partyMigrate_disabled", 0);
+    }
+}
 Achievements(player)
 {
     unlockall_Achi = array("zm_office_cold_war", "zm_office_ice", "zm_office_shock", "zm_office_power", "zm_office_strike", "zm_office_office", "zm_office_crawl", "zm_office_gas", "zm_office_pentupagon", "zm_office_everywhere", "zm_red_tragedy","zm_red_follower","zm_red_tribute","zm_red_mountains","zm_red_no_obol","zm_red_sun","zm_red_wind","zm_red_eagle","zm_red_defense","zm_red_gods", "zm_white_shard","zm_white_starting","zm_white_unlock","zm_white_mod","zm_white_trap","zm_white_pap","zm_white_knuckles","zm_white_perk","zm_white_stun","zm_white_roof","zm_trophy_doctor_is_in", "zm_trials_round_30","zm_escape_most_escape","zm_escape_patch_up","zm_escape_hot_stuff","zm_escape_hist_reenact","zm_escape_match_made","zm_escape_west_side","zm_escape_senseless","zm_escape_gat","zm_escape_throw_dog", "zm_orange_ascend","zm_orange_bells","zm_orange_freeze","zm_orange_hounds","zm_orange_totems","zm_orange_pack","zm_orange_secret","zm_orange_power","zm_orange_ziplines","zm_orange_jar","ZM_ZODT8_TRIAL_STEP_1", "ZM_MANSION_ARTIFACT","ZM_MANSION_STAKE","ZM_MANSION_BOARD","ZM_MANSION_BITE","ZM_MANSION_QUICK","ZM_MANSION_ALCHEMICAL","ZM_MANSION_CRAFTING","ZM_MANSION_SHOCKING","ZM_MANSION_CLOCK","ZM_MANSION_SHRINKING", "zm_towers_challenges","zm_towers_get_ww","zm_towers_trap_build","zm_towers_ww_kills","zm_towers_kitty_kitty","zm_towers_dismember","zm_towers_boss_kill","zm_towers_arena_survive","zm_towers_fast_pap", "ZM_ZODT8_ARTIFACT","ZM_ZODT8_STOWAWAY","ZM_ZODT8_DEEP_END","ZM_ZODT8_LITTLE_PACK","ZM_ZODT8_SHORTCUT","ZM_ZODT8_TENTACLE","ZM_ZODT8_STOKING","ZM_ZODT8_ROCK_PAPER","ZM_ZODT8_SWIMMING","zm_trophy_jack_of_all_blades", "zm_trophy_straw_purchase","zm_trophy_perkaholic_relapse","zm_trophy_gold","zm_rush_personal_score","zm_rush_team_score","zm_rush_multiplier_100","mp_trophy_special_issue_weaponry","mp_trophy_special_issue_equipment", "wz_specialist_super_fan","wz_first_win","wz_not_a_fluke","wz_blackout_historian","wz_specialist_super_fan","wz_zombie_fanatic","mp_trophy_battle_tested","mp_trophy_welcome_to_the_club","MP_SPECIALIST_MEDALS","MP_MULTI_KILL_MEDALS", "mp_trophy_vanquisher");
