@@ -24,9 +24,10 @@ you will need to use this gsc injector with visual studio code in order to use i
 ### **-BUILD VERSION: 1.0.4 - Unofficial **
 
 ### **-Change Log**
-- 04/03/22~ 19:33
+- 04/03/22
 
 - Extended Weapon Menu (Renamed To Weapon Options)
+- Cleaned Up Some Code
 
 ### **-BUILD VERSION: 1.0.3 - Unofficial **
 
