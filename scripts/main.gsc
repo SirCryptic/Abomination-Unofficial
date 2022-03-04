@@ -1,11 +1,12 @@
 /*
-    Black Ops 4 Abomination - Unofficial 1.0.3
-    Developed By: SirCryptic & CF4_99
-    Discord.gg/MXT
+    Black Ops 4 Abomination - Unofficial 1.0.4
+    Developed By: SirCryptic
 
     Credits:
+        CF4_99  ~ For Helping & The Base Menu
         Extinct ~ Wouldn't have the attachment stats without him
         Serious ~ BO4 Compiler
+        Discord.gg/MXT
 
 
 
