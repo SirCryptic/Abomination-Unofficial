@@ -1,7 +1,7 @@
 # Abomination Unofficial
 Black Ops 4 Zombie GSC Menu (PC)
 
-![Screenshot 2022-02-26 071528](https://user-images.githubusercontent.com/48811414/155833996-c46c6414-0e74-494b-b9db-baf6504b8af0.png)
+![111](https://user-images.githubusercontent.com/48811414/156706089-afd8b753-969c-4e67-94d0-ead08e70cd76.png)
 
 ### **- [ x ] Highlights**
 - Works On Any Map & Public Lobbys (Must Be Host)!
