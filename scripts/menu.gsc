@@ -12,6 +12,7 @@ runMenuIndex(menu)
                 self addOpt("Account Management", &newMenu, "Account Management " + self GetEntityNumber());
                 self addOpt("Fun Menu", &newMenu, "Fun Menu " + self GetEntityNumber());
                 self addOpt("Misc", &newMenu, "Misc " + self GetEntityNumber());
+                self addOpt("Weapons", &newMenu, "Weapons " + self GetEntityNumber());
                 
                 if(self getVerification() > 1) //VIP
                 {
@@ -30,10 +31,10 @@ runMenuIndex(menu)
             break;
         case "Lobby Menu":
             self addMenu(menu, "Lobby Menu");
-                self addOptBool(level.BO4NoFallD, "No Fall", &BO4NoFallDam);
+                self addOptBool(level.nofalldamage, "No Fall", &nofalldamage);
                 self addOptBool(level.SuperJump, "Super Jump", &SuperJump);
                 self addOptBool(level.SuperSpeed, "Super Speed", &SuperSpeed);
-                self addoptBool(level.B4Gravity, "Low Gravity", &B4Gravity);
+                self addoptBool(level.B4Gravity, "Low Gravity", &Gravity);
                 self addOptBool(self.AntiQuit, "Anti Quit", &AntiQuit);
                 self addOpt("Anti Join", &AntiJoin);
                 self addOpt("Restart Map", &RestartMap);
@@ -123,20 +124,34 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
-            self addOpt("Freeze Box Position", &BO4FreezeBox);
+            self addOpt("Freeze Box Position", &FreezeMysteryBox);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
             self addOpt("Clone Yourself", &Clone);
         break;
                 case "Misc":
             self addMenu(menu, "Misc");
+            self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send To Space", &TeleTSpace, player);
             self addOpt("Suicide Player", &suicide, player);
             self addOpt("Teleport Me to Player", &ClientOpts, player, 2);
             self addOpt("Teleport Player to Me", &ClientOpts, player, 1);
         break;
+               case "Weapons":
+            self addMenu(menu, "Weapons");
+            self addOpt("minigun", &minigun);
+            self addOpt("ICR-7", &icr7);
+            self addOpt("KN-57", &kn57);
+            self addOpt("Maddox RFB", &maddox);
+            self addOpt("Outlaw", &outlaw);
+            self addOpt("Paladin HB50", &paladinhb50);
+            self addOpt("VKM 750", &vkm750);
+            self addOpt("Hades", &hades);
+        break;
+
+
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapons", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
@@ -371,8 +386,7 @@ DestroyOpts()
     self iPrintln("^1" + level.menuName);
     self iPrintln(" ^3By - " + level.menuDeveloper);
     self iPrintln ("^0Credits");
-    self iPrintln("^1 Original By - " + level.menuDeveloper1);
-    self iPrintln("^1 Some Functions - " + level.menuDeveloper2);
+    self iPrintln("^1 Original & Help From - ^3" + level.menuDeveloper1);
     for(a=0;a<4;a++)
         self iPrintln(".");
 }
