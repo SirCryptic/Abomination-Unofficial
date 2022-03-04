@@ -70,6 +70,7 @@ GivePlayerWeapon(weapon)
     self GiveWeapon(GetWeapon(weapon));
     self SwitchToWeapon(GetWeapon(weapon));
     self iPrintLnBold(weapon + " ^2Given");
+				self playsound(#"outofmoney");
 }
 
 PlasmaLoop(player)
@@ -133,6 +134,7 @@ EndGame()
 {
     KillServer();
 }
+
 SetRound(round)
 {
     round -= 1;
@@ -426,29 +428,35 @@ Camos(Camo)
     self TakeWeapon(Weapon);
     self GiveWeapon(Weapon, self CalcWeaponOptions(Int(Camo), 1, 1, true, true, true, true));
     self iPrintLnBold("^2Camo ^1" + Camo + " ^2Given.");
-}        
-DropWeapon()
+} 
+WeaponOpt(i)
 {
-    Current_Weapon = self GetCurrentWeapon();
-    self DropItem(Current_Weapon);
-    self iPrintLnBold("^2Current Weapon ^1Dropped!");
-}
-TakeCurrentWeapon()
-{
-    weapon = self getCurrentWeapon();
-    self TakeWeapon(weapon);
-    wait .5;
-    self TakeWeapon(weapon);
-    self iPrintLnBold("^2Current Weapon ^1Taken!");
-}
-TakeWeapons()
-{
-    weapon = self getCurrentWeapon();
-    self TakeAllWeapons();
-    wait .5;
-    self TakeWeapon(weapon);
-    self iPrintLnBold("^2All Weapons ^1Taken!");
-}
+    Weap = self GetCurrentWeapon();
+    switch(i)
+    {
+        case 0:
+            self iPrintLnBold("Taken ^1Weapon");
+            self TakeWeapon(Weap);
+            break;
+
+        case 1:
+            self iPrintLnBold("All Weapons ^1Taken");
+            self TakeAllWeapons();
+            break;
+
+        case 2:
+            self iPrintLnBold("Dropped ^2Weapon");
+            self DropItem(Weap);
+            break;
+
+        case 3:
+            self giveMaxAmmo(Weap);
+            self giveMaxAmmo(self getCurrentOffHand());
+            self iPrintLnBold("Max Ammo ^2Given");
+            break;
+    }
+}       
+
 unfair_toggleaimbot()
 {
     self.aimbot = isDefined(self.aimbot) ? undefined : true;
