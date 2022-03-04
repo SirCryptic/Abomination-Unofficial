@@ -154,27 +154,27 @@ MenuOptionsPlayer(menu, player)
         break;
                case "Weapons":
             self addMenu(menu, "Weapons");
-            self addOpt("== Specials ==");
+            self addOpt("-- Specials --");
             self addOpt("Hellion Salvo", &GivePlayerWeapon, "launcher_standard_t8");
             self addOpt("Minigun", &GivePlayerWeapon, "minigun");
 
-            self addOpt("== Sniper Rifles ==");
+            self addOpt("-- Sniper Rifles --");
             self addOpt("Outlaw", &GivePlayerWeapon, "sniper_fastrechamber_t8");
             self addOpt("Paladin HB50", &GivePlayerWeapon, "sniper_powerbolt_t8");
             self addOpt("SDM", &GivePlayerWeapon, "sniper_powersemi_t8");
             self addOpt("Koshka", &GivePlayerWeapon, "sniper_quickscope_t8");
 
-            self addOpt("== Tactical Rifles ==");
+            self addOpt("-- Tactical Rifles --");
             self addOpt("Auger DMR", &GivePlayerWeapon, "tr_powersemi_t8");
             self addOpt("Swordfish", &GivePlayerWeapon, "tr_longburst_t8");
             self addOpt("ABR 223", &GivePlayerWeapon, "tr_midburst_t8");
 
-            self addOpt("== Lightmachine Guns ==");
+            self addOpt("-- Lightmachine Guns --");
             self addOpt("VKM 750", &GivePlayerWeapon, "lmg_heavy_t8");
             self addOpt("Hades", &GivePlayerWeapon, "lmg_spray_t8");
             self addOpt("Titan", &GivePlayerWeapon, "lmg_standard_t8");
 
-            self addOpt("== Assault Rifles ==");
+            self addOpt("-- Assault Rifles --");
             self addOpt("ICR-7", &GivePlayerWeapon, "ar_accurate_t8");
             self addOpt("Maddox RFB", &GivePlayerWeapon, "ar_fastfire_t8");
             self addOpt("Rampart 17", &GivePlayerWeapon, "ar_damage_t8");
@@ -182,7 +182,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("KN-57", &GivePlayerWeapon, "ar_modular_t8");
             self addOpt("Hitchcock M9", &GivePlayerWeapon, "ar_mg1909_t8");
 
-            self addOpt("== Submachine Guns ==");
+            self addOpt("-- Submachine Guns --");
             self addOpt("MX9", &GivePlayerWeapon, "smg_standard_t8");
             self addOpt("Saug 9mm", &GivePlayerWeapon, "smg_handling_t8");
             self addOpt("Spitfire", &GivePlayerWeapon, "smg_fastfire_t8");
@@ -190,19 +190,23 @@ MenuOptionsPlayer(menu, player)
             self addOpt("GKS", &GivePlayerWeapon, "smg_accurate_t8");
             self addOpt("Escargot", &GivePlayerWeapon, "smg_drum_pistol_t8");
 
-            self addOpt("== Pistols ==");
+            self addOpt("-- Pistols --");
             self addOpt("RK 7 Garrison", &GivePlayerWeapon, "pistol_burst_t8");
             self addOpt("Mozu", &GivePlayerWeapon, "pistol_revolver_t8");
             self addOpt("Strife", &GivePlayerWeapon, "pistol_standard_t8");
             self addOpt("Welling", &GivePlayerWeapon, "pistol_topbreak_t8");
 
-            self addOpt("== Shotguns ==");
+            self addOpt("-- Shotguns --");
             self addOpt("Mog 12", &GivePlayerWeapon, "shotgun_pump_t8");
             self addOpt("SG12", &GivePlayerWeapon, "shotgun_pump_t8");
             self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_pump_t8");
+            
+            self addOpt("-- Equipment --");
+            self addOpt("Monkey Bombs", &GivePlayerWeapon, "cymbal_monkey");
+            self addOpt("sticky grenade", &GivePlayerWeapon, "sticky_grenade");
+            self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8");
 
         break;
-
         case "Options":
             altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapon Options,", ",");
             
