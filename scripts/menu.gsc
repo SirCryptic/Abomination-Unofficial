@@ -12,7 +12,7 @@ runMenuIndex(menu)
                 self addOpt("Account Management", &newMenu, "Account Management " + self GetEntityNumber());
                 self addOpt("Fun Menu", &newMenu, "Fun Menu " + self GetEntityNumber());
                 self addOpt("Misc", &newMenu, "Misc " + self GetEntityNumber());
-                self addOpt("Weapons", &newMenu, "Weapons " + self GetEntityNumber());
+                self addOpt("Weapon Options", &newMenu, "Weapon Options " + self GetEntityNumber());
                 
                 if(self getVerification() > 1) //VIP
                 {
@@ -106,7 +106,6 @@ MenuOptionsPlayer(menu, player)
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
                 self addOpt("Teleport Zombies", &TeleportZombies);
-                self addOpt("Drop Weapon", &DropWeapon);
             break;
         case "Account Management":
             self addMenu(menu, "Account Management");
@@ -137,21 +136,74 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Teleport Me to Player", &ClientOpts, player, 2);
             self addOpt("Teleport Player to Me", &ClientOpts, player, 1);
         break;
-               case "Weapons":
-            self addMenu(menu, "Weapons");
-            self addOpt("minigun", &minigun);
-            self addOpt("ICR-7", &icr7);
-            self addOpt("KN-57", &kn57);
-            self addOpt("Maddox RFB", &maddox);
-            self addOpt("Outlaw", &outlaw);
-            self addOpt("Paladin HB50", &paladinhb50);
-            self addOpt("VKM 750", &vkm750);
-            self addOpt("Hades", &hades);
+
+        case "Weapon Options":
+        self addMenu(menu, "Weapon Options");
+        self addOpt("Weapons", &newMenu, "Weapons");
+        self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
+        self addOpt("Drop Weapon", &DropWeapon);
+        self addOpt("Take Current Weapon", &TakeCurrentWeapon);
+        self addOpt("Take All Weapons", &TakeWeapons);
         break;
 
+   case "Camos":
+        self addMenu(menu, "Camos");
+            for(a=0;a<96;a++)
+                    self addOpt("Camo: " + (a + 1), &Camos, a);
+        break;
+               case "Weapons":
+            self addMenu(menu, "Weapons");
+            self addOpt("== Specials ==");
+            self addOpt("Hellion Salvo", &GivePlayerWeapon, "launcher_standard_t8");
+            self addOpt("Minigun", &GivePlayerWeapon, "minigun");
+
+            self addOpt("== Sniper Rifles ==");
+            self addOpt("Outlaw", &GivePlayerWeapon, "sniper_fastrechamber_t8");
+            self addOpt("Paladin HB50", &GivePlayerWeapon, "sniper_powerbolt_t8");
+            self addOpt("SDM", &GivePlayerWeapon, "sniper_powersemi_t8");
+            self addOpt("Koshka", &GivePlayerWeapon, "sniper_quickscope_t8");
+
+            self addOpt("== Tactical Rifles ==");
+            self addOpt("Auger DMR", &GivePlayerWeapon, "tr_powersemi_t8");
+            self addOpt("Swordfish", &GivePlayerWeapon, "tr_longburst_t8");
+            self addOpt("ABR 223", &GivePlayerWeapon, "tr_midburst_t8");
+
+            self addOpt("== Lightmachine Guns ==");
+            self addOpt("VKM 750", &GivePlayerWeapon, "lmg_heavy_t8");
+            self addOpt("Hades", &GivePlayerWeapon, "lmg_spray_t8");
+            self addOpt("Titan", &GivePlayerWeapon, "lmg_standard_t8");
+
+            self addOpt("== Assault Rifles ==");
+            self addOpt("ICR-7", &GivePlayerWeapon, "ar_accurate_t8");
+            self addOpt("Maddox RFB", &GivePlayerWeapon, "ar_fastfire_t8");
+            self addOpt("Rampart 17", &GivePlayerWeapon, "ar_damage_t8");
+            self addOpt("Vapr-XKG", &GivePlayerWeapon, "ar_stealth_t8");
+            self addOpt("KN-57", &GivePlayerWeapon, "ar_modular_t8");
+            self addOpt("Hitchcock M9", &GivePlayerWeapon, "ar_mg1909_t8");
+
+            self addOpt("== Submachine Guns ==");
+            self addOpt("MX9", &GivePlayerWeapon, "smg_standard_t8");
+            self addOpt("Saug 9mm", &GivePlayerWeapon, "smg_handling_t8");
+            self addOpt("Spitfire", &GivePlayerWeapon, "smg_fastfire_t8");
+            self addOpt("Cordite", &GivePlayerWeapon, "smg_capacity_t8");
+            self addOpt("GKS", &GivePlayerWeapon, "smg_accurate_t8");
+            self addOpt("Escargot", &GivePlayerWeapon, "smg_drum_pistol_t8");
+
+            self addOpt("== Pistols ==");
+            self addOpt("RK 7 Garrison", &GivePlayerWeapon, "pistol_burst_t8");
+            self addOpt("Mozu", &GivePlayerWeapon, "pistol_revolver_t8");
+            self addOpt("Strife", &GivePlayerWeapon, "pistol_standard_t8");
+            self addOpt("Welling", &GivePlayerWeapon, "pistol_topbreak_t8");
+
+            self addOpt("== Shotguns ==");
+            self addOpt("Mog 12", &GivePlayerWeapon, "shotgun_pump_t8");
+            self addOpt("SG12", &GivePlayerWeapon, "shotgun_pump_t8");
+            self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_pump_t8");
+
+        break;
 
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapon Options,", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
