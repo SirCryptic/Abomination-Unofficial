@@ -151,7 +151,7 @@ MenuOptionsPlayer(menu, player)
 
 
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapons", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
