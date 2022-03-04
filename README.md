@@ -21,7 +21,7 @@ Black Ops 4 Zombie GSC Menu (PC)
 you will need to use this gsc injector with visual studio code in order to use it
 - https://github.com/shiversoftdev/t7-compiler
 
-### **-BUILD VERSION: 1.0.3 - Unofficial **
+### **-BUILD VERSION: 1.0.4 - Unofficial **
 
 ### **-Change Log**
 - 04/03/22~ 19:33
