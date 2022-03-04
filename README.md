@@ -25,7 +25,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 ### **-Change Log**
 - 04/03/22
-
+- Added Equipment to weapon Menu
 - Extended Weapon Menu (Renamed To Weapon Options)
 - Cleaned Up Some Code
 
