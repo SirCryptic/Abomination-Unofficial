@@ -1,5 +1,5 @@
 /*
-    Black Ops 4 Abomination
+    Black Ops 4 Abomination - Unofficial 1.0.3
     Developed By: SirCryptic & CF4_99
     Discord.gg/MXT
 
@@ -71,7 +71,6 @@ InitializeVarsPrecaches()
     level.menuName = "Abomination - Unofficial";
     level.menuDeveloper = "SirCryptic";
     level.menuDeveloper1 = "CF4_99";
-    level.menuDeveloper2 = "Gillam";
     level.AutoVerify = 0; //Auto Verification
     level.MenuStatus = StrTok("None,Verified,VIP,Co-Host,Admin,Host,Developer", ",");
 }
@@ -98,8 +97,7 @@ playerSetup()
         self iPrintln("^1Welcome To " + level.menuName);
     self iPrintln(" ^3By - " + level.menuDeveloper);
     self iPrintln ("^0Credits");
-    self iPrintln("^1 Original By - " + level.menuDeveloper1);
-    self iPrintln("^1 Some Functions - " + level.menuDeveloper2);
+    self iPrintln("^1 Original & Help From - ^3" + level.menuDeveloper1);
         self iPrintln("^1Status: " + self.playerSetting["verification"]);
         for(a=0;a<4;a++)
             self iPrintln(".");
