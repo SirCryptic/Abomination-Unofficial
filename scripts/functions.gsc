@@ -65,53 +65,11 @@ TeleportZombies()
     }
     self iPrintLnBold("^2Zombies ^1Teleported!");
 }
-icr7()
+GivePlayerWeapon(weapon)
 {
- self giveweapon(getweapon("ar_accurate_t8"));
- self SwitchToWeapon(GetWeapon("ar_accurate_t8"));
- self IPrintLnBold("Given ^2ICR-7!");
-}
-outlaw()
-{
- self giveweapon(getweapon("sniper_fastrechamber_t8"));
- self SwitchToWeapon(GetWeapon("sniper_fastrechamber_t8"));
-  self IPrintLnBold("Given ^2Outlaw!");
-}
-paladinhb50()
-{
- self giveweapon(getweapon("sniper_powerbolt_t8"));
- self SwitchToWeapon(GetWeapon("sniper_powerbolt_t8"));
-  self IPrintLnBold("Given ^2Paladin HB50!");
-}
-hades()
-{
- self giveweapon(getweapon("lmg_spray_t8"));
- self SwitchToWeapon(GetWeapon("lmg_spray_t8"));
-  self IPrintLnBold("Given ^2Hades!");
-}
-vkm750()
-{
- self giveweapon(getweapon("lmg_heavy_t8"));
- self SwitchToWeapon(GetWeapon("lmg_heavy_t8"));
-  self IPrintLnBold("Given ^2VKM 750!");
-}
-maddox()
-{
- self giveweapon(getweapon("ar_fastfire_t8"));
- self SwitchToWeapon(GetWeapon("ar_fastfire_t8"));
-  self IPrintLnBold("Given ^2Maddox RFB!");
-}
-kn57()
-{
- self giveweapon(getweapon("ar_modular_t8"));
- self SwitchToWeapon(GetWeapon("ar_modular_t8"));
-  self IPrintLnBold("Given ^2KN-57!");
-}
-minigun()
-{
- self giveweapon(getweapon("minigun"));
- self SwitchToWeapon(GetWeapon("minigun"));
-  self IPrintLnBold("Given ^2Minigun!");
+    self GiveWeapon(GetWeapon(weapon));
+    self SwitchToWeapon(GetWeapon(weapon));
+    self iPrintLnBold(weapon + " ^2Given");
 }
 
 PlasmaLoop(player)
@@ -460,12 +418,36 @@ UnlimitedSprint(player)
         player iPrintLnBold("Unlimited Sprint ^1Disabled");
     }
 }    
-        
+
+
+Camos(Camo) 
+{
+    Weapon = self GetCurrentWeapon();
+    self TakeWeapon(Weapon);
+    self GiveWeapon(Weapon, self CalcWeaponOptions(Int(Camo), 1, 1, true, true, true, true));
+    self iPrintLnBold("^2Camo ^1" + Camo + " ^2Given.");
+}        
 DropWeapon()
 {
     Current_Weapon = self GetCurrentWeapon();
     self DropItem(Current_Weapon);
-    self iPrintLnBold("^2Current Weapon Dropped");
+    self iPrintLnBold("^2Current Weapon ^1Dropped!");
+}
+TakeCurrentWeapon()
+{
+    weapon = self getCurrentWeapon();
+    self TakeWeapon(weapon);
+    wait .5;
+    self TakeWeapon(weapon);
+    self iPrintLnBold("^2Current Weapon ^1Taken!");
+}
+TakeWeapons()
+{
+    weapon = self getCurrentWeapon();
+    self TakeAllWeapons();
+    wait .5;
+    self TakeWeapon(weapon);
+    self iPrintLnBold("^2All Weapons ^1Taken!");
 }
 unfair_toggleaimbot()
 {
