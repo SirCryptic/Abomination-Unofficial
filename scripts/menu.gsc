@@ -141,9 +141,10 @@ MenuOptionsPlayer(menu, player)
         self addMenu(menu, "Weapon Options");
         self addOpt("Weapons", &newMenu, "Weapons");
         self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
-        self addOpt("Drop Weapon", &DropWeapon);
-        self addOpt("Take Current Weapon", &TakeCurrentWeapon);
-        self addOpt("Take All Weapons", &TakeWeapons);
+        self addOpt("Drop Current Weapon", &WeaponOpt, 2);
+        self addOpt("Take Current Weapon", &WeaponOpt, 0);
+        self addOpt("Take All Weapons", &WeaponOpt, 1);
+        self addOpt("Refill Current Ammo", &WeaponOpt, 3);
         break;
 
    case "Camos":
