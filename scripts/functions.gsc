@@ -65,6 +65,54 @@ TeleportZombies()
     }
     self iPrintLnBold("^2Zombies ^1Teleported!");
 }
+icr7()
+{
+ self giveweapon(getweapon("ar_accurate_t8"));
+ self SwitchToWeapon(GetWeapon("ar_accurate_t8"));
+ self IPrintLnBold("Given ^2ICR-7!");
+}
+outlaw()
+{
+ self giveweapon(getweapon("sniper_fastrechamber_t8"));
+ self SwitchToWeapon(GetWeapon("sniper_fastrechamber_t8"));
+  self IPrintLnBold("Given ^2Outlaw!");
+}
+paladinhb50()
+{
+ self giveweapon(getweapon("sniper_powerbolt_t8"));
+ self SwitchToWeapon(GetWeapon("sniper_powerbolt_t8"));
+  self IPrintLnBold("Given ^2Paladin HB50!");
+}
+hades()
+{
+ self giveweapon(getweapon("lmg_spray_t8"));
+ self SwitchToWeapon(GetWeapon("lmg_spray_t8"));
+  self IPrintLnBold("Given ^2Hades!");
+}
+vkm750()
+{
+ self giveweapon(getweapon("lmg_heavy_t8"));
+ self SwitchToWeapon(GetWeapon("lmg_heavy_t8"));
+  self IPrintLnBold("Given ^2VKM 750!");
+}
+maddox()
+{
+ self giveweapon(getweapon("ar_fastfire_t8"));
+ self SwitchToWeapon(GetWeapon("ar_fastfire_t8"));
+  self IPrintLnBold("Given ^2Maddox RFB!");
+}
+kn57()
+{
+ self giveweapon(getweapon("ar_modular_t8"));
+ self SwitchToWeapon(GetWeapon("ar_modular_t8"));
+  self IPrintLnBold("Given ^2KN-57!");
+}
+minigun()
+{
+ self giveweapon(getweapon("minigun"));
+ self SwitchToWeapon(GetWeapon("minigun"));
+  self IPrintLnBold("Given ^2Minigun!");
+}
 
 PlasmaLoop(player)
 {
@@ -152,6 +200,11 @@ SetRound(round)
         wait .13;
     }
 }
+ZombieCount()
+{
+    Zombies=getAIArray("axis");
+    self iPrintLnBold("Zombies ^1Remaining ^7: ^2"+Zombies.size);
+}
 thirdperson(player)
 {
     player.thirdperson = isDefined(player.thirdperson) ? undefined : true;
@@ -234,10 +287,11 @@ SuperSpeed()
         setDvar("g_speed", 200);
 }
 
-BO4NoFallDam()
+
+nofalldamage()
 {
-    level.BO4NoFallD = isDefined(level.BO4NoFallD) ? undefined : true;
-    if(isDefined(self.BO4NoFallD))
+    level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
+    if(isDefined(self.nofalldamage))
     {
         SetDvar(#"bg_fallDamageMinHeight", 9999);
         SetDvar(#"bg_fallDamageMaxHeight", 9999);
@@ -274,10 +328,10 @@ AntiQuit(player)
         self iPrintLnBold("Anti Quit ^1Disabled");
     }
 }
-B4Gravity()
+Gravity()
 {
-    level.B4Gravity = isDefined(level.B4Gravity) ? undefined : true;
-    if(isDefined(level.B4Gravity))
+    level.Gravity = isDefined(level.Gravity) ? undefined : true;
+    if(isDefined(level.Gravity))
         SetDvar("bg_gravity", 100);
     else
         SetDvar("bg_gravity", 350);
@@ -387,7 +441,7 @@ suicide(player)
      self iPrintLnBold("Downed "+ player.name);
      player DoDamage(player.health + 1, player.origin);
 }
-BO4FreezeBox()
+FreezeMysteryBox()
 {
     level.chests[level.chest_index].no_fly_away = (!isDefined(level.chests[level.chest_index].no_fly_away) ? true : undefined);
     self iPrintLnBold("Box Never Moves " + (!level.chests[level.chest_index].no_fly_away ? "^1OFF" : "^2ON") );
