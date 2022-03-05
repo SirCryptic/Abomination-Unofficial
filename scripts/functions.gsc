@@ -56,21 +56,17 @@ Noclip1(player)
         self iPrintLnBold("Noclip ^1Disabled");
     }
 }
-
-TeleportZombies() 
+KickAllPlayers()
 {
-    foreach(zombie in GetAITeamArray(level.zombie_team)) 
-    {
-        if (isDefined(zombie)) zombie ForceTeleport(self.origin + (+40, 0, 0));
-    }
-    self iPrintLnBold("^2Zombies ^1Teleported!");
+    foreach(player in level.players)
+        if(!player IsHost())
+            Kick(player GetEntityNumber());
 }
 GivePlayerWeapon(weapon)
 {
     self GiveWeapon(GetWeapon(weapon));
     self SwitchToWeapon(GetWeapon(weapon));
     self iPrintLnBold(weapon + " ^2Given");
-				self playsound(#"outofmoney");
 }
 
 PlasmaLoop(player)
@@ -325,6 +321,14 @@ selfInstaKill()
         self iPrintLnBold("Perma Insta Kill ^2Enabled");
         else
         self iPrintLnBold("Perma Insta Kill ^1Disabled");
+}
+TeleportZombies(player) 
+{
+    foreach(zombie in GetAITeamArray(level.zombie_team)) 
+    {
+        if (isDefined(zombie)) zombie ForceTeleport(player.origin + (+40, 0, 0));
+    }
+    self iPrintLnBold("All Zombies Teleported To ^2" + player.name);
 }
 
 RestartMap()
