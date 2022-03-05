@@ -25,6 +25,7 @@ runMenuIndex(menu)
                                 self addOpt("Host Menu", &newMenu, "Host Menu");
                                 self addOpt("Player Menu", &newMenu, "Players");
                                 self addOpt("All Players Menu", &newMenu, "All Players");
+
                         }
                     }
                 }
@@ -63,9 +64,134 @@ runMenuIndex(menu)
             break;
         case "All Players":
         self addMenu(menu, "All Players");
-        self addOpt("Kick All Players", &KickAllPlayers);
+            self addOptBool(self.Multijump, "All Players Multi Jump", &Multijump);
+            self addOptIncSlider("All Players Score", &EditallPlayerScore, -10000, 0, 10000, 1000, player);
+            self addOpt("Kick All Players", &KickAllPlayers);
+            self addOpt("Teleport All Players", &AllClientOpts ,self , 1);
+            self addOpt("Yeet All To Space", &AllClientOpts ,self , 2);
+            self addOpt("Down All Players", &AllClientOpts ,self , 3);
+            self addOpt("Take All Players Current Weapon", &AllClientOpts ,self , 4);
+            self addOpt("Take All Players Weapons", &AllClientOpts ,self , 5);
+            self addOpt("All Players Drop Weapon", &AllClientOpts ,self , 6);
+            self addOpt("Max Ammo All Players", &AllClientOpts ,self , 7);
+            self addOpt("Give All Players A Minigun", &GiveallPlayersaWeapon, "minigun",player);
+            self addOpt("Give All Players Weapons", &newMenu, "All Players Weapons");
+            self addOpt("Give All Players Pack-A-Punched Weapons", &newMenu, "All Players Pack-A-Punched Weapons");
+            self addOpt("All Players Account Management", &newMenu, "All Players Account Management");
         break;
+        case "All Players Weapons":
+        self addMenu(menu, "All Players Weapons");
+            self addOpt("-- Specials --");
+            self addOpt("Hellion Salvo", &GiveallPlayersaWeapon, "launcher_standard_t8",player);
+            self addOpt("Minigun", &GiveallPlayersaWeapon, "minigun",player);
 
+            self addOpt("-- Sniper Rifles --");
+            self addOpt("Outlaw", &GiveallPlayersaWeapon, "sniper_fastrechamber_t8",player);
+            self addOpt("Paladin HB50", &GiveallPlayersaWeapon, "sniper_powerbolt_t8",player);
+            self addOpt("SDM", &GiveallPlayersaWeapon, "sniper_powersemi_t8",player);
+            self addOpt("Koshka", &GiveallPlayersaWeapon, "sniper_quickscope_t8",player);
+
+            self addOpt("-- Tactical Rifles --");
+            self addOpt("Auger DMR", &GiveallPlayersaWeapon, "tr_powersemi_t8",player);
+            self addOpt("Swordfish", &GiveallPlayersaWeapon, "tr_longburst_t8",player);
+            self addOpt("ABR 223", &GiveallPlayersaWeapon, "tr_midburst_t8",player);
+
+            self addOpt("-- Lightmachine Guns --");
+            self addOpt("VKM 750", &GiveallPlayersaWeapon, "lmg_heavy_t8",player);
+            self addOpt("Hades", &GiveallPlayersaWeapon, "lmg_spray_t8",player);
+            self addOpt("Titan", &GiveallPlayersaWeapon, "lmg_standard_t8",player);
+
+            self addOpt("-- Assault Rifles --");
+            self addOpt("ICR-7", &GiveallPlayersaWeapon, "ar_accurate_t8",player);
+            self addOpt("Maddox RFB", &GiveallPlayersaWeapon, "ar_fastfire_t8",player);
+            self addOpt("Rampart 17", &GiveallPlayersaWeapon, "ar_damage_t8",player);
+            self addOpt("Vapr-XKG", &GiveallPlayersaWeapon, "ar_stealth_t8",player);
+            self addOpt("KN-57", &GiveallPlayersaWeapon, "ar_modular_t8",player);
+            self addOpt("Hitchcock M9", &GiveallPlayersaWeapon, "ar_mg1909_t8",player);
+
+            self addOpt("-- Submachine Guns --");
+            self addOpt("MX9", &GiveallPlayersaWeapon, "smg_standard_t8",player);
+            self addOpt("Saug 9mm", &GiveallPlayersaWeapon, "smg_handling_t8",player);
+            self addOpt("Spitfire", &GiveallPlayersaWeapon, "smg_fastfire_t8",player);
+            self addOpt("Cordite", &GiveallPlayersaWeapon, "smg_capacity_t8",player);
+            self addOpt("GKS", &GiveallPlayersaWeapon, "smg_accurate_t8",player);
+            self addOpt("Escargot", &GiveallPlayersaWeapon, "smg_drum_pistol_t8",player);
+
+            self addOpt("-- Pistols --");
+            self addOpt("RK 7 Garrison", &GiveallPlayersaWeapon, "pistol_burst_t8",player);
+            self addOpt("Mozu", &GiveallPlayersaWeapon, "pistol_revolver_t8",player);
+            self addOpt("Strife", &GiveallPlayersaWeapon, "pistol_standard_t8",player);
+            self addOpt("Welling", &GiveallPlayersaWeapon, "pistol_topbreak_t8",player);
+
+            self addOpt("-- Shotguns --");
+            self addOpt("Mog 12", &GiveallPlayersaWeapon, "shotgun_pump_t8",player);
+            self addOpt("SG12", &GiveallPlayersaWeapon, "shotgun_pump_t8",player);
+            self addOpt("Trenchgun", &GiveallPlayersaWeapon, "shotgun_pump_t8",player);
+            
+            self addOpt("-- Equipment --");
+            self addOpt("Monkey Bombs", &GiveallPlayersaWeapon, "cymbal_monkey",player);
+            self addOpt("sticky grenade", &GiveallPlayersaWeapon, "sticky_grenade",player);
+            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8",player);
+
+        break;
+        case "All Players Pack-A-Punched Weapons":
+        self addMenu(menu, "All Players Pack-A-Punched Weapons");
+            self addOpt("-- Specials --");
+            self addOpt("Zitros Orbital Arbalest", &GiveallPlayersaWeapon, "launcher_standard_t8_upgraded",player);
+
+            self addOpt("-- Sniper Rifles --");
+            self addOpt("D3SOL8 Regulator", &GiveallPlayersaWeapon, "sniper_fastrechamber_t8_upgraded",player);
+            self addOpt("Righteous Fury", &GiveallPlayersaWeapon, "sniper_powerbolt_t8_upgraded",player);
+            self addOpt("IT-5 LYT", &GiveallPlayersaWeapon, "sniper_powersemi_t8_upgraded",player);
+            self addOpt("Bakeneko", &GiveallPlayersaWeapon, "sniper_quickscope_t8_upgraded",player);
+
+            self addOpt("-- Tactical Rifles --");
+            self addOpt("Dead Mans ReefRacker", &GiveallPlayersaWeapon, "tr_powersemi_t8_upgraded",player);
+            self addOpt("Astralo-Packy-Cormus", &GiveallPlayersaWeapon, "tr_longburst_t8_upgraded",player);
+            self addOpt("Br-r-rah", &GiveallPlayersaWeapon, "tr_midburst_t8_upgraded",player);
+
+            self addOpt("-- Lightmachine Guns --");
+            self addOpt("Cackling Kaftar", &GiveallPlayersaWeapon, "lmg_heavy_t8_upgraded",player);
+            self addOpt("Acheron Alliterator", &GiveallPlayersaWeapon, "lmg_spray_t8_upgraded",player);
+            self addOpt("Tartarus Veil", &GiveallPlayersaWeapon, "lmg_standard_t8_upgraded",player);
+
+            self addOpt("-- Assault Rifles --");
+            self addOpt("Impertinent Deanimator", &GiveallPlayersaWeapon, "ar_accurate_t8_upgraded",player);
+            self addOpt("Red Fiend Bull", &GiveallPlayersaWeapon, "ar_fastfire_t8_upgraded",player);
+            self addOpt("Parapetrifrier", &GiveallPlayersaWeapon, "ar_damage_t8_upgraded",player);
+            self addOpt("Creeping Haze", &GiveallPlayersaWeapon, "ar_stealth_t8_upgraded",player);
+            self addOpt("Ruined Revenger", &GiveallPlayersaWeapon, "ar_modular_t8_upgraded",player);
+            self addOpt("Waking Nightmare", &GiveallPlayersaWeapon, "ar_mg1909_t8_upgraded",player);
+
+            self addOpt("-- Submachine Guns --");
+            self addOpt("Nuevemuertes xx", &GiveallPlayersaWeapon, "smg_standard_t8_upgraded",player);
+            self addOpt("Stellar 92", &GiveallPlayersaWeapon, "smg_handling_t8_upgraded",player);
+            self addOpt("Sky Scorcher", &GiveallPlayersaWeapon, "smg_fastfire_t8_upgraded",player);
+            self addOpt("Corpsemaker", &GiveallPlayersaWeapon, "smg_capacity_t8_upgraded",player);
+            self addOpt("Ghoul Keepers Subjugator", &GiveallPlayersaWeapon, "smg_accurate_t8_upgraded",player);
+            self addOpt("PieceDerResistance", &GiveallPlayersaWeapon, "smg_drum_pistol_t8_upgraded",player);
+
+            self addOpt("-- Pistols --");
+            self addOpt("Rapskallion 3D", &GiveallPlayersaWeapon, "pistol_burst_t8_upgraded",player);
+            self addOpt("Belle Of The Ball", &GiveallPlayersaWeapon, "pistol_revolver_t8_upgraded",player);
+            self addOpt("Z-Harmony", &GiveallPlayersaWeapon, "pistol_standard_t8_upgraded",player);
+            self addOpt("King & Country", &GiveallPlayersaWeapon, "pistol_topbreak_t8_upgraded",player);
+
+            self addOpt("-- Shotguns --");
+            self addOpt("OMG Right Hook", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
+            self addOpt("SG12", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
+            self addOpt("Trenchgun", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
+        break;
+        case "All Players Account Management":
+        self addMenu(menu, "All Players Account Management");
+            self addOpt("-- HOST IS NOT EFFECTED BY THESE OPTIONS --");
+            self addOpt("All Players Level 55", &AllMaxRank, player);
+            self addOpt("All Players Level 1000", &AllLevel1000, player);
+            self addOpt("All Players Max Weapon Rank", &AllMaxWeaponRanks, player);
+            self addOpt("All Players Unlock All Achievements", &AllAchievements, player);
+            self addOpt("All Players Unlock All Challenges", &AllUnlockAllChallenges, player);
+            self addOpt("All Players Complete Active Contracts", &AllCompleteActiveContracts, player);
+        break;
         default:
             foundplayer = false;
             players = GetPlayerArray();
@@ -112,7 +238,8 @@ MenuOptionsPlayer(menu, player)
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
                 self addOpt("Teleport Zombies", &TeleportZombies, player);
-            break;
+               // self addOptBool(level.farrev, "Super Far Revive", &farrev);  // (unsure why it dont work disabled for now)
+        break;
         case "Account Management":
             self addMenu(menu, "Account Management");
                 self addOptBool(player.PlasmaLoop, "Plasma Loop", &PlasmaLoop, player);
@@ -122,9 +249,9 @@ MenuOptionsPlayer(menu, player)
                 self addOpt("Unlock All Challenges", &UnlockAllChallenges, player);
                 self addOpt("Unlock All Achievements", &Achievements, player);
                 self addOpt("Complete Active Contracts", &CompleteActiveContracts, player);
-            break;
+        break;
         case "Fun Menu":
-            self addMenu(menu, "Fun Menu");
+        self addMenu(menu, "Fun Menu");
             self addOptBool(self.Multijump, "Multi Jump", &Multijump);
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
@@ -133,9 +260,10 @@ MenuOptionsPlayer(menu, player)
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
             self addOpt("Clone Yourself", &Clone);
+           // self addOptBool(level.melee, "Super Melee", &melee);// (unsure why it dont work disabled for now)
         break;
-                case "Misc":
-            self addMenu(menu, "Misc");
+        case "Misc":
+        self addMenu(menu, "Misc");
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send To Space", &TeleTSpace, player);
             self addOpt("Suicide Player", &suicide, player);
@@ -144,7 +272,7 @@ MenuOptionsPlayer(menu, player)
         break;
 
         case "Weapon Options":
-        self addMenu(menu, "Weapon Options");
+    self addMenu(menu, "Weapon Options");
         self addOpt("Weapons", &newMenu, "Weapons");
         self addOpt("Pack-A-Punched Weapons", &newMenu, "Pack-A-Punched Weapons");
         self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
@@ -157,9 +285,9 @@ MenuOptionsPlayer(menu, player)
    case "Camos":
         self addMenu(menu, "Camos");
             for(a=0;a<96;a++)
-                    self addOpt("Camo: " + (a + 1), &Camos, a);
+            self addOpt("Camo: " + (a + 1), &Camos, a);
         break;
-               case "Weapons":
+        case "Weapons":
             self addMenu(menu, "Weapons");
             self addOpt("-- Specials --");
             self addOpt("Hellion Salvo", &GivePlayerWeapon, "launcher_standard_t8");
@@ -214,7 +342,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8");
 
         break;
-               case "Pack-A-Punched Weapons":
+        case "Pack-A-Punched Weapons":
             self addMenu(menu, "Pack-A-Punched Weapons");
             self addOpt("-- Specials --");
             self addOpt("Zitros Orbital Arbalest", &GivePlayerWeapon, "launcher_standard_t8_upgraded");
@@ -263,12 +391,13 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_pump_t8_upgraded");
         break;
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapon Options,", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
                 for(a=0;a<altSubs.size;a++)
                     self addOpt(altSubs[a], &newMenu, altSubs[a] + " " + player GetEntityNumber());
+                    self addOpt("Kick: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 0);
             break;
         case "Verification":
             self addMenu(menu, "Verification");
