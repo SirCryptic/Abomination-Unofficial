@@ -25,6 +25,8 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 ### **-Change Log**
 - 05/03/22
+- Added Individual Kick For Each Client When Selecting A Player in Players Menu
+- Added More Stuff To All Players Menu (EG give all rank ,unlocks ,weapons,points,etc)
 - Added Pack-A-Punched Weapons Menu
 
 ### **-Change Log**
@@ -33,7 +35,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 - Extended Weapon Menu (Renamed To Weapon Options)
 - Cleaned Up Some Code
 - Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )
-- Added All Clients Menu ( Just Kick All Players For Now )
+- Added All Players Menu ( Just Kick All Players For Now )
 
 ### **-BUILD VERSION: 1.0.3 - Unofficial **
 
