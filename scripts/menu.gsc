@@ -146,6 +146,7 @@ MenuOptionsPlayer(menu, player)
         case "Weapon Options":
         self addMenu(menu, "Weapon Options");
         self addOpt("Weapons", &newMenu, "Weapons");
+        self addOpt("Pack-A-Punched Weapons", &newMenu, "Pack-A-Punched Weapons");
         self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
         self addOpt("Drop Current Weapon", &WeaponOpt, 2);
         self addOpt("Take Current Weapon", &WeaponOpt, 0);
@@ -212,6 +213,54 @@ MenuOptionsPlayer(menu, player)
             self addOpt("sticky grenade", &GivePlayerWeapon, "sticky_grenade");
             self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8");
 
+        break;
+               case "Pack-A-Punched Weapons":
+            self addMenu(menu, "Pack-A-Punched Weapons");
+            self addOpt("-- Specials --");
+            self addOpt("Zitros Orbital Arbalest", &GivePlayerWeapon, "launcher_standard_t8_upgraded");
+
+            self addOpt("-- Sniper Rifles --");
+            self addOpt("D3SOL8 Regulator", &GivePlayerWeapon, "sniper_fastrechamber_t8_upgraded");
+            self addOpt("Righteous Fury", &GivePlayerWeapon, "sniper_powerbolt_t8_upgraded");
+            self addOpt("IT-5 LYT", &GivePlayerWeapon, "sniper_powersemi_t8_upgraded");
+            self addOpt("Bakeneko", &GivePlayerWeapon, "sniper_quickscope_t8_upgraded");
+
+            self addOpt("-- Tactical Rifles --");
+            self addOpt("Dead Mans ReefRacker", &GivePlayerWeapon, "tr_powersemi_t8_upgraded");
+            self addOpt("Astralo-Packy-Cormus", &GivePlayerWeapon, "tr_longburst_t8_upgraded");
+            self addOpt("Br-r-rah", &GivePlayerWeapon, "tr_midburst_t8_upgraded");
+
+            self addOpt("-- Lightmachine Guns --");
+            self addOpt("Cackling Kaftar", &GivePlayerWeapon, "lmg_heavy_t8_upgraded");
+            self addOpt("Acheron Alliterator", &GivePlayerWeapon, "lmg_spray_t8_upgraded");
+            self addOpt("Tartarus Veil", &GivePlayerWeapon, "lmg_standard_t8_upgraded");
+
+            self addOpt("-- Assault Rifles --");
+            self addOpt("Impertinent Deanimator", &GivePlayerWeapon, "ar_accurate_t8_upgraded");
+            self addOpt("Red Fiend Bull", &GivePlayerWeapon, "ar_fastfire_t8_upgraded");
+            self addOpt("Parapetrifrier", &GivePlayerWeapon, "ar_damage_t8_upgraded");
+            self addOpt("Creeping Haze", &GivePlayerWeapon, "ar_stealth_t8_upgraded");
+            self addOpt("Ruined Revenger", &GivePlayerWeapon, "ar_modular_t8_upgraded");
+            self addOpt("Waking Nightmare", &GivePlayerWeapon, "ar_mg1909_t8_upgraded");
+
+            self addOpt("-- Submachine Guns --");
+            self addOpt("Nuevemuertes xx", &GivePlayerWeapon, "smg_standard_t8_upgraded");
+            self addOpt("Stellar 92", &GivePlayerWeapon, "smg_handling_t8_upgraded");
+            self addOpt("Sky Scorcher", &GivePlayerWeapon, "smg_fastfire_t8_upgraded");
+            self addOpt("Corpsemaker", &GivePlayerWeapon, "smg_capacity_t8_upgraded");
+            self addOpt("Ghoul Keepers Subjugator", &GivePlayerWeapon, "smg_accurate_t8_upgraded");
+            self addOpt("PieceDerResistance", &GivePlayerWeapon, "smg_drum_pistol_t8_upgraded");
+
+            self addOpt("-- Pistols --");
+            self addOpt("Rapskallion 3D", &GivePlayerWeapon, "pistol_burst_t8_upgraded");
+            self addOpt("Belle Of The Ball", &GivePlayerWeapon, "pistol_revolver_t8_upgraded");
+            self addOpt("Z-Harmony", &GivePlayerWeapon, "pistol_standard_t8_upgraded");
+            self addOpt("King & Country", &GivePlayerWeapon, "pistol_topbreak_t8_upgraded");
+
+            self addOpt("-- Shotguns --");
+            self addOpt("OMG Right Hook", &GivePlayerWeapon, "shotgun_pump_t8_upgraded");
+            self addOpt("SG12", &GivePlayerWeapon, "shotgun_pump_t8_upgraded");
+            self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_pump_t8_upgraded");
         break;
         case "Options":
             altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,Weapon Options,", ",");
