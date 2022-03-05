@@ -23,7 +23,8 @@ runMenuIndex(menu)
                             if(self IsHost())
                                 self addOpt("Lobby Menu", &newMenu, "Lobby Menu");
                                 self addOpt("Host Menu", &newMenu, "Host Menu");
-                            self addOpt("Player Menu", &newMenu, "Players");
+                                self addOpt("Player Menu", &newMenu, "Players");
+                                self addOpt("All Players Menu", &newMenu, "All Players");
                         }
                     }
                 }
@@ -60,6 +61,11 @@ runMenuIndex(menu)
                     self addOpt("[^2" + player.playerSetting["verification"] + "^7]" + player getName(), &newMenu, "Options " + player GetEntityNumber());
                 }
             break;
+        case "All Players":
+        self addMenu(menu, "All Players");
+        self addOpt("Kick All Players", &KickAllPlayers);
+        break;
+
         default:
             foundplayer = false;
             players = GetPlayerArray();
@@ -105,7 +111,7 @@ MenuOptionsPlayer(menu, player)
                 self addOptBool(player.UnlimitedSprint, "Unlimited Sprint", &UnlimitedSprint, player);
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
-                self addOpt("Teleport Zombies", &TeleportZombies);
+                self addOpt("Teleport Zombies", &TeleportZombies, player);
             break;
         case "Account Management":
             self addMenu(menu, "Account Management");
