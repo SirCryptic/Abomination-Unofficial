@@ -267,8 +267,6 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send To Space", &TeleTSpace, player);
             self addOpt("Suicide Player", &suicide, player);
-            self addOpt("Teleport Me to Player", &ClientOpts, player, 2);
-            self addOpt("Teleport Player to Me", &ClientOpts, player, 1);
         break;
 
         case "Weapon Options":
@@ -398,6 +396,8 @@ MenuOptionsPlayer(menu, player)
                 for(a=0;a<altSubs.size;a++)
                     self addOpt(altSubs[a], &newMenu, altSubs[a] + " " + player GetEntityNumber());
                     self addOpt("Kick: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 0);
+                    self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
+                    self addOpt("Teleport To: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 2);
             break;
         case "Verification":
             self addMenu(menu, "Verification");
