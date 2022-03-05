@@ -28,6 +28,8 @@ you will need to use this gsc injector with visual studio code in order to use i
 - Added Equipment to weapon Menu
 - Extended Weapon Menu (Renamed To Weapon Options)
 - Cleaned Up Some Code
+- Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )
+- Added All Clients Menu ( Just Kick All Players For Now )
 
 ### **-BUILD VERSION: 1.0.3 - Unofficial **
 
