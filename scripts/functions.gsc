@@ -257,18 +257,19 @@ SuperSpeed()
 
 nofalldamage()
 {
+    foreach(player in level.players)
     level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
-    if(isDefined(self.nofalldamage))
+    if(isDefined(level.nofalldamage))
     {
-        SetDvar("bg_fallDamageMinHeight", 9999);
-        SetDvar("bg_fallDamageMaxHeight", 9999);
+        SetDvar(#"bg_fallDamageMinHeight", 9999);
+        SetDvar(#"bg_fallDamageMaxHeight", 9999);
         self setPerk("specialty_fallheight");
     }
     else
     {        
         self unSetPerk("specialty_fallheight");
-        setdvar("bg_falldamageminheight", 256);
-		setdvar("bg_falldamagemaxheight", 512);
+        setdvar(#"bg_falldamageminheight", 256);
+		setdvar(#"bg_falldamagemaxheight", 512);
     }
 }
 //melee()
