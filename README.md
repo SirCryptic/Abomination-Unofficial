@@ -10,10 +10,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 [Controls](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Controls).
 
-# **- [ x ] Installing Dependencies**
-
-you will need to use this gsc injector with visual studio code in order to use it
-- https://github.com/shiversoftdev/t7-compiler
+[Installing Dependencies](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Installing-Dependencies).
 
 # Builds & Changelogs:
 
