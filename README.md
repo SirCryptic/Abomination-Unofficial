@@ -1,4 +1,4 @@
-# Abomination Unofficial
+# Abomination - Unofficial
 Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 ![111](https://user-images.githubusercontent.com/48811414/156706089-afd8b753-969c-4e67-94d0-ead08e70cd76.png)
@@ -14,7 +14,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 # - Builds & Changelogs:
 
-### -BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
+### - BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
 
 > 07/03/22
 - Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
