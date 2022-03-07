@@ -3,7 +3,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 ![111](https://user-images.githubusercontent.com/48811414/156706089-afd8b753-969c-4e67-94d0-ead08e70cd76.png)
 
-## **- [ x ] Highlights**
+### **- [ x ] Highlights**
 ## - Works On Any Map & Public Lobbys (Must Be Host)!
 
 
