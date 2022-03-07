@@ -59,7 +59,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 ### **-Foot Notes:**
 > This is open source and a learning project ,please respect the authors including treyarch.
 
-If You Wish To Modify This Menu & Release It You **Must** Credit The People Below In The Credits Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
+⛔ If You Wish To Modify This Menu & Release It You **Must** Credit The People Below In The Credits Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
 
 ### **-Credits**
 
