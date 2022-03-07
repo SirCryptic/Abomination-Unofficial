@@ -14,7 +14,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 - V (To go back)
 - Left & Right Mouse Button ( To go up & Down )
 
-- TIP: You Can Just Use A Controller Too.
+- **TIP:** You Can Just Use A Controller Too. ✅
 
 ### **- [ x ] Installing Dependencies**
 
@@ -23,7 +23,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 ### **-BUILD VERSION: 1.0.4 - Unofficial **
 
-### **-Change Log**
+## **- Change Log**
 > 07/03/22
 - Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
 
@@ -41,14 +41,14 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 ~~### **-BUILD VERSION: 1.0.3 - Unofficial **~~
 
-### **-Change Log**
+## **-Change Log**
 > 04/03/22~5:25
 
 - Added Weapon Menu
 
 ~~### **-BUILD VERSION: 1.0.2 - Unofficial **~~
 
-### **-Change Log**
+## **-Change Log**
 > 26/02/22~7:05
 
 - Added Misc Menu (Nothing Much / Player Teleports basically)
