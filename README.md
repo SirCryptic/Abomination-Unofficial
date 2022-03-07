@@ -12,7 +12,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 [Installing Dependencies](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Installing-Dependencies).
 
-# Builds & Changelogs:
+# - Builds & Changelogs:
 
 ### **-BUILD VERSION: 1.0.4 - Unofficial **
 
