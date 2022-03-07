@@ -40,12 +40,12 @@ you will need to use this gsc injector with visual studio code in order to use i
 - Added All Players Menu ( Just Kick All Players For Now )
 
 ~~## **- BUILD VERSION: 1.0.3  Unofficial Change Log**~~
-~~> 04/03/22~5:25~~
+> 04/03/22
 ~~Added Weapon Menu~~
 
 ~~## **- BUILD VERSION: 1.0.2  Unofficial Change Log**~~
-~~> 26/02/22~7:05~~
-> 
+> 26/02/22
+
 ~~Added Misc Menu (Nothing Much / Player Teleports basically)~~
 ~~Added Round Changer~~
 ~~Added Print Notifs for most functions~~
