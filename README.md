@@ -24,32 +24,32 @@ you will need to use this gsc injector with visual studio code in order to use i
 ### **-BUILD VERSION: 1.0.4 - Unofficial **
 
 ### **-Change Log**
-- 07/03/22
+> 07/03/22
 - Various Fixes Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
 
-- 05/03/22
+> 05/03/22
 - Added Individual Kick For Each Client When Selecting A Player in Players Menu
 - Added More Stuff To All Players Menu (EG give all rank ,unlocks ,weapons,points,etc)
 - Added Pack-A-Punched Weapons Menu
 
-- 04/03/22
+> 04/03/22
 - Added Equipment to weapon Menu
 - Extended Weapon Menu (Renamed To Weapon Options)
 - Cleaned Up Some Code
 - Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )
 - Added All Players Menu ( Just Kick All Players For Now )
 
-### **-BUILD VERSION: 1.0.3 - Unofficial **
+~~### **-BUILD VERSION: 1.0.3 - Unofficial **~~
 
 ### **-Change Log**
-- 04/03/22~5:25
+> 04/03/22~5:25
 
 - Added Weapon Menu
 
-### **-BUILD VERSION: 1.0.2 - Unofficial **
+~~### **-BUILD VERSION: 1.0.2 - Unofficial **~~
 
 ### **-Change Log**
-- 26/02/22~7:05
+> 26/02/22~7:05
 
 - Added Misc Menu (Nothing Much / Player Teleports basically)
 - Added Round Changer
