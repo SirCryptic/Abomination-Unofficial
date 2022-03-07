@@ -24,6 +24,10 @@ you will need to use this gsc injector with visual studio code in order to use i
 ### **-BUILD VERSION: 1.0.4 - Unofficial **
 
 ### **-Change Log**
+- 07/03/22
+- Various Fixes Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
+
+### **-Change Log**
 - 05/03/22
 - Added Individual Kick For Each Client When Selecting A Player in Players Menu
 - Added More Stuff To All Players Menu (EG give all rank ,unlocks ,weapons,points,etc)
