@@ -31,13 +31,13 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 - Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )
 - Added All Players Menu ( Just Kick All Players For Now )
 
-~~## **- BUILD VERSION: 1.0.3  Unofficial Change Log**~~
+~~## **- BUILD VERSION: 1.0.3  Unofficial - (Change Log)**~~
 > 04/03/22
 
 
 ~~Added Weapon Menu~~
 
-~~## **- BUILD VERSION: 1.0.2  Unofficial Change Log**~~
+~~## **- BUILD VERSION: 1.0.2  Unofficial - (Change Log)**~~
 > 26/02/22
 
 ~~Added Misc Menu (Nothing Much / Player Teleports basically)~~
