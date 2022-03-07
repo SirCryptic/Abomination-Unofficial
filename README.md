@@ -14,9 +14,8 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 # - Builds & Changelogs:
 
-### **-BUILD VERSION: 1.0.4 - Unofficial **
+### **-BUILD VERSION: 1.0.4 - Unofficial - Change Log **
 
-### **- Change Log**
 > 07/03/22
 - Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
 
