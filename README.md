@@ -63,7 +63,7 @@ If You Wish To Modify This Menu & Release It You **Must** Credit The People Belo
 
 ### **-Credits**
 
-- Sircryptic - Putting Together something usefull for the time being i guess
+- ⭐ Sircryptic - Putting Together something usefull for the time being i guess
 
-- ⭐ CF4_99 - Base Menu And Design + Being a massive Help 👍 ⭐
-- Gillam - Some Functions
+- ⭐ CF4_99 - Base Menu And Design + Being a massive Help 👍
+- ⭐ Gillam - Some Functions
