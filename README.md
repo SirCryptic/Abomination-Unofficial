@@ -56,7 +56,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 - ⭐ CF4_99 - Base Menu And Design + Being a massive Help 👍
 - ⭐ Gillam - Some Functions
-- ⭐ Treyarch - For There Ummm .....game ? 😂
+- ⭐ Treyarch - For There Ummm .....game ? 😂 (Online Is Dead , Solo Sucks 😔)
 
 # ●▬▬▬▬▬▬▬DISCLAIMER ▬▬▬▬▬▬▬●
 
