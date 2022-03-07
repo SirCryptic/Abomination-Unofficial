@@ -63,21 +63,41 @@ KickAllPlayers()
         if(!player IsHost())
             Kick(player GetEntityNumber());
 }
-GiveallPlayersaWeapon(weapon,player)
+GiveallPlayersaWeapon(weapon,player,team)
 {
     players = GetPlayerArray();
     foreach(player in players)
     player GiveWeapon(GetWeapon(weapon));
     player SwitchToWeapon(GetWeapon(weapon));
     self iPrintLnBold("All Players Given " + weapon);
+    player playsound(#"zmb_cha_ching");
 }
 GivePlayerWeapon(weapon)
 {
     self GiveWeapon(GetWeapon(weapon));
     self SwitchToWeapon(GetWeapon(weapon));
     self iPrintLnBold(weapon + " ^2Given");
+    self playsound(#"zmb_cha_ching");
 }
 
+//sounds
+sound1()
+{
+    self playsound(#"zmb_cha_ching");
+    self iPrintLnBold("Sound ^2Played");
+}
+sound2()
+{
+    self playsound(#"zmb_full_ammo");
+    self iPrintLnBold("Sound ^2Played");
+}
+sound3()
+{
+    self playsound(#"zmb_vox_monkey_scream");
+    self iPrintLnBold("Sound ^2Played");
+}
+
+//
 PlasmaLoop(player)
 {
     player.PlasmaLoop = isDefined(player.PlasmaLoop) ? undefined : true;
@@ -135,6 +155,19 @@ TeleTSpace(player)
         
 }
 
+ZombiesInSpace() 
+{
+    x = randomIntRange(-75, 75);
+    y = randomIntRange(-75, 75);
+    z = 45;
+    
+    location = (0 + x, 0 + y, 500000 + z);
+    foreach(zombie in GetAITeamArray(level.zombie_team)) 
+    {
+        if (isDefined(zombie)) zombie ForceTeleport(location);
+    }
+    self iPrintLnBold("All Zombies Teleported To ^2Space");
+}
 EndGame()
 {
     KillServer();
@@ -165,6 +198,7 @@ SetRound(round)
         wait .13;
     }
 }
+
 ZombieCount()
 {
     Zombies=getAIArray("axis");
@@ -254,53 +288,26 @@ SuperSpeed()
         setDvar("g_speed", 200);
 }
 
-
 nofalldamage()
 {
     foreach(player in level.players)
     level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
     if(isDefined(level.nofalldamage))
     {
+        self iPrintLnBold("No Fall ^2Enabled");
         SetDvar(#"bg_fallDamageMinHeight", 9999);
         SetDvar(#"bg_fallDamageMaxHeight", 9999);
-        self setPerk("specialty_fallheight");
+        player setPerk("specialty_fallheight");
     }
     else
     {        
-        self unSetPerk("specialty_fallheight");
+        self iPrintLnBold("No Fall ^1Disabled");
+        player unSetPerk("specialty_fallheight");
         setdvar(#"bg_falldamageminheight", 256);
 		setdvar(#"bg_falldamagemaxheight", 512);
     }
 }
-//melee()
-//{
- //   level.melee = isDefined(level.melee) ? undefined : true;
-//    if(isDefined(self.melee))
-//    {
-//        SetDvar("player_meleerange", 999);
-//        SetDvar("player_meleeheight", 999);
-//        SetDvar("player_meleewidth", 999);
-//    }
-//    else
-//    {
-//        SetDvar("player_meleerange", 64);
-//        SetDvar("player_meleeheight", 64);
-//        SetDvar("player_meleewidth", 64);
-//    }
-//}
-//
-//farrev()
-//{
-//    level.farrev = isDefined(level.farrev) ? undefined : true;
-//    if(isDefined(self.farrev))
-//    {
-//        SetDvar("revive_trigger_radius", 99999);
-//    }
-//    else
-//    {
-//        SetDvar("revive_trigger_radius", 64);
-//    }
-//}
+
 AntiJoin()
 {
     level.AntiJoin = isDefined(level.AntiJoin) ? undefined : true;
@@ -326,12 +333,14 @@ AntiQuit(player)
         self iPrintLnBold("Anti Quit ^1Disabled");
     }
 }
+
+
 Gravity()
 {
-    level.Gravity = isDefined(level.Gravity) ? undefined : true;
-    if(isDefined(level.Gravity))
+    level.lowGravity = isDefined(level.lowGravity) ? undefined : true;
+    if(isDefined(level.lowGravity))
         SetDvar("bg_gravity", 100);
-    else
+    else 
         SetDvar("bg_gravity", 350);
 }
 
@@ -442,6 +451,11 @@ ClientOpts(player, func)
             self SetOrigin(player.origin + (-10, 0, 0));
             self iPrintLnBold("Teleported To ^2" + player.name);
             break;
+
+        case 3:
+            self iPrintlnBold("^1 "+player.name+" ^7Revived ^1!");
+            player reviveplayer();
+            break;
     }
 } 
 
@@ -513,10 +527,17 @@ AllClientOpts(player, func)
             Weap = player GetCurrentWeapon();
             players = GetPlayerArray();
             foreach(player in players)
-            if(!player IsHost())
             player giveMaxAmmo(Weap);
             player giveMaxAmmo(player getCurrentOffHand());
             self iPrintLnBold("All Players ^2Given ^7Max Ammo");
+            player playsound(#"zmb_full_ammo");
+            break;
+        case 8:
+            players = GetPlayerArray();
+            foreach(player in players)
+            if(!player IsHost())
+            player reviveplayer();
+            self iPrintlnBold("^1All Players ^2Revived^1!");
             break;
     }
 }
@@ -785,9 +806,11 @@ WeaponOpt(i)
             self giveMaxAmmo(Weap);
             self giveMaxAmmo(self getCurrentOffHand());
             self iPrintLnBold("Max Ammo ^2Given");
+            self playsound(#"zmb_full_ammo");
             break;
     }
 }       
+
 
 unfair_toggleaimbot()
 {
@@ -844,9 +867,12 @@ Level1000(player)
 
 ForceHost()
 {
+    self.forcehost = isDefined(self.forcehost) ? undefined : true;
+    if(isDefined(self.forcehost))
+    {
+    self iPrintLnBold("Force Host ^2ON");
     if(getDvarString("party_connectTimeout") != "0")
     {
-        self iPrintLnBold("Force Host ^2ON");
         SetDvar("lobbySearchListenCountries", "0,103,6,5,8,13,16,23,25,32,34,24,37,42,44,50,71,74,76,75,82,84,88,31,90,18,35");
         SetDvar("excellentPing", 3);
         SetDvar("goodPing", 4);
@@ -865,8 +891,9 @@ ForceHost()
         SetDvar("party_neverJoinRecent", 1);
         SetDvar("party_readyPercentRequired", .25);
         SetDvar("partyMigrate_disabled", 1);
-    }
-    else
+        }
+    } 
+    else 
     {
         self iPrintLnBold("Force Host ^1OFF");
         SetDvar("lobbySearchListenCountries", "");
