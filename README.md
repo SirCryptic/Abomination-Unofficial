@@ -8,12 +8,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 
 # **- [ x ] How To Use The Menu**
 
-- Right Click + V (To Open)
-- F (To Select / Toggle)
-- V (To go back)
-- Left & Right Mouse Button ( To go up & Down )
-
-- **TIP:** You Can Just Use A Controller Too. ✅
+[Controls](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Controls).
 
 # **- [ x ] Installing Dependencies**
 
