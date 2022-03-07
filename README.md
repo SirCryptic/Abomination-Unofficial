@@ -58,7 +58,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 - ⭐ Gillam - Some Functions
 - ⭐ Treyarch - For There Ummm .....game ? 😂
 
-●▬▬▬▬▬▬▬DISCLAIMER ▬▬▬▬▬▬▬●
+# ●▬▬▬▬▬▬▬DISCLAIMER ▬▬▬▬▬▬▬●
 
 Everyone/Company That is viewing this Content This Aplies To You.
 
