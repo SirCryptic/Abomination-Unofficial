@@ -25,7 +25,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 ### **-Change Log**
 > 07/03/22
-- Various Fixes Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
+- Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
 
 > 05/03/22
 - Added Individual Kick For Each Client When Selecting A Player in Players Menu
@@ -57,7 +57,7 @@ you will need to use this gsc injector with visual studio code in order to use i
 
 
 ### **-Foot Notes:**
-im just merely adding upon the menu that worked for me from those that didnt,  enjoy :)
+If You Wish To Modify This Menu & Release It You **Must** Credit The People Below In The Credits Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
 
 ### **-Credits**
 
