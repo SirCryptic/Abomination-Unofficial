@@ -45,7 +45,7 @@ Black Ops 4 Zombie GSC Menu + All Clients + Recovery (PC)
 ~~Added Print Notifs for most functions~~
 
 
-### **-Foot Notes:**
+# **-Foot Notes:**
 > This is open source and a learning project ,please respect the authors including the game developers (treyarch).
 
 ⛔⚠️ If You Wish To Modify This Menu & Release It You **Must** Credit The People Below In The Credits Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
