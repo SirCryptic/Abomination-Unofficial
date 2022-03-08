@@ -5,6 +5,9 @@
 
 > All Clients + Recovery (PC)
 
+
+> Zombies Only This Will Not Work On Multiplayer.
+
 # How To Use The Menu
 [Controls](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Controls).
 
