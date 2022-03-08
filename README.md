@@ -1,6 +1,4 @@
 ![Untitled-1](https://user-images.githubusercontent.com/48811414/157215961-44c99bb9-4fd7-4c12-ab7d-73f61cd118d4.png)
-![111](https://user-images.githubusercontent.com/48811414/156706089-afd8b753-969c-4e67-94d0-ead08e70cd76.png)
-
 # **- Highlights**
 > Works On Any Map & Public Lobbys (Must Be Host)! ✅😎
 
@@ -12,6 +10,8 @@
 [Controls](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Controls).
 
 [Installing Dependencies](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Installing-Dependencies).
+
+[Preview Of The Menu](https://github.com/SirCryptic/Abomination-Unofficial/wiki/Preview).
 
 # - Builds & Changelogs:
 
