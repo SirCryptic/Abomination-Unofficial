@@ -85,9 +85,9 @@ runMenuIndex(menu)
             self addOpt("-- Specials --");
             self addOpt("Hellion Salvo", &GiveallPlayersaWeapon, "launcher_standard_t8",player);
             self addOpt("Minigun", &GiveallPlayersaWeapon, "minigun",player);
-            self addOpt("Ballistic Knife", &GivePlayerWeapon, "special_ballisticknife_t8_dw");
-            self addOpt("Ray Gun MK2", &GivePlayerWeapon, "ray_gun_mk2",player);
-            self addOpt("Crossbow", &GivePlayerWeapon, "special_crossbow_t8",player);
+            self addOpt("Ballistic Knife", &GiveallPlayersaWeapon, "special_ballisticknife_t8_dw");
+            self addOpt("Ray Gun MK2", &GiveallPlayersaWeapon, "ray_gun_mk2",player);
+            self addOpt("Crossbow", &GiveallPlayersaWeapon, "special_crossbow_t8",player);
 
             self addOpt("-- Sniper Rifles --");
             self addOpt("Outlaw", &GiveallPlayersaWeapon, "sniper_fastrechamber_t8",player);
@@ -120,7 +120,7 @@ runMenuIndex(menu)
             self addOpt("Cordite", &GiveallPlayersaWeapon, "smg_capacity_t8",player);
             self addOpt("GKS", &GiveallPlayersaWeapon, "smg_accurate_t8",player);
             self addOpt("Escargot", &GiveallPlayersaWeapon, "smg_drum_pistol_t8",player);
-            self addOpt("Switchblade x9", &GivePlayerWeapon, "smg_folding_t8",player);
+            self addOpt("Switchblade x9", &GiveallPlayersaWeapon, "smg_folding_t8",player);
 
             self addOpt("-- Pistols --");
             self addOpt("RK 7 Garrison", &GiveallPlayersaWeapon, "pistol_burst_t8",player);
@@ -131,17 +131,17 @@ runMenuIndex(menu)
             self addOpt("-- Shotguns --");
             self addOpt("Mog 12", &GivePlayerWeapon, "shotgun_pump_t8",player);
             self addOpt("SG12", &GivePlayerWeapon, "shotgun_semiauto_t8",player);
-            self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_trenchgun_t8",player);
+            self addOpt("Trenchgun", &GiveallPlayersaWeapon, "shotgun_trenchgun_t8",player);
             
             self addOpt("-- Equipment --");
             self addOpt("sticky grenade", &GiveallPlayersaWeapon, "sticky_grenade",player);
             
             self addOpt("-- Maps Specific --");
-            self addOpt("Monkey Bombs (all non chaos maps only)", &GivePlayerWeapon, "cymbal_monkey",player);
-            self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8",player);
-            self addOpt("homunculus (all chaos maps only)", &GivePlayerWeapon, "homunculus",player);
-            self addOpt("Wunderwaffe (Tag der Toten only)", &GivePlayerWeapon, "tesla_gun",player);
-            self addOpt("thundergun (Tag der Toten only)", &GivePlayerWeapon, "thundergun",player);
+            self addOpt("Monkey Bombs (all non chaos maps only)", &GiveallPlayersaWeapon, "cymbal_monkey",player);
+            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8",player);
+            self addOpt("homunculus (all chaos maps only)", &GiveallPlayersaWeapon, "homunculus",player);
+            self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "tesla_gun",player);
+            self addOpt("thundergun (Tag der Toten only)", &GiveallPlayersaWeapon, "thundergun",player);
         break;
         case "All Players Pack-A-Punched Weapons":
         self addMenu(menu, "All Players Pack-A-Punched Weapons");
@@ -149,7 +149,7 @@ runMenuIndex(menu)
             self addOpt("Zitros Orbital Arbalest", &GiveallPlayersaWeapon, "launcher_standard_t8_upgraded",player);
             self addOpt("Thekrauss Refibrillator++", &GivePlayerWeapon, "special_ballisticknife_t8_dw_upgraded",player);
             self addOpt("Porters Mark II Ray Gun", &GivePlayerWeapon, "ray_gun_mk2_upgraded",player);
-            self addOpt("Minos's Zeal", &GivePlayerWeapon, "special_crossbow_t8_upgraded",player);
+            self addOpt("Minos's Zeal", &GiveallPlayersaWeapon, "special_crossbow_t8_upgraded",player);
             
             self addOpt("-- Sniper Rifles --");
             self addOpt("D3SOL8 Regulator", &GiveallPlayersaWeapon, "sniper_fastrechamber_t8_upgraded",player);
@@ -182,7 +182,7 @@ runMenuIndex(menu)
             self addOpt("Corpsemaker", &GiveallPlayersaWeapon, "smg_capacity_t8_upgraded",player);
             self addOpt("Ghoul Keepers Subjugator", &GiveallPlayersaWeapon, "smg_accurate_t8_upgraded",player);
             self addOpt("PieceDerResistance", &GiveallPlayersaWeapon, "smg_drum_pistol_t8_upgraded",player);
-            self addOpt("Excisenin3fold", &GivePlayerWeapon, "smg_folding_t8_upgraded", player);
+            self addOpt("Excisenin3fold", &GiveallPlayersaWeapon, "smg_folding_t8_upgraded", player);
             
             self addOpt("-- Pistols --");
             self addOpt("Rapskallion 3D", &GiveallPlayersaWeapon, "pistol_burst_t8_upgraded",player);
@@ -192,9 +192,9 @@ runMenuIndex(menu)
 
             self addOpt("-- Shotguns --");
             self addOpt("OMG Right Hook", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
-            self addOpt("Breccius Rebornus", &GivePlayerWeapon, "shotgun_semiauto_t8_upgraded",player);
-            self addOpt("M9-TKG Home Wrecker", &GivePlayerWeapon, "shotgun_trenchgun_t8_upgraded",player);
-        break;
+            self addOpt("Breccius Rebornus", &GiveallPlayersaWeapon, "shotgun_semiauto_t8_upgraded",player);
+            self addOpt("M9-TKG Home Wrecker", &GiveallPlayersaWeapon, "shotgun_trenchgun_t8_upgraded",player);
+        break;    
         case "All Players Account Management":
         self addMenu(menu, "All Players Account Management");
             self addOpt("-- HOST IS NOT EFFECTED BY THESE OPTIONS --");
