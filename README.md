@@ -21,7 +21,7 @@
 
 ### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
 
-> 07/03/22
+> 09/03/22
 - Changed Teleports to players menu & fixed = added some weapons (also changed got rid of misc options are now in fun and teleports menu)
 
 > 07/03/22
