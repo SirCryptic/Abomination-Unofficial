@@ -194,7 +194,7 @@ runMenuIndex(menu)
             self addOpt("OMG Right Hook", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
             self addOpt("Breccius Rebornus", &GiveallPlayersaWeapon, "shotgun_semiauto_t8_upgraded",player);
             self addOpt("M9-TKG Home Wrecker", &GiveallPlayersaWeapon, "shotgun_trenchgun_t8_upgraded",player);
-        break;    
+        break;
         case "All Players Account Management":
         self addMenu(menu, "All Players Account Management");
             self addOpt("-- HOST IS NOT EFFECTED BY THESE OPTIONS --");
@@ -277,8 +277,6 @@ MenuOptionsPlayer(menu, player)
         self addMenu(menu, "Misc");
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
-            self addOpt("Send To Space", &TeleTSpace, player);
-            self addOpt("Suicide Player", &suicide, player);
             self addOpt("Sounds Menu", &newMenu, "Sounds Menu");
         break;
         case "Sounds Menu":
@@ -424,16 +422,23 @@ MenuOptionsPlayer(menu, player)
             self addOpt("M9-TKG Home Wrecker", &GivePlayerWeapon, "shotgun_trenchgun_t8_upgraded");
         break;
         case "Options":
-            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,Misc,", ",");
+            altSubs = StrTok("Basic Scripts,Account Management,Fun Menu,", ",");
             
             self addMenu(menu, "[" + player.playerSetting["verification"] + "]" + player getName());
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
                 for(a=0;a<altSubs.size;a++)
                     self addOpt(altSubs[a], &newMenu, altSubs[a] + " " + player GetEntityNumber());
-                    self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
+                    self addOpt("Teleports "+ player getName() + " | Client Num: " + player GetEntityNumber() ,&newMenu, "Teleports");
                     self addOpt("Kick: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 0);
-                    self addOpt("Teleport To: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 2);
+                    self addOpt("Suicide " + player getName() + " | Client Num: " + player GetEntityNumber(), &suicide, player);
                     self addOpt("Revive: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 3);
+            break;
+                    case "Teleports":
+            self addMenu(menu, "Teleports");
+            self addOpt("Teleport To: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 2);
+            self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
+            self addOpt("Teleport Zombies "+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleportZombies, player);
+            self addOpt("Send To Space"+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleTSpace, player);
             break;
         case "Verification":
             self addMenu(menu, "Verification");
