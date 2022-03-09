@@ -69,15 +69,20 @@ runMenuIndex(menu)
             self addOpt("Teleport All Players", &AllClientOpts ,self , 1);
             self addOpt("Yeet All To Space", &AllClientOpts ,self , 2);
             self addOpt("Down All Players", &AllClientOpts ,self , 3);
+            self addOpt("All Players Weapon Options", &newMenu, "All Players Weapon Options");
+            self addOpt("All Players Account Management", &newMenu, "All Players Account Management");
+            self addOpt("Revive All Players", &AllClientOpts ,self , 8);
+        break;
+        case "All Players Weapon Options":
+         self addMenu(menu, "All Players Weapon Options");
             self addOpt("Take All Players Current Weapon", &AllClientOpts ,self , 4);
             self addOpt("Take All Players Weapons", &AllClientOpts ,self , 5);
             self addOpt("All Players Drop Weapon", &AllClientOpts ,self , 6);
             self addOpt("Max Ammo All Players", &AllClientOpts ,self , 7);
             self addOpt("Give All Players A Minigun", &GiveallPlayersaWeapon, "minigun",player);
             self addOpt("Give All Players Weapons", &newMenu, "All Players Weapons");
+            self addOpt("Give All Players specific map Weapons", &newMenu, "All Players Specific Map Weapons");
             self addOpt("Give All Players Pack-A-Punched Weapons", &newMenu, "All Players Pack-A-Punched Weapons");
-            self addOpt("All Players Account Management", &newMenu, "All Players Account Management");
-            self addOpt("Revive All Players", &AllClientOpts ,self , 8);
         break;
         case "All Players Weapons":
         self addMenu(menu, "All Players Weapons");
@@ -134,13 +139,6 @@ runMenuIndex(menu)
             
             self addOpt("-- Equipment --");
             self addOpt("sticky grenade", &GiveallPlayersaWeapon, "sticky_grenade",player);
-            
-            self addOpt("-- Maps Specific --");
-            self addOpt("Monkey Bombs (all non chaos maps only)", &GiveallPlayersaWeapon, "cymbal_monkey",player);
-            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8",player);
-            self addOpt("homunculus (all chaos maps only)", &GiveallPlayersaWeapon, "homunculus",player);
-            self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "tesla_gun",player);
-            self addOpt("thundergun (Tag der Toten only)", &GiveallPlayersaWeapon, "thundergun",player);
         break;
         case "All Players Pack-A-Punched Weapons":
         self addMenu(menu, "All Players Pack-A-Punched Weapons");
@@ -193,6 +191,15 @@ runMenuIndex(menu)
             self addOpt("OMG Right Hook", &GiveallPlayersaWeapon, "shotgun_pump_t8_upgraded",player);
             self addOpt("Breccius Rebornus", &GiveallPlayersaWeapon, "shotgun_semiauto_t8_upgraded",player);
             self addOpt("M9-TKG Home Wrecker", &GiveallPlayersaWeapon, "shotgun_trenchgun_t8_upgraded",player);
+        break;
+        case "All Players Specific Map Weapons":
+        self addMenu("All Players Specific Map Weapons");
+            self addOpt("-- Maps Specific --");
+            self addOpt("Monkey Bombs (all non chaos maps only)", &GiveallPlayersaWeapon, "cymbal_monkey",player);
+            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8",player);
+            self addOpt("homunculus (all chaos maps only)", &GiveallPlayersaWeapon, "homunculus",player);
+            self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "tesla_gun",player);
+            self addOpt("thundergun (Tag der Toten only)", &GiveallPlayersaWeapon, "thundergun",player);
         break;
         case "All Players Account Management":
         self addMenu(menu, "All Players Account Management");
@@ -668,3 +675,4 @@ DestroyOpts()
     for(a=0;a<4;a++)
         self iPrintln(".");
 }
+
