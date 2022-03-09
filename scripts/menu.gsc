@@ -11,7 +11,6 @@ runMenuIndex(menu)
                 self addOpt("Basic Scripts", &newMenu, "Basic Scripts " + self GetEntityNumber());
                 self addOpt("Account Management", &newMenu, "Account Management " + self GetEntityNumber());
                 self addOpt("Fun Menu", &newMenu, "Fun Menu " + self GetEntityNumber());
-                self addOpt("Misc", &newMenu, "Misc " + self GetEntityNumber());
                 self addOpt("Weapon Options", &newMenu, "Weapon Options " + self GetEntityNumber());
                 
                 if(self getVerification() > 1) //VIP
@@ -272,9 +271,6 @@ MenuOptionsPlayer(menu, player)
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
             self addOpt("Clone Yourself", &Clone);
-        break;
-        case "Misc":
-        self addMenu(menu, "Misc");
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
             self addOpt("Sounds Menu", &newMenu, "Sounds Menu");
