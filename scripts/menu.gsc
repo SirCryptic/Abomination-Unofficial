@@ -287,10 +287,10 @@ MenuOptionsPlayer(menu, player)
                 self addOpt("Unlock All Challenges", &UnlockAllChallenges, player);
                 self addOpt("Unlock All Achievements", &Achievements, player);
                 self addOpt("Complete Active Contracts", &CompleteActiveContracts, player);
-                self addOpt("Stats Options", &newMenu, "Stats Options");
+                self addOpt("Stats Options", &newMenu, "Stats");
         break;
 
-        case "Stats options":
+        case "Stats":
             self addMenu(menu,"Stats Options");
             self addOptIncSlider("Total Played", &Stats_TotalPlayed, 0, 0, 10000, 100);
             self addOptIncSlider("Highest Reached", &Stats_HighestReached, 0, 0, 10000, 100);
