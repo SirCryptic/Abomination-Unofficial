@@ -159,7 +159,10 @@ TeleTSpace(player)
         player iPrintLnBold("You Are Now In ^2Space");
         
 }
-
+LunaWolf()
+{
+    spawnactor(#"hash_3f174b9bcc408705", self.origin, self.angles, "wolf_protector", 1);
+}
 ZombiesInSpace() 
 {
     x = randomIntRange(-75, 75);
