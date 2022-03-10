@@ -96,7 +96,11 @@ sound3()
     self playsound(#"zmb_vox_monkey_scream");
     self iPrintLnBold("Sound ^2Played");
 }
-
+sound4()
+    {
+    self playsound(#"zmb_player_outofbounds");
+    self iPrintLnBold("Sound ^2Played");
+		}
 //
 PlasmaLoop(player)
 {
@@ -113,6 +117,7 @@ PlasmaLoop(player)
         }
     }
 }
+
 SaveLocation(Val)
 {
     if(Val == 0)
@@ -168,6 +173,7 @@ ZombiesInSpace()
     }
     self iPrintLnBold("All Zombies Teleported To ^2Space");
 }
+
 EndGame()
 {
     KillServer();
@@ -376,6 +382,8 @@ selfInstaKill()
 }
 TeleportZombies(player) 
 {
+    playfx(level._effect[#"teleport_splash"], self.origin);
+	playfx(level._effect[#"teleport_aoe"], self.origin);
     foreach(zombie in GetAITeamArray(level.zombie_team)) 
     {
         if (isDefined(zombie)) zombie ForceTeleport(player.origin + (+40, 0, 0));
@@ -439,17 +447,25 @@ ClientOpts(player, func)
     {
         case 0:
             if(player == self)
-                return;
+        return;
+            playfx(level._effect[#"teleport_splash"], player.origin);
+	        playfx(level._effect[#"teleport_aoe"], player.origin);
             self iPrintLnBold(player.name + "Has Been ^1Kicked");
             Kick(player GetEntityNumber());
             break; 
          case 1:
+            playfx(level._effect[#"teleport_splash"], self.origin);
+	        playfx(level._effect[#"teleport_aoe"], self.origin);
+            wait .1;
             player SetOrigin(self.origin + (-10, 0, 0));
             self iPrintLnBold(player.name + " Teleported To ^2Me");
             break;
             
         case 2:
             self SetOrigin(player.origin + (-10, 0, 0));
+            wait .1;
+            playfx(level._effect[#"teleport_splash"], self.origin);
+	        playfx(level._effect[#"teleport_aoe"], self.origin);
             self iPrintLnBold("Teleported To ^2" + player.name);
             break;
 
@@ -493,6 +509,9 @@ TpToChest()
             BOrigin = BOrigin - 16 * FORWARD;
             break;
     }
+    playfx(level._effect[#"teleport_splash"], self.origin);
+	playfx(level._effect[#"teleport_aoe"], self.origin);
+    wait .1;
     self SetOrigin(BOrigin);
     self SetPlayerAngles(BAngles);
 }
@@ -608,6 +627,8 @@ AllClientOpts(player, func)
             
             players = GetPlayerArray();
             foreach(player in players)
+            playfx(level._effect[#"teleport_splash"], self.origin);
+	        playfx(level._effect[#"teleport_aoe"], self.origin);
             player SetOrigin(self.origin + (-10, 0, 0));
             self iPrintLnBold("All Players ^2Teleported");
             break;
@@ -630,6 +651,7 @@ AllClientOpts(player, func)
             if(!player IsHost())
             player DoDamage(player.health + 1, player.origin);
             self iPrintLnBold("All Players ^2Downed");
+            player iPrintLnBold("Looks Like You Broke A Leg");
             break;
         case 4:
             Weap = player GetCurrentWeapon();
@@ -888,6 +910,7 @@ suicide(player)
 {
      self iPrintLnBold("Downed "+ player.name);
      player DoDamage(player.health + 1, player.origin);
+     player iPrintLnBold("Looks Like You Broke A Leg");
 }
 FreezeMysteryBox()
 {
