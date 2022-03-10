@@ -36,6 +36,7 @@ Fixs:
   
 Misc Changes:
 - Re-arranged some menu options (main now fits all on one page)
+- Cleaned up and tidied up some code / functions
   
 > 09/03/22
 - Changed Teleports to players menu & fixed = added some weapons (also changed got rid of misc options are now in fun and teleports menu)
