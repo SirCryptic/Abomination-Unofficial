@@ -301,6 +301,7 @@ MenuOptionsPlayer(menu, player)
         case "Fun Menu":
         self addMenu(menu, "Fun Menu");
             self addOptBool(self.Multijump, "Multi Jump", &Multijump);
+            self addOpt("Spawn Luna Wolf", &LunaWolf);
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
