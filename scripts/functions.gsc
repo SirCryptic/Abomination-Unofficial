@@ -397,6 +397,7 @@ KillAllZombies(player)
         if (isDefined(zombie)) zombie dodamage(zombie.maxhealth + 999, zombie.origin, player);
     }
 }
+
 StartTeleGun()
 {
     self.TeleGun = isDefined(self.TeleGun) ? undefined : true;
@@ -459,6 +460,140 @@ ClientOpts(player, func)
     }
 } 
 
+packapunchweapon()
+{
+    weapon = self GetCurrentWeapon();
+    self TakeWeapon(weapon);
+    wait .1;
+    self GiveWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
+    self SwitchToWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
+    self IPrintLnBold("Your Current Weapon Has Been ^2Upgraded!");
+}
+
+TpToChest()
+{
+    Chest = level.chests[level.chest_index];
+    origin = Chest.zbarrier.origin;
+    FORWARD = AnglesToForward(Chest.zbarrier.angles);
+    right = AnglesToRight(Chest.zbarrier.angles);
+    BAngles = VectorToAngles(right);
+    BOrigin = origin - 48 * right;
+    switch(randomInt(3))
+    {
+        case 0:
+            BOrigin = BOrigin + 16 * right;
+            break;
+        case 1:
+            BOrigin = BOrigin + 16 * FORWARD;
+            break;
+        case 2:
+            BOrigin = BOrigin - 16 * right;
+            break;
+        case 3:
+            BOrigin = BOrigin - 16 * FORWARD;
+            break;
+    }
+    self SetOrigin(BOrigin);
+    self SetPlayerAngles(BAngles);
+}
+Powerups(func)
+{  
+    switch(func)
+    {
+        case 0:
+            self zm_powerups::specific_powerup_drop("full_ammo", self.origin, undefined, undefined, undefined, 1);
+        case 1:
+            self zm_powerups::specific_powerup_drop("fire_sale", self.origin, undefined, undefined, undefined, 1);
+        case 2:
+            self zm_powerups::specific_powerup_drop("bonus_points_player", self.origin, undefined, undefined, undefined, 1);
+        case 3:
+            self zm_powerups::specific_powerup_drop("free_perk", self.origin, undefined, undefined, undefined, 1);
+        case 4:
+            self zm_powerups::specific_powerup_drop("nuke", self.origin, undefined, undefined, undefined, 1);
+        case 5:
+            self zm_powerups::specific_powerup_drop("hero_weapon_power", self.origin, undefined, undefined, undefined, 1);
+        case 6:
+            self zm_powerups::specific_powerup_drop("insta_kill", self.origin, undefined, undefined, undefined, 1);
+        case 7:
+            self zm_powerups::specific_powerup_drop("double_points", self.origin, undefined, undefined, undefined, 1);
+        case 8:
+            self zm_powerups::specific_powerup_drop("carpenter", self.origin, undefined, undefined, undefined, 1);
+    }
+} 
+
+Stats_TotalPlayed(score)
+{
+    self zm_stats::function_ab006044("TOTAL_GAMES_PLAYED", score);
+}
+
+Stats_HighestReached(score)
+{
+    self zm_stats::function_1b763e4("HIGHEST_ROUND_REACHED", score);
+}
+
+Stats_MostKills(score)
+{
+    self zm_stats::function_1b763e4("kills", score);
+}
+
+Stats_MostHeadshots(score)
+{
+    self zm_stats::function_1b763e4("MOST_HEADSHOTS", score);
+}
+
+Stats_Round(score)
+{
+    self zm_stats::function_ab006044("TOTAL_ROUNDS_SURVIVED", score);
+    self zm_stats::function_a6efb963("TOTAL_ROUNDS_SURVIVED", score);
+    self zm_stats::function_9288c79b("TOTAL_ROUNDS_SURVIVED", score);
+}
+
+ShowAllBoxes()
+{
+    foreach(chest in level.chests)
+	{
+		chest zm_magicbox::show_chest();
+	}
+}
+BoxPrice(value)
+{
+    foreach(chest in level.chests) chest.zombie_cost = value;
+    self IprintLnBold("Price Changed To ^1"+value);
+}
+GiveAllPerks()
+{
+    self thread zm_perks::function_cc24f525();
+    self IprintLnBold("All Perks ^2Given");
+}
+GiveAllPlayersPerks()
+{
+    players = GetPlayerArray();
+    foreach(player in players)
+    player thread zm_perks::function_cc24f525();
+    self IprintLnBold("All Players Perks ^2Given");
+}
+OpenAllDoors()
+{
+    types = array("zombie_door", "zombie_airlock_buy", "zombie_debris");
+    foreach(type in types)
+    {
+        zombie_doors = GetEntArray(type, "targetname");
+        foreach(door in zombie_doors)
+        {
+            if(door._door_open == 0)
+            {
+                door thread zm_blockers::door_opened(door.zombie_cost, 0);
+                door._door_open = true;
+
+                all_trigs = GetEntArray(door.target, "target");
+                foreach(trig in all_trigs)
+                    trig thread zm_utility::set_hint_string(trig, "");
+            }
+        }
+    }
+    level._doors_done = true;
+    self iPrintLnBold("Doors ^2Opened");
+}
 AllClientOpts(player, func)
 {  
     player endon("disconnect");
@@ -773,7 +908,6 @@ UnlimitedSprint(player)
         player iPrintLnBold("Unlimited Sprint ^1Disabled");
     }
 }    
-
 
 Camos(Camo) 
 {
