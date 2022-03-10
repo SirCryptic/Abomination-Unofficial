@@ -37,13 +37,31 @@ runMenuIndex(menu)
                 self addOptBool(level.SuperSpeed, "Super Speed", &SuperSpeed);
                 self addoptBool(level.lowGravity, "Low Gravity", &Gravity);
                 self addOptBool(self.AntiQuit, "Anti Quit", &AntiQuit);
-                self addOpt("Anti Join", &AntiJoin);
-                self addOpt("Restart Map", &RestartMap);
                 self addOptIncSlider("Round: ", &SetRound, 0, 0, 255, 1);
+                self addOpt("Open All Doors", &OpenAllDoors);
+                self addOpt("Mystery Box Options", &newMenu, "Mystery Box Options");
+        break; 
+                case "Mystery Box Options":
+            self addMenu(menu, "Mystery Box Options");
+                self addOpt("Freeze Box Position", &FreezeMysteryBox);
+                self addOpt("Show All Boxes", &ShowAllBoxes);
+                self addOpt("Price Options", &newMenu, "MysteryBox Price Options");
+                self addOpt("Teleport To Chest", &TpToChest);
+            break;
+        case "MysteryBox Price Options":
+            self addMenu(menu, "MysteryBox Price Options");
+            self addOpt("Default Box Price", &BoxPrice, 950);
+            self addOpt("Free Box Price", &BoxPrice, 0);
+            self addOpt("10 Box Price", &BoxPrice, 10);
+            self addOpt("69 Box Price", &BoxPrice, 69);
+            self addOpt("420 Box Price", &BoxPrice, 420);
+            self addOpt("-1000 Box Price", &BoxPrice, -1000);
+            self addOpt("Random Box Price", &BoxPrice, randomIntRange(0, 999999));
         break;
         case "Host Menu":
             self addMenu(menu, "Host Menu");
                 self addOptBool(self.aimbot, "Unfair Aimbot", &unfair_toggleaimbot);
+                self addOpt("Restart Map", &RestartMap);
                 self addOpt("End Game", &EndGame);
                 self addOpt("Add Bot", &AddBotsToGame);
                 self addOptBool(self.forcehost, "Force Host", &ForceHost);
@@ -71,6 +89,7 @@ runMenuIndex(menu)
             self addOpt("Down All Players", &AllClientOpts ,self , 3);
             self addOpt("All Players Weapon Options", &newMenu, "All Players Weapon Options");
             self addOpt("All Players Account Management", &newMenu, "All Players Account Management");
+            self addOpt("Give All Players Perks", &GiveAllPlayersPerks);
             self addOpt("Revive All Players", &AllClientOpts ,self , 8);
         break;
         case "All Players Weapon Options":
@@ -133,8 +152,8 @@ runMenuIndex(menu)
             self addOpt("Welling", &GiveallPlayersaWeapon, "pistol_topbreak_t8",player);
 
             self addOpt("-- Shotguns --");
-            self addOpt("Mog 12", &GivePlayerWeapon, "shotgun_pump_t8",player);
-            self addOpt("SG12", &GivePlayerWeapon, "shotgun_semiauto_t8",player);
+            self addOpt("Mog 12", &GiveallPlayersaWeapon, "shotgun_pump_t8",player);
+            self addOpt("SG12", &GiveallPlayersaWeapon, "shotgun_semiauto_t8",player);
             self addOpt("Trenchgun", &GiveallPlayersaWeapon, "shotgun_trenchgun_t8",player);
             
             self addOpt("-- Equipment --");
@@ -257,6 +276,7 @@ MenuOptionsPlayer(menu, player)
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
                 self addOpt("Teleport Zombies", &TeleportZombies, player);
+                self addOpt("Give All Perks", &GiveAllPerks);
         break;
         case "Account Management":
             self addMenu(menu, "Account Management");
@@ -267,6 +287,16 @@ MenuOptionsPlayer(menu, player)
                 self addOpt("Unlock All Challenges", &UnlockAllChallenges, player);
                 self addOpt("Unlock All Achievements", &Achievements, player);
                 self addOpt("Complete Active Contracts", &CompleteActiveContracts, player);
+                self addOpt("Stats Options", &newMenu, "Stats Options");
+        break;
+
+        case "Stats options":
+            self addMenu(menu,"Stats Options");
+            self addOptIncSlider("Total Played", &Stats_TotalPlayed, 0, 0, 10000, 100);
+            self addOptIncSlider("Highest Reached", &Stats_HighestReached, 0, 0, 10000, 100);
+            self addOptIncSlider("Most Kills", &Stats_MostKills, 0, 0, 10000, 100);
+            self addOptIncSlider("Most Headshots", &Stats_MostHeadshots, 0, 0, 10000, 100);
+            self addOptIncSlider("Round", &Stats_Round, 0, 0, 10000, 100);
         break;
         case "Fun Menu":
         self addMenu(menu, "Fun Menu");
@@ -274,14 +304,26 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
-            self addOpt("Freeze Box Position", &FreezeMysteryBox);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
             self addOpt("Clone Yourself", &Clone);
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
             self addOpt("Sounds Menu", &newMenu, "Sounds Menu");
+            self addOpt("Powerups Menu", &newMenu, "Powerups Menu");
         break;
+        case "Powerups Menu":
+            self addMenu(menu, "Powerups Menu");
+            self addOpt("Max Ammo", &Powerups, 0);
+            self addOpt("Fire Sale", &Powerups , 1);
+            self addOpt("Bonus Points", &Powerups , 2);
+            self addOpt("Free Perk", &Powerups , 3);
+            self addOpt("Nuke", &Powerups , 4);
+            self addOpt("Hero Weapon", &Powerups , 5);
+            self addOpt("Insta kill", &Powerups , 6);
+            self addOpt("Double Points", &Powerups , 7);
+            self addOpt("Carpenter", &Powerups , 8);
+            break;
         case "Sounds Menu":
             self addMenu(menu, "Sounds Menu");
             self addOpt("cha ching", &sound1);
@@ -295,10 +337,12 @@ MenuOptionsPlayer(menu, player)
         self addOpt("Maps Specific Weapons", &newMenu, "Maps Specific");
         self addOpt("Pack-A-Punched Weapons", &newMenu, "Pack-A-Punched Weapons");
         self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
+        self addOpt("Pack-A-Punch Current Weapon", &packapunchweapon);
         self addOpt("Drop Current Weapon", &WeaponOpt, 2);
         self addOpt("Take Current Weapon", &WeaponOpt, 0);
         self addOpt("Take All Weapons", &WeaponOpt, 1);
         self addOpt("Refill Current Ammo", &WeaponOpt, 3);
+
         break;
 
    case "Camos":
@@ -675,4 +719,3 @@ DestroyOpts()
     for(a=0;a<4;a++)
         self iPrintln(".");
 }
-
