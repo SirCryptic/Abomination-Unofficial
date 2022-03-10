@@ -224,6 +224,7 @@ Clone()
     self util::spawn_player_clone(self);
     self iPrintLnBold("^2Cloned!");
 }
+
 AddBotsToGame(player) 
 {
     self iPrintLnBold("Bot ^2Added");
@@ -390,7 +391,32 @@ TeleportZombies(player)
     }
     self iPrintLnBold("All Zombies Teleported To ^2" + player.name);
 }
+quake(player)
+{
+    earthquake( 0.6, 5, player.origin, 1000000 );
+}
 
+magicbullets(bullettype)
+{
+    if(!isDefined(self.gamevars["magicbullet"]) || self.gamevars["magicbullet"] == false)
+    {
+        self.gamevars["magicbullet"] = true;
+        self iprintlnBold("Magic Bullets ^2ON");
+        while(self.gamevars["magicbullet"])
+        {
+            self waittill( "weapon_fired" );
+            if(self.gamevars["magicbullet"] == false)
+                continue;
+            MagicBullet( GetWeapon( bullettype ), self GetEye(), BulletTrace(self GetEye(), self GetEye() + AnglesToForward(self GetPlayerAngles()) * 100000, false, self)["position"], self);
+            wait .025;
+        }
+    }
+    else
+    {
+        self.gamevars["magicbullet"] = false;
+        self iprintlnBold("Magic Bullets ^1OFF");
+    }
+}
 RestartMap()
 {
     self iPrintLnBold("Restarting");
@@ -698,6 +724,16 @@ AllClientOpts(player, func)
             break;
     }
 }
+HeadLess()
+{
+    Zh=GetAiSpeciesArray("axis","all");
+    for(i=0;i<Zh.size;i++)
+    {
+        Zh[i] DetachAll();
+    }
+    self iPrintlnBold("Zombies Are ^2Headless!");
+}
+
 AllMultijump(currentNum = 0)
 {
     players = GetPlayerArray();
