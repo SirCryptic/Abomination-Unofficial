@@ -12,6 +12,7 @@
 #include scripts\core_common\rank_shared;
 #include scripts\zm_common\zm_utility.gsc;
 #include script_47fb62300ac0bd60.gsc;
+#include scripts\zm_common\zm_bgb.gsc;
 #include scripts\zm_common\zm_perks.gsc;
 #include scripts\zm_common\zm_powerups.gsc;
 #include scripts\zm_common\zm_magicbox.gsc;
@@ -31,6 +32,7 @@
 #include scripts\core_common\laststand_shared.gsc;
 #include scripts\core_common\match_record.gsc;
 #include scripts\zm_common\zm_stats.gsc;
+
 
 #namespace clientids_shared;
 
