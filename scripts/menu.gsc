@@ -309,8 +309,21 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Clone Yourself", &Clone);
             self addOpt("Zombies Left", &ZombieCount);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
+            self addOpt("HeadLess Zombies", &HeadLess);
+            self addOpt("Earthquake", &quake, player);
+            self addOpt("Bullets Menu", &newMenu,"Bullets Menu");
             self addOpt("Sounds Menu", &newMenu, "Sounds Menu");
             self addOpt("Powerups Menu", &newMenu, "Powerups Menu");
+        break;
+        case "Bullets Menu":
+        self addMenu(menu, "Bullets Menu");
+            self addOpt("= Turn OFF The Current One =");
+            self addOpt("= Before Applying Another =");
+            self addOpt("Ray Gun mk2", &magicbullets, "ray_gun_mk2_upgraded");
+            self addOpt("Hellion Salvo", &magicbullets, "launcher_standard_t8_upgraded");
+            self addOpt("Minigun", &magicbullets, "minigun");
+            self addOpt("Ballistic Knife", &magicbullets, "special_ballisticknife_t8_dw_upgraded");
+            self addOpt("Crossbow", &magicbullets, "special_crossbow_t8_upgraded");
         break;
         case "Powerups Menu":
             self addMenu(menu, "Powerups Menu");
