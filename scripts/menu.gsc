@@ -329,6 +329,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("cha ching", &sound1);
             self addOpt("Max Ammo", &sound2);
             self addOpt("Monkey Scream", &sound3);
+            self addOpt("Out Of Bounds", &sound4);
         break;
 
         case "Weapon Options":
@@ -405,15 +406,22 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Trenchgun", &GivePlayerWeapon, "shotgun_trenchgun_t8");
             
             self addOpt("-- Equipment --");
-            self addOpt("sticky grenade", &GivePlayerWeapon, "sticky_grenade");
+            self addOpt("Acid Bomb", &GivePlayerWeapon, "eq_acid_bomb");
+            self addOpt("Molotov", &GivePlayerWeapon, "eq_molotov");
+            self addOpt("Sticky Grenade", &GivePlayerWeapon, "sticky_grenade");
+            self addOpt("Claymore", &GivePlayerWeapon, "claymore");
+            self addOpt("Bouncingbetty", &GivePlayerWeapon, "bouncingbetty");
+            self addOpt("Mini Turret", &GivePlayerWeapon, "mini_turret");
+
         break;
         case "Maps Specific":
             self addMenu(menu, "Maps Specific");
             self addOpt("Monkey Bombs (all non chaos maps only)", &GivePlayerWeapon, "cymbal_monkey");
             self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8");
             self addOpt("homunculus (all chaos maps only)", &GivePlayerWeapon, "homunculus");
-            self addOpt("Wunderwaffe (Tag der Toten only)", &GivePlayerWeapon, "tesla_gun");
+            self addOpt("Wunderwaffe (Tag der Toten only)", &GivePlayerWeapon, "ww_tesla_sniper_t8");
             self addOpt("thundergun (Tag der Toten only)", &GivePlayerWeapon, "thundergun");
+            self addOpt("Galvaknuckles (Honestly unsure)", &GivePlayerWeapon, "galvaknuckles_t8");
         break;
         case "Pack-A-Punched Weapons":
             self addMenu(menu, "Pack-A-Punched Weapons");
@@ -475,22 +483,23 @@ MenuOptionsPlayer(menu, player)
                 self addOpt("Verification", &newMenu, "Verification " + player GetEntityNumber());
                 for(a=0;a<altSubs.size;a++)
                     self addOpt(altSubs[a], &newMenu, altSubs[a] + " " + player GetEntityNumber());
-                    self addOpt("Teleports "+ player getName() + " | Client Num: " + player GetEntityNumber() ,&newMenu, "Teleports");
+                    self addOpt("Teleports ",&newMenu, "Teleports"+ " " + player GetEntityNumber());
                     self addOpt("Kick: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 0);
                     self addOpt("Suicide " + player getName() + " | Client Num: " + player GetEntityNumber(), &suicide, player);
                     self addOpt("Revive: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 3);
             break;
-                    case "Teleports":
-            self addMenu(menu, "Teleports");
-            self addOpt("Teleport To: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 2);
-            self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
-            self addOpt("Teleport Zombies "+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleportZombies, player);
-            self addOpt("Send To Space"+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleTSpace, player);
-            break;
+
         case "Verification":
             self addMenu(menu, "Verification");
                 for(a=0;a<(level.MenuStatus.size - 2);a++)
                     self addOptBool(player getVerification() == a, level.MenuStatus[a], &setVerification, a, player, true);
+            break;
+        case "Teleports":
+            self addMenu(menu, "Teleports | " + player getName());
+            self addOpt("Teleport To: " + player getName() + " | Client Num: " + player GetEntityNumber(), &ClientOpts, player, 2);
+            self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
+            self addOpt("Teleport Zombies "+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleportZombies, player);
+            self addOpt("Send To Space"+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleTSpace, player);
             break;
         default:
             self addMenu(menu, "404 ERROR");
