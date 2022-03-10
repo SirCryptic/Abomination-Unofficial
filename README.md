@@ -33,6 +33,7 @@ Added:
   
 Fixs:
 - Fixed Issue With Some Weapons Not Being given to players
+-Fixed Issue With Teleport Menu Not Selecting the chosen client (also added some misc Fx To Teleports🤷)
   
 Misc Changes:
 - Re-arranged some menu options (main now fits all on one page)
