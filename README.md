@@ -20,7 +20,23 @@
   <summary>Click to expand!</summary>
 
 ### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
-
+> 10/03/22
+  
+Added:
+- Give All Perks
+- Open All Doors
+- Stats Options
+- Packapunch current weapon
+- Sounds menu
+- Powerups menu
+- Mystery Box Options
+  
+Fixs:
+- Fixed Issue With Some Weapons Not Being given to players
+  
+Misc Changes:
+- Re-arranged some menu options (main now fits all on one page)
+  
 > 09/03/22
 - Changed Teleports to players menu & fixed = added some weapons (also changed got rid of misc options are now in fun and teleports menu)
 
