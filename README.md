@@ -30,6 +30,8 @@ Added:
 - Sounds menu
 - Powerups menu
 - Mystery Box Options
+- Added Bullets Menu
+- Some Random Stuff
   
 Fixs:
 - Fixed Issue With Some Weapons Not Being given to players
