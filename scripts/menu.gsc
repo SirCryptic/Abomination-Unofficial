@@ -38,7 +38,7 @@ runMenuIndex(menu)
                 self addoptBool(level.lowGravity, "Low Gravity", &Gravity);
                 self addOptBool(self.AntiQuit, "Anti Quit", &AntiQuit);
                 self addOptIncSlider("Round: ", &SetRound, 0, 0, 255, 1);
-                self addOpt("Open All Doors", &OpenAllDoors);
+                self addOpt("Turn Power On & Open All Doors", &open_sesame);
                 self addOpt("Mystery Box Options", &newMenu, "Mystery Box Options");
         break; 
                 case "Mystery Box Options":
@@ -89,7 +89,7 @@ runMenuIndex(menu)
             self addOpt("Down All Players", &AllClientOpts ,self , 3);
             self addOpt("All Players Weapon Options", &newMenu, "All Players Weapon Options");
             self addOpt("All Players Account Management", &newMenu, "All Players Account Management");
-            self addOpt("Give All Players Perks", &GiveAllPlayersPerks);
+            self addOpt("Give All Players Perks", &allplayersperkaholic, "zm_bgb_perkaholic");
             self addOpt("Revive All Players", &AllClientOpts ,self , 8);
         break;
         case "All Players Weapon Options":
@@ -276,7 +276,7 @@ MenuOptionsPlayer(menu, player)
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
                 self addOpt("Teleport Zombies", &TeleportZombies, player);
-                self addOpt("Give All Perks", &GiveAllPerks);
+                self addOpt("Give All Perks", &perkaholic, "zm_bgb_perkaholic");
         break;
         case "Account Management":
             self addMenu(menu, "Account Management");
@@ -302,6 +302,7 @@ MenuOptionsPlayer(menu, player)
         self addMenu(menu, "Fun Menu");
             self addOptBool(self.Multijump, "Multi Jump", &Multijump);
             self addOpt("Spawn Luna Wolf", &LunaWolf);
+            self addOpt("Equipment Stays Healthy", &equipment_stays_healthy);
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
@@ -312,10 +313,11 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
             self addOpt("HeadLess Zombies", &HeadLess);
             self addOpt("Earthquake", &quake, player);
-            self addOpt("Bullets Menu", &newMenu,"Bullets Menu");
             self addOpt("Sounds Menu", &newMenu, "Sounds Menu");
+            self addOpt("Bullets Menu", &newMenu,"Bullets Menu");
             self addOpt("Powerups Menu", &newMenu, "Powerups Menu");
         break;
+ 
         case "Bullets Menu":
         self addMenu(menu, "Bullets Menu");
             self addOpt("= Turn OFF The Current One =");
