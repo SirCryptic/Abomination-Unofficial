@@ -20,6 +20,17 @@
   <summary>Click to expand!</summary>
 
 ### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
+  > 10/03/22
+  
+Added:
+- Turn Power On ( combined with all doors )
+  
+Fixs:
+- Fixed Issue With Some Doors Not Opening and the popup error (now opens all doors & turns power on)
+  
+Misc Changes:
+- Changed the way all perks is given and now uses perkaholic ( you get all the perks ✅😎 )
+  
 > 10/03/22
   
 Added:
