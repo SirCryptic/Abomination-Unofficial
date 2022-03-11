@@ -84,7 +84,6 @@ runMenuIndex(menu)
         case "All Players":
         self addMenu(menu, "All Players");
             self addOptBool(self.AllGod,"All Players Godmode", &AllPlayerGodMod);
-            self addOptBool(self.AllUnlimitedAmmo,"All Players Infinite Ammo", &AllUnlimitedAmmo);
             self addOptBool(self.Multijump, "All Players Multi Jump", &Multijump);
             self addOptIncSlider("All Players Score", &EditallPlayerScore, -10000, 0, 10000, 1000, player);
             self addOpt("Kick All Players", &KickAllPlayers);
