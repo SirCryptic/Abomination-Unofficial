@@ -33,6 +33,8 @@
 #include scripts\core_common\match_record.gsc;
 #include scripts\zm_common\zm_stats.gsc;
 
+// hello there from sircryptic :)
+#using scripts\zm_common\zm_power.gsc;
 
 #namespace clientids_shared;
 
