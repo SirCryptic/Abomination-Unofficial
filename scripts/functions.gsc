@@ -13,8 +13,8 @@ Godmode(player)
         }
     }
     else
-        player DisableInvulnerability();
         self iPrintLnBold("Godmode ^1Disabled");
+        player DisableInvulnerability();
 }
 
 Noclip1(player)
@@ -386,8 +386,8 @@ selfInstaKill()
 }
 TeleportZombies(player) 
 {
-    playfx(level._effect[#"teleport_splash"], self.origin);
-	playfx(level._effect[#"teleport_aoe"], self.origin);
+    playfx(level._effect[#"teleport_splash"], player.origin);
+	playfx(level._effect[#"teleport_aoe"], player.origin);
     foreach(zombie in GetAITeamArray(level.zombie_team)) 
     {
         if (isDefined(zombie)) zombie ForceTeleport(player.origin + (+40, 0, 0));
@@ -483,18 +483,19 @@ ClientOpts(player, func)
             Kick(player GetEntityNumber());
             break; 
          case 1:
+
             playfx(level._effect[#"teleport_splash"], self.origin);
 	        playfx(level._effect[#"teleport_aoe"], self.origin);
-            wait .1;
+            wait .2;
             player SetOrigin(self.origin + (-10, 0, 0));
             self iPrintLnBold(player.name + " Teleported To ^2Me");
             break;
             
         case 2:
-            self SetOrigin(player.origin + (-10, 0, 0));
-            wait .1;
             playfx(level._effect[#"teleport_splash"], self.origin);
 	        playfx(level._effect[#"teleport_aoe"], self.origin);
+            wait .2;
+            self SetOrigin(player.origin + (-10, 0, 0));
             self iPrintLnBold("Teleported To ^2" + player.name);
             break;
 
@@ -504,7 +505,37 @@ ClientOpts(player, func)
             break;
     }
 } 
-
+equipment_stays_healthy()
+{
+		self endon(#"disconnect");
+		self notify(#"preserve_equipment");
+		self endon(#"preserve_equipment");
+		if(!(isdefined(self.preserving_equipment) && self.preserving_equipment))
+		{
+			self.preserving_equipment = 1;
+			while(true)
+			{
+				self.equipment_damage = [];
+				self.shielddamagetaken = 0;
+				if(isdefined(level.destructible_equipment))
+				{
+					foreach(equip in level.destructible_equipment)
+					{
+						if(isdefined(equip))
+						{
+							equip.shielddamagetaken = 0;
+							equip.damage = 0;
+							equip.headchopper_kills = 0;
+							equip.springpad_kills = 0;
+							equip.subwoofer_kills = 0;
+						}
+					}
+				}
+				wait(0.1);
+			}
+		}
+		self.preserving_equipment = 0;
+}
 packapunchweapon()
 {
     weapon = self GetCurrentWeapon();
@@ -608,40 +639,67 @@ BoxPrice(value)
     foreach(chest in level.chests) chest.zombie_cost = value;
     self IprintLnBold("Price Changed To ^1"+value);
 }
-GiveAllPerks()
+perkaholic(str_bgb)
 {
-    self thread zm_perks::function_cc24f525();
+    self thread bgb::run_activation_func(str_bgb);
     self IprintLnBold("All Perks ^2Given");
 }
-GiveAllPlayersPerks()
+allplayersperkaholic(str_bgb)
 {
     players = GetPlayerArray();
     foreach(player in players)
-    player thread zm_perks::function_cc24f525();
+    player thread bgb::run_activation_func(str_bgb);
     self IprintLnBold("All Players Perks ^2Given");
 }
-OpenAllDoors()
-{
-    types = array("zombie_door", "zombie_airlock_buy", "zombie_debris");
-    foreach(type in types)
-    {
-        zombie_doors = GetEntArray(type, "targetname");
-        foreach(door in zombie_doors)
-        {
-            if(door._door_open == 0)
-            {
-                door thread zm_blockers::door_opened(door.zombie_cost, 0);
-                door._door_open = true;
 
-                all_trigs = GetEntArray(door.target, "target");
-                foreach(trig in all_trigs)
-                    trig thread zm_utility::set_hint_string(trig, "");
-            }
-        }
-    }
-    level._doors_done = true;
-    self iPrintLnBold("Doors ^2Opened");
+open_sesame()
+{
+	setdvar(#"zombie_unlock_all", 1);
+	level flag::set("power_on");
+	level clientfield::set("zombie_power_on", 1);
+	power_trigs = getentarray("use_elec_switch", "targetname");
+	foreach(trig in power_trigs)
+	{
+		if(isdefined(trig.script_int))
+		{
+			level flag::set("power_on" + trig.script_int);
+			level clientfield::set("zombie_power_on", trig.script_int + 1);
+		}
+	}
+	players = getplayers();
+	zombie_doors = getentarray("zombie_door", "targetname");
+	for(i = 0; i < zombie_doors.size; i++)
+	{
+		if(!(isdefined(zombie_doors[i].has_been_opened) && zombie_doors[i].has_been_opened))
+		{
+			zombie_doors[i] notify(#"trigger", {#activator:players[0]});
+		}
+		if(isdefined(zombie_doors[i].power_door_ignore_flag_wait) && zombie_doors[i].power_door_ignore_flag_wait)
+		{
+			zombie_doors[i] notify(#"power_on");
+		}
+		waitframe(1);
+	}
+	zombie_airlock_doors = getentarray("zombie_airlock_buy", "targetname");
+	for(i = 0; i < zombie_airlock_doors.size; i++)
+	{
+		zombie_airlock_doors[i] notify(#"trigger", {#activator:players[0]});
+		waitframe(1);
+	}
+	zombie_debris = getentarray("zombie_debris", "targetname");
+	for(i = 0; i < zombie_debris.size; i++)
+	{
+		if(isdefined(zombie_debris[i]))
+		{
+			zombie_debris[i] notify(#"trigger", {#activator:players[0]});
+		}
+		waitframe(1);
+	}
+	level notify(#"open_sesame");
+	wait(1);
+	setdvar(#"zombie_unlock_all", 0);
 }
+
 AllClientOpts(player, func)
 {  
     player endon("disconnect");
@@ -656,9 +714,9 @@ AllClientOpts(player, func)
             
             players = GetPlayerArray();
             foreach(player in players)
-            playfx(level._effect[#"teleport_splash"], self.origin);
-	        playfx(level._effect[#"teleport_aoe"], self.origin);
             player SetOrigin(self.origin + (-10, 0, 0));
+            playfx(level._effect[#"teleport_splash"], player.origin);
+	        playfx(level._effect[#"teleport_aoe"], player.origin);
             self iPrintLnBold("All Players ^2Teleported");
             break;
 
@@ -727,6 +785,7 @@ AllClientOpts(player, func)
             break;
     }
 }
+
 HeadLess()
 {
     Zh=GetAiSpeciesArray("axis","all");
