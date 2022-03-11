@@ -114,4 +114,4 @@ Copyright Disclaimer Under Section 107 of the Copyright Act 1976,allowance is ma
   # Foot Notes
 > This is open source and a learning project ,please respect the authors including the game developers (treyarch).
 
-⛔⚠️ If You Wish To Modify This Menu & Release It You **Must** Credit The People Below In The Credits Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
+⛔⚠️ If You Wish To Modify This Menu & Release It You **Must** Credit The People In The [Credits](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/README.md#credits) Under The [License](https://github.com/SirCryptic/Abomination-Unofficial/blob/main/LICENSE)..
