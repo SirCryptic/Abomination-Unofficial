@@ -37,6 +37,7 @@ runMenuIndex(menu)
                 self addOptBool(level.SuperSpeed, "Super Speed", &SuperSpeed);
                 self addoptBool(level.lowGravity, "Low Gravity", &Gravity);
                 self addOptBool(self.AntiQuit, "Anti Quit", &AntiQuit);
+                self addOpt("GunGame", &doGunGame);
                 self addOptIncSlider("Round: ", &SetRound, 0, 0, 255, 1);
                 self addOpt("Turn Power On & Open All Doors", &open_sesame);
                 self addOpt("Mystery Box Options", &newMenu, "Mystery Box Options");
@@ -45,6 +46,7 @@ runMenuIndex(menu)
             self addMenu(menu, "Mystery Box Options");
                 self addOpt("Freeze Box Position", &FreezeMysteryBox);
                 self addOpt("Show All Boxes", &ShowAllBoxes);
+                self addOpt("Hide All Boxes", &HideAllBoxes);
                 self addOpt("Price Options", &newMenu, "MysteryBox Price Options");
                 self addOpt("Teleport To Chest", &TpToChest);
             break;
@@ -81,6 +83,8 @@ runMenuIndex(menu)
             break;
         case "All Players":
         self addMenu(menu, "All Players");
+            self addOptBool(self.AllGod,"All Players Godmode", &AllPlayerGodMod);
+            self addOptBool(self.AllUnlimitedAmmo,"All Players Infinite Ammo", &AllUnlimitedAmmo);
             self addOptBool(self.Multijump, "All Players Multi Jump", &Multijump);
             self addOptIncSlider("All Players Score", &EditallPlayerScore, -10000, 0, 10000, 1000, player);
             self addOpt("Kick All Players", &KickAllPlayers);
@@ -215,7 +219,7 @@ runMenuIndex(menu)
         self addMenu("All Players Specific Map Weapons");
             self addOpt("-- Maps Specific --");
             self addOpt("Monkey Bombs (all non chaos maps only)", &GiveallPlayersaWeapon, "cymbal_monkey",player);
-            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8",player);
+            self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8_upgraded",player);
             self addOpt("homunculus (all chaos maps only)", &GiveallPlayersaWeapon, "homunculus",player);
             self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "tesla_gun",player);
             self addOpt("thundergun (Tag der Toten only)", &GiveallPlayersaWeapon, "thundergun",player);
@@ -305,6 +309,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Equipment Stays Healthy", &equipment_stays_healthy);
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
+            self addOptBool(self.killtxt,"kill text", &KillText);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
@@ -433,7 +438,7 @@ MenuOptionsPlayer(menu, player)
         case "Maps Specific":
             self addMenu(menu, "Maps Specific");
             self addOpt("Monkey Bombs (all non chaos maps only)", &GivePlayerWeapon, "cymbal_monkey");
-            self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8");
+            self addOpt("tomahawk (blood of the dead only)", &GivePlayerWeapon, "tomahawk_t8_upgraded");
             self addOpt("homunculus (all chaos maps only)", &GivePlayerWeapon, "homunculus");
             self addOpt("Wunderwaffe (Tag der Toten only)", &GivePlayerWeapon, "ww_tesla_sniper_t8");
             self addOpt("thundergun (Tag der Toten only)", &GivePlayerWeapon, "thundergun");
