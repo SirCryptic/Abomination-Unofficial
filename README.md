@@ -30,6 +30,7 @@ Fixs:
   
 Misc Changes:
 - Changed the way all perks is given and now uses perkaholic ( you get all the perks ✅😎 )
+- Cleaned Up Some More Code
   
 > 10/03/22
   
