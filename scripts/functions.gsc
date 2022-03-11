@@ -16,7 +16,27 @@ Godmode(player)
         self iPrintLnBold("Godmode ^1Disabled");
         player DisableInvulnerability();
 }
-
+AllPlayerGodMod()
+{
+    if(!isDefined(self.AllGod)){
+        foreach(player in level.players)
+        {
+            player EnableInvulnerability();
+            self.AllGod = true;
+            player iPrintLnBold("God Mode Has Been ^2Enabled");
+            wait 0.1;
+        }
+    }
+    else
+    {
+        foreach(player in level.players)
+        {
+            player DisableInvulnerability();
+            self.AllGod = undefined;
+            player iPrintLnBold("God Mode Has Been ^1Disabled");
+        }
+   }
+}
 Noclip1(player)
 {
     player.Noclip = isDefined(player.Noclip) ? undefined : true;
@@ -163,6 +183,12 @@ LunaWolf()
 {
     spawnactor(#"hash_3f174b9bcc408705", self.origin, self.angles, "wolf_protector", 1);
 }
+/# // Causes a Crash but ill leave it here for reffernce
+
+    spawnactor("spawner_mp_blight_father", self.origin, self.angles, "blightfather");
+
+#/
+
 ZombiesInSpace() 
 {
     x = randomIntRange(-75, 75);
@@ -300,14 +326,14 @@ SuperSpeed()
 
 nofalldamage()
 {
-    foreach(player in level.players)
+    foreach(player in level.players) //grabs all players playing in the game
     level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
     if(isDefined(level.nofalldamage))
     {
         self iPrintLnBold("No Fall ^2Enabled");
-        SetDvar(#"bg_fallDamageMinHeight", 9999);
+        SetDvar(#"bg_fallDamageMinHeight", 9999); ///unsure if the dvar actualy works
         SetDvar(#"bg_fallDamageMaxHeight", 9999);
-        player setPerk("specialty_fallheight");
+        player setPerk("specialty_fallheight"); /// so i used this function too
     }
     else
     {        
@@ -358,10 +384,10 @@ UnlimitedAmmo(player)
 {
     player.UnlimitedAmmo = isDefined(player.UnlimitedAmmo) ? undefined : true;
 
-    self iPrintLnBold("Unlimted Ammo ^1Disabled");
+    player iPrintLnBold("Unlimted Ammo ^1Disabled");
     if(isDefined(player.UnlimitedAmmo))
     {
-        self iPrintLnBold("Unlimited Ammo ^2Enabled");
+        player iPrintLnBold("Unlimited Ammo ^2Enabled");
         player endon("disconnect");
         while(isDefined(player.UnlimitedAmmo))
         {
@@ -372,10 +398,13 @@ UnlimitedAmmo(player)
     }
 }
 
+//edit player score
 EditPlayerScore(score, player)
 {
     player.score = !score ? 0 : player.score + score;
 }
+
+//permanant insta kill (self)
 selfInstaKill()
 {
     self.personal_instakill = isDefined(self.personal_instakill) ? undefined : true;
@@ -384,6 +413,8 @@ selfInstaKill()
         else
         self iPrintLnBold("Perma Insta Kill ^1Disabled");
 }
+
+//teleport zombies to a player
 TeleportZombies(player) 
 {
     playfx(level._effect[#"teleport_splash"], player.origin);
@@ -394,11 +425,13 @@ TeleportZombies(player)
     }
     self iPrintLnBold("All Zombies Teleported To ^2" + player.name);
 }
+
+//earthqauke , makes the players screen shake
 quake(player)
 {
     earthquake( 0.6, 5, player.origin, 1000000 );
 }
-
+//magic bullets, need to fix the popup error , works for time being 
 magicbullets(bullettype)
 {
     if(!isDefined(self.gamevars["magicbullet"]) || self.gamevars["magicbullet"] == false)
@@ -420,12 +453,16 @@ magicbullets(bullettype)
         self iprintlnBold("Magic Bullets ^1OFF");
     }
 }
+
+//obvs your not dumb ;)
 RestartMap()
 {
     self iPrintLnBold("Restarting");
     wait .5;
     map_restart(0);
 }
+
+//kill all zombies
 KillAllZombies(player) 
 {
     foreach(zombie in GetAITeamArray(level.zombie_team)) 
@@ -434,7 +471,7 @@ KillAllZombies(player)
         if (isDefined(zombie)) zombie dodamage(zombie.maxhealth + 999, zombie.origin, player);
     }
 }
-
+// teleport gun
 StartTeleGun()
 {
     self.TeleGun = isDefined(self.TeleGun) ? undefined : true;
@@ -468,6 +505,8 @@ vector_scal(vec, scale)
     vec = (vec[0] * scale, vec[1] * scale, vec[2] * scale);
     return vec;
 } 
+
+//client options teleports etc
 ClientOpts(player, func)
 {  
     player endon("disconnect");
@@ -546,35 +585,7 @@ packapunchweapon()
     self IPrintLnBold("Your Current Weapon Has Been ^2Upgraded!");
 }
 
-TpToChest()
-{
-    Chest = level.chests[level.chest_index];
-    origin = Chest.zbarrier.origin;
-    FORWARD = AnglesToForward(Chest.zbarrier.angles);
-    right = AnglesToRight(Chest.zbarrier.angles);
-    BAngles = VectorToAngles(right);
-    BOrigin = origin - 48 * right;
-    switch(randomInt(3))
-    {
-        case 0:
-            BOrigin = BOrigin + 16 * right;
-            break;
-        case 1:
-            BOrigin = BOrigin + 16 * FORWARD;
-            break;
-        case 2:
-            BOrigin = BOrigin - 16 * right;
-            break;
-        case 3:
-            BOrigin = BOrigin - 16 * FORWARD;
-            break;
-    }
-    playfx(level._effect[#"teleport_splash"], self.origin);
-	playfx(level._effect[#"teleport_aoe"], self.origin);
-    wait .1;
-    self SetOrigin(BOrigin);
-    self SetPlayerAngles(BAngles);
-}
+//Powerup Drop Functions
 Powerups(func)
 {  
     switch(func)
@@ -599,7 +610,7 @@ Powerups(func)
             self zm_powerups::specific_powerup_drop("carpenter", self.origin, undefined, undefined, undefined, 1);
     }
 } 
-
+//stats functions
 Stats_TotalPlayed(score)
 {
     self zm_stats::function_ab006044("TOTAL_GAMES_PLAYED", score);
@@ -626,19 +637,7 @@ Stats_Round(score)
     self zm_stats::function_a6efb963("TOTAL_ROUNDS_SURVIVED", score);
     self zm_stats::function_9288c79b("TOTAL_ROUNDS_SURVIVED", score);
 }
-
-ShowAllBoxes()
-{
-    foreach(chest in level.chests)
-	{
-		chest zm_magicbox::show_chest();
-	}
-}
-BoxPrice(value)
-{
-    foreach(chest in level.chests) chest.zombie_cost = value;
-    self IprintLnBold("Price Changed To ^1"+value);
-}
+//all perks
 perkaholic(str_bgb)
 {
     self thread bgb::run_activation_func(str_bgb);
@@ -652,6 +651,8 @@ allplayersperkaholic(str_bgb)
     self IprintLnBold("All Players Perks ^2Given");
 }
 
+
+// open all doors and turn power on
 open_sesame()
 {
 	setdvar(#"zombie_unlock_all", 1);
@@ -700,6 +701,126 @@ open_sesame()
 	setdvar(#"zombie_unlock_all", 0);
 }
 
+
+KillText()
+{
+	if(!isDefined(self.killtxt))
+	{
+		self.killtxt=true;
+		self thread loopKillText();
+		self iPrintlnBold("Kill Text ^2Enabled");
+	}
+	else
+	{
+		self.killtxt=undefined;
+		self notify("stop_kill_text");
+		self iPrintlnBold("Kill Text ^1Disabled");
+	}
+}
+
+loopKillText()
+{
+	self endon("disconnect");
+	self endon("stop_kill_text");
+	
+	Messages=[];
+	Messages[0]="u Ok Down There Bro?";
+	Messages[1]="Pow Right In The Kisser";
+	Messages[2]="Dieee";
+	Messages[3]="Lets Go";
+	Messages[4]="Wasted";
+	Messages[5]="Much Skillz";
+	Messages[6]="Oh dang!";
+	Messages[7]="shhht son...";
+	Messages[8]="FU Zombie";
+	Messages[9]="Owned";
+	Messages[10]="Pow Pow Pow";
+	Messages[11]="Pew Pew Pew";
+	Messages[12]="You Suck Zombie D";
+	Messages[13]="And Take Some Of This";
+	Messages[14]="Im Just A Freaking Boss";
+	Messages[15]="Hell Yeah Take Some Of That!";
+	for(;;)
+	{
+		self waittill("zom_kill");
+		self iPrintlnBold("^2"+Messages[randomint(Messages.size)]);
+	}
+}
+
+//taken from Zeiiken's Gr3zz v4.1 and updated to BO4 by myself (sircryptic) enjoy :)
+randomize2( array )
+{
+    for ( i = 0; i < array.size; i++ )
+    {
+        j = RandomInt( array.size );
+        temp = array[ i ];
+        array[ i ] = array[ j ];
+        array[ j ] = temp;
+    }
+
+    return array;
+}
+
+doGunGame()
+{
+        self thread ZombieKill();
+        self thread RoundEdit(15);
+        foreach(player in level.players)
+    {
+        player thread GunGame();
+        player iPrintlnBold("^1G^7un ^1G^7ame");
+        wait 2;
+        player iPrintlnBold("^1H^7ave ^1F^7un !");
+    }
+}
+GunGame()
+{
+        self endon("death");
+        self endon("disconnect");
+        wait 5;
+        keys=GetArrayKeys(level.zombie_weapons);
+        weaps = randomize2(keys);
+        self TakeAllWeapons();
+        self GiveWeapon(weaps[0]);
+        self SwitchToWeapon(weaps[0]);
+        for(i=1;i <= weaps.size-1;i++)
+    {
+        self waittill("zom_kill");
+        self iPrintlnBold("New Weapon ^2Given. ^7Kills ^2"+i);
+        self TakeAllWeapons();
+        self GiveWeapon(weaps[i]);
+        self SwitchToWeapon(weaps[i]);
+    }
+}
+
+RoundEdit(round)
+{
+        round -= 1;
+    if(round >= 255)
+        round = 254;
+    if(round <= 0)
+        round = 1;
+    level.round_number = round;
+    world.roundnumber  = round ^ 115;
+    game.roundsplayed = round;
+    SetRoundsPlayed(round + 1);
+    self iprintlnBold("Round Set To: ^115");
+}
+
+ZombieKill()
+{
+            level.zombie_total = 0;
+            for(a=0;a<3;a++) //Triple check to make sure it kills them all
+        {
+            zombies = GetAISpeciesArray(level.zombie_team, "all");
+            for(b=0;b<zombies.size;b++)
+        {
+            if(isDefined(zombies[b]) && IsAlive(zombies[b]))
+            zombies[b] DoDamage(zombies[b].health + 99, zombies[b].origin);
+        }
+    }
+}
+//
 AllClientOpts(player, func)
 {  
     player endon("disconnect");
@@ -711,7 +832,6 @@ AllClientOpts(player, func)
                 return;
             break;    
         case 1:
-            
             players = GetPlayerArray();
             foreach(player in players)
             player SetOrigin(self.origin + (-10, 0, 0));
@@ -719,7 +839,6 @@ AllClientOpts(player, func)
 	        playfx(level._effect[#"teleport_aoe"], player.origin);
             self iPrintLnBold("All Players ^2Teleported");
             break;
-
         case 2:
             x = randomIntRange(-75, 75);
             y = randomIntRange(-75, 75);
@@ -732,7 +851,6 @@ AllClientOpts(player, func)
             self iPrintLnBold("All Players ^2Yeeted Into Space");
             break;
         case 3:
-            
             players = GetPlayerArray();
             foreach(player in players)
             if(!player IsHost())
@@ -748,7 +866,6 @@ AllClientOpts(player, func)
             player TakeWeapon(Weap);
             self iPrintLnBold("All Players Current Weapon ^1Taken");
             break;
-
         case 5:
             Weap = player GetCurrentWeapon();
             players = GetPlayerArray();
@@ -757,7 +874,6 @@ AllClientOpts(player, func)
             player TakeAllWeapons();
             self iPrintLnBold("All Players Weapons ^1Taken");
             break;
-
         case 6:
             Weap = player GetCurrentWeapon();
             players = GetPlayerArray();
@@ -766,7 +882,6 @@ AllClientOpts(player, func)
             player DropItem(Weap);
             self iPrintLnBold("All Players Current Weapon ^1Dropped");
             break;
-
         case 7:
             Weap = player GetCurrentWeapon();
             players = GetPlayerArray();
@@ -1010,11 +1125,59 @@ suicide(player)
      player DoDamage(player.health + 1, player.origin);
      player iPrintLnBold("Looks Like You Broke A Leg");
 }
+// all mystery box options
 FreezeMysteryBox()
 {
-    level.chests[level.chest_index].no_fly_away = (!isDefined(level.chests[level.chest_index].no_fly_away) ? true : undefined);
-    self iPrintLnBold("Box Never Moves " + (!level.chests[level.chest_index].no_fly_away ? "^1OFF" : "^2ON") );
+    self iPrintlnBold("Mystery Box ^1Frozen");
+    level.chest_min_move_usage = 999;
 }
+ShowAllBoxes()
+{
+        self iPrintlnBold("All Mystery Boxes ^2Spawned");
+        foreach(box in level.chests)
+        box thread zm_magicbox::show_chest();
+}
+HideAllBoxes() 
+{
+        self iPrintlnBold("All Mystery Boxes ^2Hidden");
+        foreach(box in level.chests)
+        box thread zm_magicbox::hide_chest(0);
+}
+BoxPrice(value)
+{
+    foreach(chest in level.chests) chest.zombie_cost = value;
+    self IprintLnBold("Price Changed To ^1"+value);
+}
+TpToChest()
+{
+    Chest = level.chests[level.chest_index];
+    origin = Chest.zbarrier.origin;
+    FORWARD = AnglesToForward(Chest.zbarrier.angles);
+    right = AnglesToRight(Chest.zbarrier.angles);
+    BAngles = VectorToAngles(right);
+    BOrigin = origin - 48 * right;
+    switch(randomInt(3))
+    {
+        case 0:
+            BOrigin = BOrigin + 16 * right;
+            break;
+        case 1:
+            BOrigin = BOrigin + 16 * FORWARD;
+            break;
+        case 2:
+            BOrigin = BOrigin - 16 * right;
+            break;
+        case 3:
+            BOrigin = BOrigin - 16 * FORWARD;
+            break;
+    }
+    playfx(level._effect[#"teleport_splash"], self.origin);
+	playfx(level._effect[#"teleport_aoe"], self.origin);
+    wait .1;
+    self SetOrigin(BOrigin);
+    self SetPlayerAngles(BAngles);
+}
+//
 UnlimitedSprint(player) 
 {
     player.UnlimitedSprint = isDefined(player.UnlimitedSprint) ? undefined : true;
