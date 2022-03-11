@@ -24,6 +24,8 @@
   
 Added:
 - Turn Power On ( combined with all doors )
+- Gun Game (yes gun game for zombies)
+- All Players Godmode
   
 Fixs:
 - Fixed Issue With Some Doors Not Opening and the popup error (now opens all doors & turns power on)
@@ -31,6 +33,7 @@ Fixs:
 Misc Changes:
 - Changed the way all perks is given and now uses perkaholic ( you get all the perks ✅😎 )
 - Cleaned Up Some More Code
+  - some misc changes to code and additions ( eg fixed + added box stuff )
   
 > 10/03/22
   
