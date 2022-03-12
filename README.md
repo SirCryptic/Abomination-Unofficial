@@ -18,13 +18,29 @@
 # TO DO LIST
 <details>
   <summary>Click to expand!</summary>
-  - Ensure Functions Work On Other Players When Using Fun Menu.
+  - Hi 👋🙋‍♂️
   
   </details>
   
 # Builds & Changelogs
 <details>
   <summary>Click to expand!</summary>
+  
+### BUILD VERSION: 1.0.5 - Unofficial - (Change Log)
+  > 12/03/22
+  
+Added:
+- Shoot Power Ups
+- Zombie Ducks
+
+  
+Fixs:
+- Fixed Issue With Most Options In Fun Menu (Now Works On Selected Player)
+- Fixed Issue When Reviving a player/s through menu  ( Now Properly Revives Player / Players)
+  
+Misc Changes:
+- Cleaned Up Some More Code (Again...)
+  
 
 ### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
   > 11/03/22
