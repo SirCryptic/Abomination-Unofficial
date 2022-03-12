@@ -570,7 +570,8 @@ ZombieDucks()
     {
         Zombz[i] attach(#"p8_zm_red_floatie_duck", "j_spinelower");
     }
-        self iPrintlnBold("All Zombies Have^2 Rubber Duckies xD");
+	foreach(player in level.players)
+        player iPrintlnBold("Run... ^1Z-Ducks ^7Are Coming! xD");
 }
 shootpowers()
 {
