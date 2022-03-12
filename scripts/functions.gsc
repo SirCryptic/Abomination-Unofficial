@@ -326,9 +326,9 @@ SuperSpeed()
 
 nofalldamage()
 {
-    foreach(player in level.players) //grabs all players playing in the game
     level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
     if(isDefined(level.nofalldamage))
+    foreach(player in level.players) //grabs all players playing in the game
     {
         self iPrintLnBold("No Fall ^2Enabled");
         SetDvar(#"bg_fallDamageMinHeight", 9999); ///unsure if the dvar actualy works
@@ -337,10 +337,10 @@ nofalldamage()
     }
     else
     {        
-        self iPrintLnBold("No Fall ^1Disabled");
         player unSetPerk("specialty_fallheight");
         setdvar(#"bg_falldamageminheight", 256);
 		setdvar(#"bg_falldamagemaxheight", 512);
+        self iPrintLnBold("No Fall ^1Disabled");
     }
 }
 
@@ -437,7 +437,7 @@ magicbullets(bullettype)
     if(!isDefined(self.gamevars["magicbullet"]) || self.gamevars["magicbullet"] == false)
     {
         self.gamevars["magicbullet"] = true;
-        self iprintlnBold("Magic Bullets ^2ON");
+        self iprintlnBold("Magic Bullets ^2Enabled");
         while(self.gamevars["magicbullet"])
         {
             self waittill( "weapon_fired" );
@@ -450,10 +450,23 @@ magicbullets(bullettype)
     else
     {
         self.gamevars["magicbullet"] = false;
-        self iprintlnBold("Magic Bullets ^1OFF");
+        self iprintlnBold("Magic Bullets ^1Disabled");
     }
 }
 
+zignore()
+{
+	if(!self.ignoreme)
+	{
+		self iprintlnBold("Zombies Ignore You ^2Enabled");
+		self.ignoreme = true;
+	}
+	else
+	{
+		self iprintlnBold("Zombies Ignore You ^1Disabled");
+		self.ignoreme = false;
+	}
+}
 //obvs your not dumb ;)
 RestartMap()
 {
@@ -584,6 +597,34 @@ packapunchweapon()
     self SwitchToWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
     self IPrintLnBold("Your Current Weapon Has Been ^2Upgraded!");
 }
+test()
+{
+	self closeingamemenu();
+	self closemenu("StartMenu_Main");
+	self notify(#"player_intermission");
+	self endon(#"player_intermission");
+	level endon(#"stop_intermission");
+	self endon(#"disconnect", #"death");
+	self notify(#"_zombie_game_over");
+	self.score = self.score_total;
+
+}
+/#
+zmultioptions(func)
+{  
+    switch(func)
+    {
+        case 0:
+            self zombie_utility::set_zombie_run_cycle("walk");
+        case 1:
+            self zombie_utility::set_zombie_run_cycle("run");
+        case 2:
+            self zombie_utility::set_zombie_run_cycle("sprint");
+        case 3:
+            self zombie_utility::set_zombie_run_cycle("idle");
+    }
+} 
+#/
 
 //Powerup Drop Functions
 Powerups(func)
