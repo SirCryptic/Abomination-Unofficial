@@ -42,60 +42,60 @@ Misc Changes:
 - Cleaned Up Some More Code (Again...)
   
 
-### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
+~~## BUILD VERSION: 1.0.4 - Unofficial - (Change Log)~~
   > 11/03/22
   
-Added:
-- Turn Power On ( combined with all doors )
-- Gun Game (yes gun game for zombies)
-- All Players Godmode
+~~Added:~~
+~~- Turn Power On ( combined with all doors )~~
+~~- Gun Game (yes gun game for zombies)~~
+~~- All Players Godmode~~
   
-Fixs:
-- Fixed Issue With Some Doors Not Opening and the popup error (now opens all doors & turns power on)
+~~Fixs:~~
+~~- Fixed Issue With Some Doors Not Opening and the popup error (now opens all doors & turns power on)~~
   
-Misc Changes:
-- Changed the way all perks is given and now uses perkaholic ( you get all the perks ✅😎 )
-- Cleaned Up Some More Code
-  - some misc changes to code and additions ( eg fixed + added box stuff )
+~~Misc Changes:~~
+~~- Changed the way all perks is given and now uses perkaholic ( you get all the perks ✅😎 )~~
+~~- Cleaned Up Some More Code~~
+~~- some misc changes to code and additions ( eg fixed + added box stuff )~~
   
 > 10/03/22
   
-Added:
-- Give All Perks
-- Open All Doors
-- Stats Options
-- Packapunch current weapon
-- Sounds menu
-- Powerups menu
-- Mystery Box Options
-- Added Bullets Menu
-- Some Random Stuff
+~~Added:~~
+~~- Give All Perks~~
+~~- Open All Doors
+~~- Stats Options~~
+~~- Packapunch current weapon~~
+~~- Sounds menu~~
+~~- Powerups menu~~
+~~- Mystery Box Options~~
+~~- Added Bullets Menu~~
+~~- Some Random Stuff~~
   
 Fixs:
-- Fixed Issue With Some Weapons Not Being given to players
-- Fixed Issue With Teleport Menu Not Selecting the chosen client (also added some misc Fx To Teleports🤷)
+~~- Fixed Issue With Some Weapons Not Being given to players~~
+~~- Fixed Issue With Teleport Menu Not Selecting the chosen client (also added some misc Fx To Teleports🤷)~~
   
 Misc Changes:
-- Re-arranged some menu options (main now fits all on one page)
-- Cleaned up and tidied up some code / functions
+~~- Re-arranged some menu options (main now fits all on one page)~~
+~~- Cleaned up and tidied up some code / functions~~
   
 > 09/03/22
-- Changed Teleports to players menu & fixed = added some weapons (also changed got rid of misc options are now in fun and teleports menu)
+~~- Changed Teleports to players menu & fixed = added some weapons (also changed got rid of misc options are now in fun and teleports menu)~~
 
 > 07/03/22
-- Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)
+~~- Various Fixes, Changes & Additions (eg revive players , sounds + fix & added some weapons to weapon menu)~~
 
 > 05/03/22
-- Added Individual Kick For Each Client When Selecting A Player in Players Menu
-- Added More Stuff To All Players Menu (EG give all rank ,unlocks ,weapons,points,etc)
-- Added Pack-A-Punched Weapons Menu
+~~- Added Individual Kick For Each Client When Selecting A Player in Players Menu~~~~
+~~- Added More Stuff To All Players Menu (EG give all rank ,unlocks ,weapons,points,etc)~~
+~~- Added Pack-A-Punched Weapons Menu~~
 
 > 04/03/22
-- Added Equipment to weapon Menu
-- Extended Weapon Menu (Renamed To Weapon Options)
-- Cleaned Up Some Code
-- Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )
-- Added All Players Menu ( Just Kick All Players For Now )
+~~- Added Equipment to weapon Menu~~
+~~- Extended Weapon Menu (Renamed To Weapon Options)~~
+~~- Cleaned Up Some Code~~
+~~- Fixed Zombie Teleport ( Now Teleports To Specific Player When Using Player Menu )~~
+~~- Added All Players Menu ( Just Kick All Players For Now )~~
 
 ~~## ** BUILD VERSION: 1.0.3  Unofficial - (Change Log)**~~
 > 04/03/22
