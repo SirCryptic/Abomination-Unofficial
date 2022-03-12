@@ -84,7 +84,6 @@ runMenuIndex(menu)
         case "All Players":
         self addMenu(menu, "All Players");
             self addOptBool(self.AllGod,"All Players Godmode", &AllPlayerGodMod);
-            self addOptBool(self.Multijump, "All Players Multi Jump", &Multijump);
             self addOptIncSlider("All Players Score", &EditallPlayerScore, -10000, 0, 10000, 1000, player);
             self addOpt("Kick All Players", &KickAllPlayers);
             self addOpt("Teleport All Players", &AllClientOpts ,self , 1);
@@ -295,26 +294,27 @@ MenuOptionsPlayer(menu, player)
 
         case "Stats":
             self addMenu(menu,"Stats Options");
-            self addOptIncSlider("Total Played", &Stats_TotalPlayed, 0, 0, 10000, 100);
-            self addOptIncSlider("Highest Reached", &Stats_HighestReached, 0, 0, 10000, 100);
-            self addOptIncSlider("Most Kills", &Stats_MostKills, 0, 0, 10000, 100);
-            self addOptIncSlider("Most Headshots", &Stats_MostHeadshots, 0, 0, 10000, 100);
-            self addOptIncSlider("Round", &Stats_Round, 0, 0, 10000, 100);
+            self addOptIncSlider("Total Played", &Stats_TotalPlayed, 0, 0, 10000, 100, player);
+            self addOptIncSlider("Highest Reached", &Stats_HighestReached, 0, 0, 10000, 100, player);
+            self addOptIncSlider("Most Kills", &Stats_MostKills, 0, 0, 10000, 100, player);
+            self addOptIncSlider("Most Headshots", &Stats_MostHeadshots, 0, 0, 10000, 100, player);
+            self addOptIncSlider("Round", &Stats_Round, 0, 0, 10000, 100, player);
         break;
         case "Fun Menu":
         self addMenu(menu, "Fun Menu");
-            self addOptBool(self.Multijump, "Multi Jump", &Multijump);
-            self addOpt("Spawn Luna Wolf", &LunaWolf);
-            self addOpt("Equipment Stays Healthy", &equipment_stays_healthy);
-            self addOpt("Save Location", &SaveLocation, 0);
-            self addOpt("Load Location", &SaveLocation, 1);
-            self addOptBool(self.ignoreme, "Zombies Ignore You", &zignore);
-            self addOptBool(self.killtxt,"kill text", &KillText);
-            self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
+            self addOptBool(self.Multijump, "Multi Jump", &Multijump, player);
+            self addOpt("Spawn Luna Wolf", &LunaWolf, player);
+            self addOpt("Equipment Stays Healthy", &equipment_stays_healthy, player);
+            self addOpt("Save Location", &SaveLocation, 0, player);
+            self addOpt("Load Location", &SaveLocation, 1, player);
+            self addOptBool(player.ignoreme, "Zombies Ignore You", &zignore,player);
+            self addOptBool(self.killtxt,"Kill Text", &KillText);
+            self addOpt("ZombieDucks", &ZombieDucks);
+            self addOptBool(self.shootpowers, "Shoot Powerups", &shootingshit);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
-            self addOpt("Clone Yourself", &Clone);
-            self addOpt("Zombies Left", &ZombieCount);
+            self addOpt("Clone Yourself", &Clone,player);
+            self addOpt("Zombies Left", &ZombieCount, player);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
             self addOpt("HeadLess Zombies", &HeadLess);
             self addOpt("Earthquake", &quake, player);
@@ -334,22 +334,22 @@ MenuOptionsPlayer(menu, player)
         break;
         case "Powerups Menu":
             self addMenu(menu, "Powerups Menu");
-            self addOpt("Max Ammo", &Powerups, 0);
-            self addOpt("Fire Sale", &Powerups , 1);
-            self addOpt("Bonus Points", &Powerups , 2);
-            self addOpt("Free Perk", &Powerups , 3);
-            self addOpt("Nuke", &Powerups , 4);
-            self addOpt("Hero Weapon", &Powerups , 5);
-            self addOpt("Insta kill", &Powerups , 6);
-            self addOpt("Double Points", &Powerups , 7);
-            self addOpt("Carpenter", &Powerups , 8);
+            self addOpt("Max Ammo", &Powerups, 0, player);
+            self addOpt("Fire Sale", &Powerups , 1, player);
+            self addOpt("Bonus Points", &Powerups , 2, player);
+            self addOpt("Free Perk", &Powerups , 3, player);
+            self addOpt("Nuke", &Powerups , 4, player);
+            self addOpt("Hero Weapon", &Powerups , 5, player);
+            self addOpt("Insta kill", &Powerups , 6, player);
+            self addOpt("Double Points", &Powerups , 7, player);
+            self addOpt("Carpenter", &Powerups , 8, player);
             break;
         case "Sounds Menu":
             self addMenu(menu, "Sounds Menu");
-            self addOpt("cha ching", &sound1);
-            self addOpt("Max Ammo", &sound2);
-            self addOpt("Monkey Scream", &sound3);
-            self addOpt("Out Of Bounds", &sound4);
+            self addOpt("cha ching", &sound1, player);
+            self addOpt("Max Ammo", &sound2, player);
+            self addOpt("Monkey Scream", &sound3, player);
+            self addOpt("Out Of Bounds", &sound4, player);
         break;
 
         case "Weapon Options":
@@ -358,11 +358,11 @@ MenuOptionsPlayer(menu, player)
         self addOpt("Maps Specific Weapons", &newMenu, "Maps Specific");
         self addOpt("Pack-A-Punched Weapons", &newMenu, "Pack-A-Punched Weapons");
         self addOpt("Camos (Can Cause Crashs)", &newMenu, "Camos"); // camos on specific guns can cause crashs!
-        self addOpt("Pack-A-Punch Current Weapon", &packapunchweapon);
-        self addOpt("Drop Current Weapon", &WeaponOpt, 2);
-        self addOpt("Take Current Weapon", &WeaponOpt, 0);
-        self addOpt("Take All Weapons", &WeaponOpt, 1);
-        self addOpt("Refill Current Ammo", &WeaponOpt, 3);
+        self addOpt("Pack-A-Punch Current Weapon", &packapunchweapon, player);
+        self addOpt("Drop Current Weapon", &WeaponOpt, 2, player);
+        self addOpt("Take Current Weapon", &WeaponOpt, 0, player);
+        self addOpt("Take All Weapons", &WeaponOpt, 1, player);
+        self addOpt("Refill Current Ammo", &WeaponOpt, 3, player);
 
         break;
 
