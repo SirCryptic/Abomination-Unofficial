@@ -570,7 +570,7 @@ ZombieDucks()
     {
         Zombz[i] attach(#"p8_zm_red_floatie_duck", "j_spinelower");
     }
-        self iPrintln("All Zombies Have^2 Rubber Duckies xD");
+        self iPrintlnBold("All Zombies Have^2 Rubber Duckies xD");
 }
 shootpowers()
 {
