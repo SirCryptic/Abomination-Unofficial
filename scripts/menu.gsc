@@ -30,7 +30,7 @@ runMenuIndex(menu)
                 }
             }
             break;
-        case "Lobby Menu":
+            case "Lobby Menu":
             self addMenu(menu, "Lobby Menu");
                 self addOptBool(level.nofalldamage, "No Fall", &nofalldamage);
                 self addOptBool(level.SuperJump, "Super Jump", &SuperJump);
@@ -41,8 +41,8 @@ runMenuIndex(menu)
                 self addOptIncSlider("Round: ", &SetRound, 0, 0, 255, 1);
                 self addOpt("Turn Power On & Open All Doors", &open_sesame);
                 self addOpt("Mystery Box Options", &newMenu, "Mystery Box Options");
-        break; 
-                case "Mystery Box Options":
+            break;
+            case "Mystery Box Options":
             self addMenu(menu, "Mystery Box Options");
                 self addOpt("Freeze Box Position", &FreezeMysteryBox);
                 self addOpt("Show All Boxes", &ShowAllBoxes);
@@ -308,6 +308,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Equipment Stays Healthy", &equipment_stays_healthy);
             self addOpt("Save Location", &SaveLocation, 0);
             self addOpt("Load Location", &SaveLocation, 1);
+            self addOptBool(self.ignoreme, "Zombies Ignore You", &zignore);
             self addOptBool(self.killtxt,"kill text", &KillText);
             self addOptBool(self.personal_instakill, "Permanent Insta Kill", &selfInstaKill);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
@@ -321,7 +322,6 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Bullets Menu", &newMenu,"Bullets Menu");
             self addOpt("Powerups Menu", &newMenu, "Powerups Menu");
         break;
- 
         case "Bullets Menu":
         self addMenu(menu, "Bullets Menu");
             self addOpt("= Turn OFF The Current One =");
