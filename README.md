@@ -31,7 +31,7 @@
   
 Added:
 - Shoot Power Ups
-- Zombie Ducks
+- [Zombie Ducks](https://github.com/SirCryptic/Abomination-Unofficial/wiki/zducks)🤷🤣
 
   
 Fixs:
