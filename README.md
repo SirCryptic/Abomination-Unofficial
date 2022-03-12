@@ -18,6 +18,12 @@
 # Builds & Changelogs
 <details>
   <summary>Click to expand!</summary>
+  - Ensure Functions Work On Other Players When Using Fun Menu.
+  
+  </details>
+# Builds & Changelogs
+<details>
+  <summary>Click to expand!</summary>
 
 ### BUILD VERSION: 1.0.4 - Unofficial - (Change Log)
   > 11/03/22
