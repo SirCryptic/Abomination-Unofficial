@@ -32,9 +32,21 @@
 #include scripts\core_common\laststand_shared.gsc;
 #include scripts\core_common\match_record.gsc;
 #include scripts\zm_common\zm_stats.gsc;
+#include scripts\zm_common\zm_spawner.gsc;
 
 // hello there from sircryptic :)
 #using scripts\zm_common\zm_power.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_laststand.gsc;
+#using scripts\core_common\aat_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\gametypes\globallogic_audio.gsc;
 
 #namespace clientids_shared;
 
