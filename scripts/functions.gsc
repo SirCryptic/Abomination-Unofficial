@@ -101,26 +101,26 @@ GivePlayerWeapon(weapon)
 }
 
 //sounds
-sound1()
+sound1(player)
 {
-    self playsound(#"zmb_cha_ching");
+    player playsound(#"zmb_cha_ching");
     self iPrintLnBold("Sound ^2Played");
 }
-sound2()
+sound2(player)
 {
-    self playsound(#"zmb_full_ammo");
+    player playsound(#"zmb_full_ammo");
     self iPrintLnBold("Sound ^2Played");
 }
-sound3()
+sound3(player)
 {
-    self playsound(#"zmb_vox_monkey_scream");
+    player playsound(#"zmb_vox_monkey_scream");
     self iPrintLnBold("Sound ^2Played");
 }
-sound4()
-    {
-    self playsound(#"zmb_player_outofbounds");
+sound4(player)
+{
+    player playsound(#"zmb_player_outofbounds");
     self iPrintLnBold("Sound ^2Played");
-		}
+}
 //
 PlasmaLoop(player)
 {
@@ -138,12 +138,12 @@ PlasmaLoop(player)
     }
 }
 
-SaveLocation(Val)
+SaveLocation(Val,player)
 {
     if(Val == 0)
     {
-        self.SaveLocation      = self.origin;
-        self.SaveLocationAngle = self.angles;
+        self.SaveLocation      = player.origin;
+        self.SaveLocationAngle = player.angles;
         if(!IsDefined(self.SaveLocTog))
             self.SaveLocTog = true;
             
@@ -154,8 +154,8 @@ SaveLocation(Val)
         if(!IsDefined(self.SaveLocTog))
             return self iPrintLnBold("^1Error: ^7No Location Saved");
             
-        self SetPlayerAngles(self.SaveLocationAngle);
-        self SetOrigin(self.SaveLocation);
+        player SetPlayerAngles(self.SaveLocationAngle);
+        player SetOrigin(self.SaveLocation);
         self iPrintLnBold("Saved Position: ^2Loaded");
     }
     else
@@ -179,9 +179,9 @@ TeleTSpace(player)
         player iPrintLnBold("You Are Now In ^2Space");
         
 }
-LunaWolf()
+LunaWolf(player)
 {
-    spawnactor(#"hash_3f174b9bcc408705", self.origin, self.angles, "wolf_protector", 1);
+    spawnactor(#"hash_3f174b9bcc408705", player.origin, player.angles, "wolf_protector", 1);
 }
 /# // Causes a Crash but ill leave it here for reffernce
 
@@ -234,23 +234,23 @@ SetRound(round)
     }
 }
 
-ZombieCount()
+ZombieCount(player)
 {
     Zombies=getAIArray("axis");
-    self iPrintLnBold("Zombies ^1Remaining ^7: ^2"+Zombies.size);
+    player iPrintLnBold("Zombies ^1Remaining ^7: ^2"+Zombies.size);
 }
 thirdperson(player)
 {
     player.thirdperson = isDefined(player.thirdperson) ? undefined : true;
     if (isDefined(player.thirdperson))
-        self setclientthirdperson(1);
+        player setclientthirdperson(1);
     else
-        self setclientthirdperson(0);
+        player setclientthirdperson(0);
 }
 
-Clone()
+Clone(player)
 {
-    self util::spawn_player_clone(self);
+    self util::spawn_player_clone(player);
     self iPrintLnBold("^2Cloned!");
 }
 
@@ -344,6 +344,7 @@ nofalldamage()
     }
 }
 
+
 AntiJoin()
 {
     level.AntiJoin = isDefined(level.AntiJoin) ? undefined : true;
@@ -404,16 +405,6 @@ EditPlayerScore(score, player)
     player.score = !score ? 0 : player.score + score;
 }
 
-//permanant insta kill (self)
-selfInstaKill()
-{
-    self.personal_instakill = isDefined(self.personal_instakill) ? undefined : true;
-        if(isDefined(self.personal_instakill))
-        self iPrintLnBold("Perma Insta Kill ^2Enabled");
-        else
-        self iPrintLnBold("Perma Insta Kill ^1Disabled");
-}
-
 //teleport zombies to a player
 TeleportZombies(player) 
 {
@@ -454,17 +445,17 @@ magicbullets(bullettype)
     }
 }
 
-zignore()
+zignore(player)
 {
-	if(!self.ignoreme)
+	if(!player.ignoreme)
 	{
 		self iprintlnBold("Zombies Ignore You ^2Enabled");
-		self.ignoreme = true;
+		player.ignoreme = true;
 	}
 	else
 	{
 		self iprintlnBold("Zombies Ignore You ^1Disabled");
-		self.ignoreme = false;
+		player.ignoreme = false;
 	}
 }
 //obvs your not dumb ;)
@@ -533,30 +524,83 @@ ClientOpts(player, func)
 	        playfx(level._effect[#"teleport_aoe"], player.origin);
             self iPrintLnBold(player.name + "Has Been ^1Kicked");
             Kick(player GetEntityNumber());
-            break; 
-         case 1:
+        break; 
+        case 1:
 
             playfx(level._effect[#"teleport_splash"], self.origin);
 	        playfx(level._effect[#"teleport_aoe"], self.origin);
-            wait .2;
+        wait .2;
             player SetOrigin(self.origin + (-10, 0, 0));
             self iPrintLnBold(player.name + " Teleported To ^2Me");
-            break;
+        break;
             
         case 2:
             playfx(level._effect[#"teleport_splash"], self.origin);
 	        playfx(level._effect[#"teleport_aoe"], self.origin);
-            wait .2;
+        wait .2;
             self SetOrigin(player.origin + (-10, 0, 0));
             self iPrintLnBold("Teleported To ^2" + player.name);
-            break;
+        break;
 
         case 3:
+            if(player laststand::player_is_in_laststand())  // to prevent us from crashing
+            player thread zm_laststand::auto_revive(player, 0, 0);
             self iPrintlnBold("^1 "+player.name+" ^7Revived ^1!");
-            player reviveplayer();
-            break;
+        break;
     }
 } 
+shootingshit()
+{
+	if(!isDefined(self.shootpowers))
+	{
+		self.shootpowers = 1;
+		self thread shootpowers();
+	}
+	else
+	{
+		self.shootpowers = undefined;
+		self notify("stop_shoot_powerups");
+        self iPrintlnBold("Shoot Powerups ^1Disabled");
+	}
+}
+ZombieDucks()
+{
+    Zombz=GetAiSpeciesArray("axis","all");
+    for(i=0;i<Zombz.size;i++)
+    {
+        Zombz[i] attach(#"p8_zm_red_floatie_duck", "j_spinelower");
+    }
+    self iPrintln("All Zombies Changed To ^2 Default Model");
+}
+shootpowers()
+{
+    self iPrintlnBold("Shoot Powerups ^2Enabled");
+	self endon("disconnect");
+	self endon("stop_shoot_powerups");
+	for(;;)
+	{
+		self waittill("weapon_fired");
+		level.zombie_devgui_power = 1;
+		level.zombie_vars["zombie_drop_item"] = 1;
+		level.powerup_drop_count = 0;
+		level thread zm_powerups::powerup_drop(PlayerlookingPosition());
+	}
+}
+PlayerlookingPosition(dist, type)
+{
+	if(!isDefined(dist))
+	{
+		dist = 99999;
+	}
+	if(!isDefined(type))
+	{
+		type = "position";
+	}
+	angles = AnglesToForward(self getPlayerAngles());
+	return bullettrace(self GetEye(), self GetEye() + VectorScale(angles, dist), 0, self)[type];
+}
+
+
 equipment_stays_healthy()
 {
 		self endon(#"disconnect");
@@ -597,6 +641,7 @@ packapunchweapon()
     self SwitchToWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
     self IPrintLnBold("Your Current Weapon Has Been ^2Upgraded!");
 }
+/*
 test()
 {
 	self closeingamemenu();
@@ -609,7 +654,6 @@ test()
 	self.score = self.score_total;
 
 }
-/#
 zmultioptions(func)
 {  
     switch(func)
@@ -624,59 +668,59 @@ zmultioptions(func)
             self zombie_utility::set_zombie_run_cycle("idle");
     }
 } 
-#/
+*/
 
 //Powerup Drop Functions
-Powerups(func)
+Powerups(func,player)
 {  
     switch(func)
     {
         case 0:
-            self zm_powerups::specific_powerup_drop("full_ammo", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("full_ammo", player.origin, undefined, undefined, undefined, 1);
         case 1:
-            self zm_powerups::specific_powerup_drop("fire_sale", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("fire_sale", player.origin, undefined, undefined, undefined, 1);
         case 2:
-            self zm_powerups::specific_powerup_drop("bonus_points_player", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("bonus_points_player", player.origin, undefined, undefined, undefined, 1);
         case 3:
-            self zm_powerups::specific_powerup_drop("free_perk", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("free_perk", player.origin, undefined, undefined, undefined, 1);
         case 4:
-            self zm_powerups::specific_powerup_drop("nuke", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("nuke", player.origin, undefined, undefined, undefined, 1);
         case 5:
-            self zm_powerups::specific_powerup_drop("hero_weapon_power", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("hero_weapon_power", player.origin, undefined, undefined, undefined, 1);
         case 6:
-            self zm_powerups::specific_powerup_drop("insta_kill", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("insta_kill", player.origin, undefined, undefined, undefined, 1);
         case 7:
-            self zm_powerups::specific_powerup_drop("double_points", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("double_points", player.origin, undefined, undefined, undefined, 1);
         case 8:
-            self zm_powerups::specific_powerup_drop("carpenter", self.origin, undefined, undefined, undefined, 1);
+            player zm_powerups::specific_powerup_drop("carpenter", player.origin, undefined, undefined, undefined, 1);
     }
 } 
 //stats functions
-Stats_TotalPlayed(score)
+Stats_TotalPlayed(score,player)
 {
-    self zm_stats::function_ab006044("TOTAL_GAMES_PLAYED", score);
+    player zm_stats::function_ab006044("TOTAL_GAMES_PLAYED", score);
 }
 
-Stats_HighestReached(score)
+Stats_HighestReached(score,player)
 {
-    self zm_stats::function_1b763e4("HIGHEST_ROUND_REACHED", score);
+    player zm_stats::function_1b763e4("HIGHEST_ROUND_REACHED", score);
 }
 
-Stats_MostKills(score)
+Stats_MostKills(score,player)
 {
-    self zm_stats::function_1b763e4("kills", score);
+    player zm_stats::function_1b763e4("kills", score);
 }
 
-Stats_MostHeadshots(score)
+Stats_MostHeadshots(score,player)
 {
-    self zm_stats::function_1b763e4("MOST_HEADSHOTS", score);
+    player zm_stats::function_1b763e4("MOST_HEADSHOTS", score);
 }
 
-Stats_Round(score)
+Stats_Round(score,player)
 {
-    self zm_stats::function_ab006044("TOTAL_ROUNDS_SURVIVED", score);
-    self zm_stats::function_a6efb963("TOTAL_ROUNDS_SURVIVED", score);
-    self zm_stats::function_9288c79b("TOTAL_ROUNDS_SURVIVED", score);
+    player zm_stats::function_ab006044("TOTAL_ROUNDS_SURVIVED", score);
+    player zm_stats::function_a6efb963("TOTAL_ROUNDS_SURVIVED", score);
+    player zm_stats::function_9288c79b("TOTAL_ROUNDS_SURVIVED", score);
 }
 //all perks
 perkaholic(str_bgb)
@@ -936,7 +980,8 @@ AllClientOpts(player, func)
             players = GetPlayerArray();
             foreach(player in players)
             if(!player IsHost())
-            player reviveplayer();
+            if(player laststand::player_is_in_laststand())  // to prevent us from crashing
+            player thread zm_laststand::auto_revive(player, 0, 0);
             self iPrintlnBold("^1All Players ^2Revived^1!");
             break;
     }
@@ -952,33 +997,7 @@ HeadLess()
     self iPrintlnBold("Zombies Are ^2Headless!");
 }
 
-AllMultijump(currentNum = 0)
-{
-    players = GetPlayerArray();
-    foreach(player in players)
-    player endon("disconnect");
-    player notify("SMulti");
-    self.Multijump = isDefined(self.Multijump) ? undefined : true;
-    player endon("SMulti");
     
-    if(isDefined(self.Multijump))
-        player setPerk("specialty_fallheight");
-    else
-        player unSetPerk("specialty_fallheight");
-        
-    while(IsDefined(self.Multijump))
-    {
-        if(player JumpButtonPressed() && currentNum < 15)
-        {
-            player setVelocity(player getVelocity() + (0, 0, 250));
-            currentNum++;
-        }
-        if(currentNum == 15 && player isOnGround())
-            currentNum = 0;
-
-        wait .1;
-    }
-}
 AllAchievements(player)
 {
     Allunlockall_Achi = array("zm_office_cold_war", "zm_office_ice", "zm_office_shock", "zm_office_power", "zm_office_strike", "zm_office_office", "zm_office_crawl", "zm_office_gas", "zm_office_pentupagon", "zm_office_everywhere", "zm_red_tragedy","zm_red_follower","zm_red_tribute","zm_red_mountains","zm_red_no_obol","zm_red_sun","zm_red_wind","zm_red_eagle","zm_red_defense","zm_red_gods", "zm_white_shard","zm_white_starting","zm_white_unlock","zm_white_mod","zm_white_trap","zm_white_pap","zm_white_knuckles","zm_white_perk","zm_white_stun","zm_white_roof","zm_trophy_doctor_is_in", "zm_trials_round_30","zm_escape_most_escape","zm_escape_patch_up","zm_escape_hot_stuff","zm_escape_hist_reenact","zm_escape_match_made","zm_escape_west_side","zm_escape_senseless","zm_escape_gat","zm_escape_throw_dog", "zm_orange_ascend","zm_orange_bells","zm_orange_freeze","zm_orange_hounds","zm_orange_totems","zm_orange_pack","zm_orange_secret","zm_orange_power","zm_orange_ziplines","zm_orange_jar","ZM_ZODT8_TRIAL_STEP_1", "ZM_MANSION_ARTIFACT","ZM_MANSION_STAKE","ZM_MANSION_BOARD","ZM_MANSION_BITE","ZM_MANSION_QUICK","ZM_MANSION_ALCHEMICAL","ZM_MANSION_CRAFTING","ZM_MANSION_SHOCKING","ZM_MANSION_CLOCK","ZM_MANSION_SHRINKING", "zm_towers_challenges","zm_towers_get_ww","zm_towers_trap_build","zm_towers_ww_kills","zm_towers_kitty_kitty","zm_towers_dismember","zm_towers_boss_kill","zm_towers_arena_survive","zm_towers_fast_pap", "ZM_ZODT8_ARTIFACT","ZM_ZODT8_STOWAWAY","ZM_ZODT8_DEEP_END","ZM_ZODT8_LITTLE_PACK","ZM_ZODT8_SHORTCUT","ZM_ZODT8_TENTACLE","ZM_ZODT8_STOKING","ZM_ZODT8_ROCK_PAPER","ZM_ZODT8_SWIMMING","zm_trophy_jack_of_all_blades", "zm_trophy_straw_purchase","zm_trophy_perkaholic_relapse","zm_trophy_gold","zm_rush_personal_score","zm_rush_team_score","zm_rush_multiplier_100","mp_trophy_special_issue_weaponry","mp_trophy_special_issue_equipment", "wz_specialist_super_fan","wz_first_win","wz_not_a_fluke","wz_blackout_historian","wz_specialist_super_fan","wz_zombie_fanatic","mp_trophy_battle_tested","mp_trophy_welcome_to_the_club","MP_SPECIALIST_MEDALS","MP_MULTI_KILL_MEDALS", "mp_trophy_vanquisher");
