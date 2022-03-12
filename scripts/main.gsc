@@ -1,7 +1,10 @@
 /*
-    Black Ops 4 Abomination - Unofficial 1.0.4
+    Black Ops 4 Abomination - Unofficial 1.0.5
     Developed By: SirCryptic
 
+    https://github.com/SirCryptic/Abomination-Unofficial
+    
+    
     Credits:
         CF4_99  ~ For Helping & The Base Menu
         Extinct ~ Wouldn't have the attachment stats without him
