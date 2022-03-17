@@ -27,7 +27,20 @@
   <summary>Click to expand!</summary>
   
 ### BUILD VERSION: 1.0.5 - Unofficial - (Change Log)
-  > 12/03/22
+ > 12/03/22
+  
+Added:
+- All Players Unlimted Ammo
+- some misc stuff 🤷
+
+  
+Fixs:
+- all perks now plays animation for perkaholic
+  
+Misc Changes:
+- Cleaned Up Some More Code and improved some fucntions.
+  
+> 12/03/22
   
 Added:
 - Shoot Power Ups
