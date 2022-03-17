@@ -38,7 +38,7 @@ Fixs:
 - all perks now plays animation for perkaholic
   
 Misc Changes:
-- Cleaned Up Some More Code and improved some fucntions.
+- Cleaned Up Some More Code and improved some functions.
   
 > 12/03/22
   
