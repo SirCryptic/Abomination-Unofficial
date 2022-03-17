@@ -5,10 +5,10 @@ runMenuIndex(menu)
     switch(menu)
     {
         case "Main":
-            self addMenu(menu, level.menuName);
+            self addMenu(menu, "^3"+level.menuName);
             if(self getVerification() > 0) //Verified
             {
-                self addOpt("Basic Scripts", &newMenu, "Basic Scripts " + self GetEntityNumber());
+                self addOpt("^3Basic Scripts", &newMenu, "Basic Scripts " + self GetEntityNumber());
                 self addOpt("Account Management", &newMenu, "Account Management " + self GetEntityNumber());
                 self addOpt("Fun Menu", &newMenu, "Fun Menu " + self GetEntityNumber());
                 self addOpt("Weapon Options", &newMenu, "Weapon Options " + self GetEntityNumber());
@@ -67,7 +67,7 @@ runMenuIndex(menu)
                 self addOpt("End Game", &EndGame);
                 self addOpt("Add Bot", &AddBotsToGame);
                 self addOptBool(self.forcehost, "Force Host", &ForceHost);
-            break;
+        break;
         case "Players":
             self addMenu(menu, "Players");
                 players = GetPlayerArray();
@@ -84,6 +84,7 @@ runMenuIndex(menu)
         case "All Players":
         self addMenu(menu, "All Players");
             self addOptBool(self.AllGod,"All Players Godmode", &AllPlayerGodMod);
+            self addOptBool(self.UnlimitedAmmoAll,"All Players Unlimited Ammo", &AllUnlimitedAmmo);
             self addOptIncSlider("All Players Score", &EditallPlayerScore, -10000, 0, 10000, 1000, player);
             self addOpt("Kick All Players", &KickAllPlayers);
             self addOpt("Teleport All Players", &AllClientOpts ,self , 1);
@@ -278,7 +279,7 @@ MenuOptionsPlayer(menu, player)
                 self addOptIncSlider("Score", &EditPlayerScore, -10000, 0, 10000, 1000, player);
                 self addOpt("Kill All Zombies", &KillAllZombies, player);
                 self addOpt("Teleport Zombies", &TeleportZombies, player);
-                self addOpt("Give All Perks", &perkaholic, "zm_bgb_perkaholic");
+                self addOpt("Give All Perks", &perkaholic, "zm_bgb_perkaholic",player);
         break;
         case "Account Management":
             self addMenu(menu, "Account Management");
@@ -302,7 +303,7 @@ MenuOptionsPlayer(menu, player)
         break;
         case "Fun Menu":
         self addMenu(menu, "Fun Menu");
-            self addOptBool(self.Multijump, "Multi Jump", &Multijump, player);
+            self addOptBool(self.Multijump, "Multi Jump", &Multijump);
             self addOpt("Spawn Luna Wolf", &LunaWolf, player);
             self addOpt("Equipment Stays Healthy", &equipment_stays_healthy, player);
             self addOpt("Save Location", &SaveLocation, 0, player);
@@ -313,7 +314,7 @@ MenuOptionsPlayer(menu, player)
             self addOptBool(self.shootpowers, "Shoot Powerups", &shootingshit);
             self addOptBool(self.TeleGun, "Teleport Gun", &StartTeleGun);
             self addOptBool(player.thirdperson, "Third Person", &thirdperson, player);
-            self addOpt("Clone Yourself", &Clone,player);
+            self addOpt("Clone", &Clone,player);
             self addOpt("Zombies Left", &ZombieCount, player);
             self addOpt("Send All Zombies Into Space", &ZombiesInSpace);
             self addOpt("HeadLess Zombies", &HeadLess);
@@ -326,11 +327,10 @@ MenuOptionsPlayer(menu, player)
         self addMenu(menu, "Bullets Menu");
             self addOpt("= Turn OFF The Current One =");
             self addOpt("= Before Applying Another =");
-            self addOpt("Ray Gun mk2", &magicbullets, "ray_gun_mk2_upgraded");
+            self addOpt("Porters x2 Ray Gun", &magicbullets, "ray_gun_upgraded");
             self addOpt("Hellion Salvo", &magicbullets, "launcher_standard_t8_upgraded");
             self addOpt("Minigun", &magicbullets, "minigun");
             self addOpt("Ballistic Knife", &magicbullets, "special_ballisticknife_t8_dw_upgraded");
-            self addOpt("Crossbow", &magicbullets, "special_crossbow_t8_upgraded");
         break;
         case "Powerups Menu":
             self addMenu(menu, "Powerups Menu");
@@ -441,7 +441,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("homunculus (all chaos maps only)", &GivePlayerWeapon, "homunculus");
             self addOpt("Wunderwaffe (Tag der Toten only)", &GivePlayerWeapon, "ww_tesla_sniper_t8");
             self addOpt("thundergun (Tag der Toten only)", &GivePlayerWeapon, "thundergun");
-            self addOpt("Galvaknuckles (Honestly unsure)", &GivePlayerWeapon, "galvaknuckles_t8");
+            self addOpt("tazer knuckles (Honestly unsure)", &GivePlayerWeapon, "tazer_knuckles");
         break;
         case "Pack-A-Punched Weapons":
             self addMenu(menu, "Pack-A-Punched Weapons");
@@ -520,6 +520,8 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Teleport: " + player getName() + " | Client Num: " + player GetEntityNumber() + " To Me", &ClientOpts, player, 1);
             self addOpt("Teleport Zombies "+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleportZombies, player);
             self addOpt("Send To Space"+ player getName() + " | Client Num: " + player GetEntityNumber() , &TeleTSpace, player);
+            self addOpt("Save Location"+ player getName() + " | Client Num: " + player GetEntityNumber() , &SaveLocation, 0, player);
+            self addOpt("Load Location"+ player getName() + " | Client Num: " + player GetEntityNumber() , &SaveLocation, 1, player);
             break;
         default:
             self addMenu(menu, "404 ERROR");
