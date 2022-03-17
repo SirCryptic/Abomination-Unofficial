@@ -76,7 +76,6 @@ Noclip1(player)
         self iPrintLnBold("Noclip ^1Disabled");
     }
 }
-
 KickAllPlayers()
 {
     foreach(player in level.players)
@@ -99,7 +98,6 @@ GivePlayerWeapon(weapon)
     self iPrintLnBold(weapon + " ^2Given");
     self playsound(#"zmb_cha_ching");
 }
-
 //sounds
 sound1(player)
 {
@@ -137,7 +135,6 @@ PlasmaLoop(player)
         }
     }
 }
-
 SaveLocation(Val,player)
 {
     if(Val == 0)
@@ -188,7 +185,11 @@ LunaWolf(player)
     spawnactor("spawner_mp_blight_father", self.origin, self.angles, "blightfather");
 
 #/
-
+Clone(player)
+{
+    self util::spawn_player_clone(player);
+    self iPrintLnBold("^2Cloned!");
+}
 ZombiesInSpace() 
 {
     x = randomIntRange(-75, 75);
@@ -202,12 +203,10 @@ ZombiesInSpace()
     }
     self iPrintLnBold("All Zombies Teleported To ^2Space");
 }
-
 EndGame()
 {
     KillServer();
 }
-
 SetRound(round)
 {
     round -= 1;
@@ -233,7 +232,6 @@ SetRound(round)
         wait .13;
     }
 }
-
 ZombieCount(player)
 {
     Zombies=getAIArray("axis");
@@ -248,17 +246,12 @@ thirdperson(player)
         player setclientthirdperson(0);
 }
 
-Clone(player)
-{
-    self util::spawn_player_clone(player);
-    self iPrintLnBold("^2Cloned!");
-}
-
 AddBotsToGame(player) 
 {
     self iPrintLnBold("Bot ^2Added");
     AddTestClient();
 }
+
 
 Multijump(currentNum = 0)
 {
@@ -314,7 +307,6 @@ AllSuperJump()
         wait .05; 
     }
 }
-
 SuperSpeed()
 {
     level.SuperSpeed = isDefined(level.SuperSpeed) ? undefined : true;
@@ -323,7 +315,6 @@ SuperSpeed()
     else
         setDvar("g_speed", 200);
 }
-
 nofalldamage()
 {
     level.nofalldamage = isDefined(level.nofalldamage) ? undefined : true;
@@ -343,13 +334,12 @@ nofalldamage()
         self iPrintLnBold("No Fall ^1Disabled");
     }
 }
-
-
+/*
 AntiJoin()
 {
     level.AntiJoin = isDefined(level.AntiJoin) ? undefined : true;
 }
-
+*/
 AntiQuit(player) 
 
 {
@@ -370,8 +360,6 @@ AntiQuit(player)
         self iPrintLnBold("Anti Quit ^1Disabled");
     }
 }
-
-
 Gravity()
 {
     level.lowGravity = isDefined(level.lowGravity) ? undefined : true;
@@ -380,11 +368,9 @@ Gravity()
     else 
         SetDvar("bg_gravity", 350);
 }
-
 UnlimitedAmmo(player)
 {
     player.UnlimitedAmmo = isDefined(player.UnlimitedAmmo) ? undefined : true;
-
     player iPrintLnBold("Unlimted Ammo ^1Disabled");
     if(isDefined(player.UnlimitedAmmo))
     {
@@ -398,13 +384,30 @@ UnlimitedAmmo(player)
         }
     }
 }
-
+AllUnlimitedAmmo(player)
+{
+    self.UnlimitedAmmoAll = isDefined(self.UnlimitedAmmoAll) ? undefined : true;
+    foreach(player in level.players)
+    player iPrintLnBold("Unlimted Ammo ^1Disabled");
+    if(isDefined(self.UnlimitedAmmoAll))
+    {
+        foreach(player in level.players)
+        player iPrintLnBold("Unlimited Ammo ^2Enabled");
+        while(isDefined(self.UnlimitedAmmoAll))
+        {
+            foreach(player in level.players)
+            player GiveMaxAmmo(player GetCurrentWeapon());
+            foreach(player in level.players)
+            player SetWeaponAmmoClip(player GetCurrentWeapon(), player GetCurrentWeapon().clipsize);
+            wait .05;
+        }
+    }
+}
 //edit player score
 EditPlayerScore(score, player)
 {
     player.score = !score ? 0 : player.score + score;
 }
-
 //teleport zombies to a player
 TeleportZombies(player) 
 {
@@ -416,7 +419,6 @@ TeleportZombies(player)
     }
     self iPrintLnBold("All Zombies Teleported To ^2" + player.name);
 }
-
 //earthqauke , makes the players screen shake
 quake(player)
 {
@@ -444,7 +446,6 @@ magicbullets(bullettype)
         self iprintlnBold("Magic Bullets ^1Disabled");
     }
 }
-
 zignore(player)
 {
 	if(!player.ignoreme)
@@ -465,7 +466,6 @@ RestartMap()
     wait .5;
     map_restart(0);
 }
-
 //kill all zombies
 KillAllZombies(player) 
 {
@@ -489,7 +489,6 @@ StartTeleGun()
         self notify("stop_telegun");
     }
 }
-
 TeleportToCrosshair() 
 {
     self iPrintLnBold("Teleport Gun ^2Enabled");
@@ -503,13 +502,11 @@ TeleportToCrosshair()
     }
     wait .1;
 }
-
 vector_scal(vec, scale) 
 {
     vec = (vec[0] * scale, vec[1] * scale, vec[2] * scale);
     return vec;
 } 
-
 //client options teleports etc
 ClientOpts(player, func)
 {  
@@ -570,7 +567,7 @@ ZombieDucks()
     {
         Zombz[i] attach(#"p8_zm_red_floatie_duck", "j_spinelower");
     }
-	foreach(player in level.players)
+    	foreach(player in level.players)
         player iPrintlnBold("Run... ^1Z-Ducks ^7Are Coming! xD");
 }
 shootpowers()
@@ -600,8 +597,6 @@ PlayerlookingPosition(dist, type)
 	angles = AnglesToForward(self getPlayerAngles());
 	return bullettrace(self GetEye(), self GetEye() + VectorScale(angles, dist), 0, self)[type];
 }
-
-
 equipment_stays_healthy()
 {
 		self endon(#"disconnect");
@@ -637,40 +632,13 @@ packapunchweapon()
 {
     weapon = self GetCurrentWeapon();
     self TakeWeapon(weapon);
-    wait .1;
+    wait .1;    
     self GiveWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
+    self thread aat::acquire(weapon);
+    wait .1;
     self SwitchToWeapon(self zm_weapons::get_upgrade_weapon(weapon, zm_weapons::weapon_supports_aat(weapon)));
     self IPrintLnBold("Your Current Weapon Has Been ^2Upgraded!");
 }
-/*
-test()
-{
-	self closeingamemenu();
-	self closemenu("StartMenu_Main");
-	self notify(#"player_intermission");
-	self endon(#"player_intermission");
-	level endon(#"stop_intermission");
-	self endon(#"disconnect", #"death");
-	self notify(#"_zombie_game_over");
-	self.score = self.score_total;
-
-}
-zmultioptions(func)
-{  
-    switch(func)
-    {
-        case 0:
-            self zombie_utility::set_zombie_run_cycle("walk");
-        case 1:
-            self zombie_utility::set_zombie_run_cycle("run");
-        case 2:
-            self zombie_utility::set_zombie_run_cycle("sprint");
-        case 3:
-            self zombie_utility::set_zombie_run_cycle("idle");
-    }
-} 
-*/
-
 //Powerup Drop Functions
 Powerups(func,player)
 {  
@@ -701,22 +669,18 @@ Stats_TotalPlayed(score,player)
 {
     player zm_stats::function_ab006044("TOTAL_GAMES_PLAYED", score);
 }
-
 Stats_HighestReached(score,player)
 {
     player zm_stats::function_1b763e4("HIGHEST_ROUND_REACHED", score);
 }
-
 Stats_MostKills(score,player)
 {
     player zm_stats::function_1b763e4("kills", score);
 }
-
 Stats_MostHeadshots(score,player)
 {
     player zm_stats::function_1b763e4("MOST_HEADSHOTS", score);
 }
-
 Stats_Round(score,player)
 {
     player zm_stats::function_ab006044("TOTAL_ROUNDS_SURVIVED", score);
@@ -724,20 +688,31 @@ Stats_Round(score,player)
     player zm_stats::function_9288c79b("TOTAL_ROUNDS_SURVIVED", score);
 }
 //all perks
-perkaholic(str_bgb)
+perkaholic(str_bgb,player)
 {
-    self thread bgb::run_activation_func(str_bgb);
-    self IprintLnBold("All Perks ^2Given");
+    player endon(#"death");
+    player notify(#"bgb_activation", str_bgb);
+    player bgb::activation_start();
+    player thread bgb::run_activation_func(str_bgb);     
+    player bgb::bgb_gumball_anim(str_bgb);
+    if(!player IsHost())
+    self iPrintLnBold("All Perks ^2Given");
+    else
+    player iPrintLnBold("All Perks ^2Given");
 }
-allplayersperkaholic(str_bgb)
+allplayersperkaholic(str_bgb,player)
 {
-    players = GetPlayerArray();
-    foreach(player in players)
+    foreach(player in level.players)
+    player notify(#"bgb_activation", str_bgb);
+    foreach(player in level.players)
+    player bgb::activation_start();
+    foreach(player in level.players)
     player thread bgb::run_activation_func(str_bgb);
-    self IprintLnBold("All Players Perks ^2Given");
+    foreach(player in level.players)
+    player bgb::bgb_gumball_anim(str_bgb);
+    foreach(player in level.players)
+    player IprintLnBold("All Players Perks ^2Given");
 }
-
-
 // open all doors and turn power on
 open_sesame()
 {
@@ -786,8 +761,6 @@ open_sesame()
 	wait(1);
 	setdvar(#"zombie_unlock_all", 0);
 }
-
-
 KillText()
 {
 	if(!isDefined(self.killtxt))
@@ -803,7 +776,6 @@ KillText()
 		self iPrintlnBold("Kill Text ^1Disabled");
 	}
 }
-
 loopKillText()
 {
 	self endon("disconnect");
@@ -878,7 +850,6 @@ GunGame()
         self SwitchToWeapon(weaps[i]);
     }
 }
-
 RoundEdit(round)
 {
         round -= 1;
@@ -892,7 +863,6 @@ RoundEdit(round)
     SetRoundsPlayed(round + 1);
     self iprintlnBold("Round Set To: ^115");
 }
-
 ZombieKill()
 {
             level.zombie_total = 0;
@@ -987,7 +957,6 @@ AllClientOpts(player, func)
             break;
     }
 }
-
 HeadLess()
 {
     Zh=GetAiSpeciesArray("axis","all");
@@ -996,9 +965,7 @@ HeadLess()
         Zh[i] DetachAll();
     }
     self iPrintlnBold("Zombies Are ^2Headless!");
-}
-
-    
+} 
 AllAchievements(player)
 {
     Allunlockall_Achi = array("zm_office_cold_war", "zm_office_ice", "zm_office_shock", "zm_office_power", "zm_office_strike", "zm_office_office", "zm_office_crawl", "zm_office_gas", "zm_office_pentupagon", "zm_office_everywhere", "zm_red_tragedy","zm_red_follower","zm_red_tribute","zm_red_mountains","zm_red_no_obol","zm_red_sun","zm_red_wind","zm_red_eagle","zm_red_defense","zm_red_gods", "zm_white_shard","zm_white_starting","zm_white_unlock","zm_white_mod","zm_white_trap","zm_white_pap","zm_white_knuckles","zm_white_perk","zm_white_stun","zm_white_roof","zm_trophy_doctor_is_in", "zm_trials_round_30","zm_escape_most_escape","zm_escape_patch_up","zm_escape_hot_stuff","zm_escape_hist_reenact","zm_escape_match_made","zm_escape_west_side","zm_escape_senseless","zm_escape_gat","zm_escape_throw_dog", "zm_orange_ascend","zm_orange_bells","zm_orange_freeze","zm_orange_hounds","zm_orange_totems","zm_orange_pack","zm_orange_secret","zm_orange_power","zm_orange_ziplines","zm_orange_jar","ZM_ZODT8_TRIAL_STEP_1", "ZM_MANSION_ARTIFACT","ZM_MANSION_STAKE","ZM_MANSION_BOARD","ZM_MANSION_BITE","ZM_MANSION_QUICK","ZM_MANSION_ALCHEMICAL","ZM_MANSION_CRAFTING","ZM_MANSION_SHOCKING","ZM_MANSION_CLOCK","ZM_MANSION_SHRINKING", "zm_towers_challenges","zm_towers_get_ww","zm_towers_trap_build","zm_towers_ww_kills","zm_towers_kitty_kitty","zm_towers_dismember","zm_towers_boss_kill","zm_towers_arena_survive","zm_towers_fast_pap", "ZM_ZODT8_ARTIFACT","ZM_ZODT8_STOWAWAY","ZM_ZODT8_DEEP_END","ZM_ZODT8_LITTLE_PACK","ZM_ZODT8_SHORTCUT","ZM_ZODT8_TENTACLE","ZM_ZODT8_STOKING","ZM_ZODT8_ROCK_PAPER","ZM_ZODT8_SWIMMING","zm_trophy_jack_of_all_blades", "zm_trophy_straw_purchase","zm_trophy_perkaholic_relapse","zm_trophy_gold","zm_rush_personal_score","zm_rush_team_score","zm_rush_multiplier_100","mp_trophy_special_issue_weaponry","mp_trophy_special_issue_equipment", "wz_specialist_super_fan","wz_first_win","wz_not_a_fluke","wz_blackout_historian","wz_specialist_super_fan","wz_zombie_fanatic","mp_trophy_battle_tested","mp_trophy_welcome_to_the_club","MP_SPECIALIST_MEDALS","MP_MULTI_KILL_MEDALS", "mp_trophy_vanquisher");
@@ -1261,6 +1228,7 @@ Camos(Camo)
     self GiveWeapon(Weapon, self CalcWeaponOptions(Int(Camo), 1, 1, true, true, true, true));
     self iPrintLnBold("^2Camo ^1" + Camo + " ^2Given.");
 } 
+
 WeaponOpt(i)
 {
     Weap = self GetCurrentWeapon();
@@ -1289,8 +1257,6 @@ WeaponOpt(i)
             break;
     }
 }       
-
-
 unfair_toggleaimbot()
 {
     self.aimbot = isDefined(self.aimbot) ? undefined : true;
@@ -1305,7 +1271,6 @@ unfair_toggleaimbot()
         self iPrintLnBold("Unfair Aimbot ^1Disabled");
     }
 }
-
 unfair_AimBot()
 {
     self endon("disconnect");
@@ -1325,7 +1290,6 @@ unfair_AimBot()
         wait .05;
     }
 }
-
 MaxRank(player)
 {
     player AddRankXPValue("kill", 1439600);
@@ -1334,7 +1298,7 @@ MaxRank(player)
     UploadStats(player);
     player iPrintLnBold("Rank 55 ^2SET");
 }
-
+//
 Level1000(player)
 {
     player AddRankXPValue("kill", 52486400);
@@ -1343,7 +1307,6 @@ Level1000(player)
     UploadStats(player);
     player iPrintLnBold("Rank 1000 ^2SET");
 }
-
 ForceHost()
 {
     self.forcehost = isDefined(self.forcehost) ? undefined : true;
@@ -1438,7 +1401,6 @@ MaxWeaponRanks(player)
     if(player != self)
         self iPrintlnBold(player getName() + ": Max Weapon Ranks ^2Set");
 }
-
 UnlockAllChallenges(player)
 {
     if(isDefined(player.UnlockAll))
@@ -1523,7 +1485,6 @@ UnlockAllChallenges(player)
     if(player != self)
         self iPrintlnBold(player getName() + ": Unlock All Challenges ^2Done");
 }
-
 CompleteActiveContracts(player)
 {
     foreach(index, contract in player.pers["contracts"])
