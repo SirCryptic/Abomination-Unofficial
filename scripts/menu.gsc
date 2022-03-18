@@ -66,6 +66,7 @@ runMenuIndex(menu)
                 self addOpt("Restart Map", &RestartMap);
                 self addOpt("End Game", &EndGame);
                 self addOpt("Add Bot", &AddBotsToGame);
+                self addOptBool(level.AntiJoin,"Anti Join", &AntiJoin);
                 self addOptBool(self.forcehost, "Force Host", &ForceHost);
         break;
         case "Players":
@@ -308,6 +309,7 @@ MenuOptionsPlayer(menu, player)
             self addOpt("Equipment Stays Healthy", &equipment_stays_healthy, player);
             self addOpt("Save Location", &SaveLocation, 0, player);
             self addOpt("Load Location", &SaveLocation, 1, player);
+            self addOptBool(self.personal_instakill, "Insta Kill", &selfInstaKill);
             self addOptBool(player.ignoreme, "Zombies Ignore You", &zignore,player);
             self addOptBool(self.killtxt,"Kill Text", &KillText);
             self addOpt("ZombieDucks", &ZombieDucks);
