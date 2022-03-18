@@ -466,6 +466,14 @@ RestartMap()
     wait .5;
     map_restart(0);
 }
+selfInstaKill()
+{
+    self.personal_instakill = isDefined(self.personal_instakill) ? undefined : true;
+}
+AntiJoin()
+{
+    level.AntiJoin = isDefined(level.AntiJoin) ? undefined : true;
+}
 //kill all zombies
 KillAllZombies(player) 
 {
