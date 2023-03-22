@@ -221,7 +221,7 @@ runMenuIndex(menu)
             self addOpt("Monkey Bombs (all non chaos maps only)", &GiveallPlayersaWeapon, "cymbal_monkey",player);
             self addOpt("tomahawk (blood of the dead only)", &GiveallPlayersaWeapon, "tomahawk_t8_upgraded",player);
             self addOpt("homunculus (all chaos maps only)", &GiveallPlayersaWeapon, "homunculus",player);
-            self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "tesla_gun",player);
+            self addOpt("Wunderwaffe (Tag der Toten only)", &GiveallPlayersaWeapon, "ww_tesla_gun_t8",player); // now uses correct string name thanks to TheUnknownCod3r for pointing this out.
             self addOpt("thundergun (Tag der Toten only)", &GiveallPlayersaWeapon, "thundergun",player);
         break;
         case "All Players Account Management":
