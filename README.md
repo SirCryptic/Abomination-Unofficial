@@ -134,6 +134,7 @@ Misc Changes:
 - ⭐ Extinct - Wouldn't have the attachment stats without him
 - ⭐ Serious - BO4 Compiler
 - ⭐ Gillam - Some Functions
+- ⭐ TheUnknownCod3r - correct weapon string name for wonderwaffle
 - ⭐ Treyarch - For There Ummm .....game ? 😂 (Online Is Dead , Solo Sucks 😔)
 
 </details>
