@@ -430,7 +430,7 @@ magicbullets()//Fixed and rewritten for BO4 by TheUnknownCod3r / MrFawkes1337
     if(isDefined(self.magicBullet))
     {
         self.bulletEffectType = "launcher_standard_t8_upgraded";
-        self S("Magic Bullets Enabled, Effect: Rocket Launcher");
+        self iPrintLnBold("Magic Bullets ^2Enabled");
         while(isDefined(self.magicBullet))
         {
             self waittill(#"weapon_fired");
@@ -440,25 +440,26 @@ magicbullets()//Fixed and rewritten for BO4 by TheUnknownCod3r / MrFawkes1337
     }
     else 
     {
-        self S("Bullet Effects ^1Disabled");
+        self iPrintLnBold("Bullet Effects ^1Disabled");
         self.bulletEffectType=undefined;
     }
 }
 
-changeBulletType(val)
+changeBulletEffect(val)
 {
     if(isDefined(self.bulletEffectType))
     {
         switch(val)
         {
-            case 0: self.bulletEffectType="minigun"; self S("Bullet Effect Set To: Minigun"); break;
-            case 1: self.bulletEffectType = "special_ballisticknife_t8_dw_upgraded"; self S("Bullet Effect Set To: Ballistic Knife"); break;
-            case 2: self.bulletEffectType = "launcher_standard_t8_upgraded"; self S("Bullet Effect Set To: Rocket Launcher"); break;
+            case 0: self.bulletEffectType="minigun"; self iPrintLnBold("Bullet Effect Set To: ^2Minigun"); break;
+            case 1: self.bulletEffectType = "special_ballisticknife_t8_dw_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Ballistic Knife"); break;
+            case 2: self.bulletEffectType = "launcher_standard_t8_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Rocket Launcher"); break;
+	    case 3: self.bulletEffectType = "ray_gun_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Ray Gun"); break;
         }
     }
     else
     {
-        self S("Custom Bullet Effects are not Enabled");
+        self iPrintLnBold("Custom Bullet Effects are not Enabled");
     }
 }
 zignore(player)
