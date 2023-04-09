@@ -327,12 +327,11 @@ MenuOptionsPlayer(menu, player)
         break;
         case "Bullets Menu":
         self addMenu(menu, "Bullets Menu");
-            self addOpt("= Turn OFF The Current One =");
-            self addOpt("= Before Applying Another =");
-            self addOpt("Porters x2 Ray Gun", &magicbullets, "ray_gun_upgraded");
-            self addOpt("Hellion Salvo", &magicbullets, "launcher_standard_t8_upgraded");
-            self addOpt("Minigun", &magicbullets, "minigun");
-            self addOpt("Ballistic Knife", &magicbullets, "special_ballisticknife_t8_dw_upgraded");
+            self addOptBool(self.magicBullet, "Toggle Magic Bullets", &magicbullets);
+            self addOpt("Porters x2 Ray Gun", &changeBulletEffect, 3);
+            self addOpt("Hellion Salvo", &changeBulletEffect, 2);
+            self addOpt("Minigun", &changeBulletEffect, 0);
+            self addOpt("Ballistic Knife", &changeBulletEffect, 1);
         break;
         case "Powerups Menu":
             self addMenu(menu, "Powerups Menu");
