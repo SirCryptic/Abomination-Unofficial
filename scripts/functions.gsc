@@ -424,26 +424,42 @@ quake(player)
 {
     earthquake( 0.6, 5, player.origin, 1000000 );
 }
-//magic bullets, need to fix the popup error , works for time being 
-magicbullets(bullettype)
+magicbullets()//Fixed and rewritten for BO4 by TheUnknownCod3r / MrFawkes1337
 {
-    if(!isDefined(self.gamevars["magicbullet"]) || self.gamevars["magicbullet"] == false)
+    self.magicBullet = isDefined(self.magicBullet) ? undefined : true;
+    if(isDefined(self.magicBullet))
     {
-        self.gamevars["magicbullet"] = true;
-        self iprintlnBold("Magic Bullets ^2Enabled");
-        while(self.gamevars["magicbullet"])
+        self.bulletEffectType = "launcher_standard_t8_upgraded";
+        self iPrintLnBold("Magic Bullets ^2Enabled");
+        while(isDefined(self.magicBullet))
         {
-            self waittill( "weapon_fired" );
-            if(self.gamevars["magicbullet"] == false)
-                continue;
-            MagicBullet( GetWeapon( bullettype ), self GetEye(), BulletTrace(self GetEye(), self GetEye() + AnglesToForward(self GetPlayerAngles()) * 100000, false, self)["position"], self);
-            wait .025;
+            self waittill(#"weapon_fired");
+            MagicBullet(getWeapon(self.bulletEffectType), self getPlayerCameraPos(), BulletTrace(self getPlayerCameraPos(), self getPlayerCameraPos() + anglesToForward(self getPlayerAngles())  * 100000, false, self)["position"], self);
+            wait .25;
+        }
+    }
+    else 
+    {
+        self iPrintLnBold("Bullet Effects ^1Disabled");
+        self.bulletEffectType=undefined;
+    }
+}
+
+changeBulletEffect(val)
+{
+    if(isDefined(self.bulletEffectType))
+    {
+        switch(val)
+        {
+            case 0: self.bulletEffectType="minigun"; self iPrintLnBold("Bullet Effect Set To: ^2Minigun"); break;
+            case 1: self.bulletEffectType = "special_ballisticknife_t8_dw_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Ballistic Knife"); break;
+            case 2: self.bulletEffectType = "launcher_standard_t8_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Rocket Launcher"); break;
+	    case 3: self.bulletEffectType = "ray_gun_upgraded"; self iPrintLnBold("Bullet Effect Set To: ^2Ray Gun"); break;
         }
     }
     else
     {
-        self.gamevars["magicbullet"] = false;
-        self iprintlnBold("Magic Bullets ^1Disabled");
+        self iPrintLnBold("Custom Bullet Effects are not Enabled");
     }
 }
 zignore(player)
